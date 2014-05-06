@@ -10,12 +10,15 @@ div.race {
 	text-align: center;
 }
 
-.race span {
+.race-selector span {
 	display: block;
 	width: 240px;
+	height: 20px;
 	margin: auto;
 	margin-top: 10px;
 	border: 1px solid #DBDBDB;
+	cursor: pointer;
+	font-size: 14px;
 }
 
 .race-selector {
@@ -34,16 +37,16 @@ li.race-selector {
 	display: block;
 	line-height: 20px;
 	padding: 5px 0 5px 0;
-	font-size: 12px;
+	font-size: 14px;
 	margin: 0;
 	list-style: none;
 	cursor: pointer;
 }
 
-li.race-selector:hover {
+li.race-selector:hover, .race-selector span:hover {
 	color: white;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 15px;
 	background: #f9f9f9; /* Old browsers */
 	background: -moz-linear-gradient(top, #f9f9f9 0%, #dbda9c 50%, #dbda8a 54%, #f9f9f9 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(50%,#dbda9c), color-stop(54%,#dbda8a), color-stop(100%,#f9f9f9)); /* Chrome,Safari4+ */
