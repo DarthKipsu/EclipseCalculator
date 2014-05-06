@@ -1,10 +1,10 @@
 $(document).ready(function() {
 	$('ul.race-selector').hide()
 	$('.race-selector span').mouseenter(function() {
-		raceSelector() //script.js
+		raceSelectorMenu() //script.js
 	})
 
 	$('.race-selector span, li.race-selector').click(function() {
-		raceChosen(this) //script.js
+		choosingARace(this) //script.js
 	})
 })

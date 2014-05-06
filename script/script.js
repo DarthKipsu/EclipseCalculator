@@ -1,4 +1,6 @@
-function raceSelector() {
+var chosenRace
+
+function raceSelectorMenu() {
 	$('ul.race-selector').slideDown('slow')
 	$('.race-selector span').css('border-bottom', 'none')
 
@@ -8,32 +10,36 @@ function raceSelector() {
 	})
 }
 
-function raceChosen(race) {
-	console.log(race)
-	$('.race-selector span').css('border-bottom', '1px solid #DBDBDB')
-	$('#choose-race, ul.race-selector').hide()
-	$('.race-selector span, li.race-selector').unbind('click')
-	$('div.race').css('margin-top', '20px')
-	$('.race-selector').css('margin', '0')
+function choosingARace(race) {
+	moveRaceSelector()
 	
-	var chosenRace = $(race).data('race')
+	chosenRace = $(race).data('race')
 	var topRaceOnSelector = $('.race-selector span').attr('data-race')
-	console.log(chosenRace, topRaceOnSelector)
 	if (chosenRace!=topRaceOnSelector) {
-		console.log('replace race')
-		var newLi = document.createElement('li')
-		$(newLi).addClass('race-selector')
-		$(newLi).appendTo('ul.race-selector')
-		$(newLi).data('race', topRaceOnSelector)
-		$(newLi).text($('.race-selector span').text())
-		$('.race-selector span').html($(race).text())
-		$('.race-selector span').attr('data-race', chosenRace)
-		var oldLi = $('li.race-selector[data-race="' + chosenRace + '"]')
-		console.log(oldLi)
-		$(oldLi).remove()
+		reorderRaceSelectorRaces(race, chosenRace, topRaceOnSelector)
 	}
 
 	$('.race-selector span, li.race-selector').click(function() {
-		raceChosen(this) //script.js
+		choosingARace(this)
 	})
+}
+
+function moveRaceSelector() {
+	$('#choose-race, ul.race-selector').hide()
+	$('.race-selector span, li.race-selector').unbind('click')
+	$('.race-selector span').css('border-bottom', '1px solid #DBDBDB')
+	$('div.race').css('margin-top', '20px')
+	$('.race-selector').css('margin', '0')
+}
+
+function reorderRaceSelectorRaces(race, chosenRace, topRaceOnSelector) {
+	var newLi = document.createElement('li')
+	$(newLi).addClass('race-selector')
+	$(newLi).appendTo('ul.race-selector')
+	$(newLi).attr('data-race', topRaceOnSelector)
+	$(newLi).text($('.race-selector span').text())
+	$('.race-selector span').html($(race).text())
+	$('.race-selector span').attr('data-race', chosenRace)
+	var oldLi = $('li.race-selector[data-race="' + chosenRace + '"]')
+	$(oldLi).remove()
 }
