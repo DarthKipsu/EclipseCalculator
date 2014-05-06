@@ -22,6 +22,8 @@ function choosingARace(race) {
 	$('.race-selector span, li.race-selector').click(function() {
 		choosingARace(this)
 	})
+
+	addUpgradeIcons()
 }
 
 function moveRaceSelector() {
@@ -42,4 +44,8 @@ function reorderRaceSelectorRaces(race, chosenRace, topRaceOnSelector) {
 	$('.race-selector span').attr('data-race', chosenRace)
 	var oldLi = $('li.race-selector[data-race="' + chosenRace + '"]')
 	$(oldLi).remove()
+}
+
+function addUpgradeIcons() {
+	$('#upgrades').load('upgrades.html')
 }

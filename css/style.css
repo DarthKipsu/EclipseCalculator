@@ -4,9 +4,16 @@
 	text-align: center;
 }
 
-div.race {
+div {
 	width: 740px;
-	margin: 60px auto 0;
+	margin: 40px auto 0;
+}
+
+div.tech {
+	margin-top: 0;
+}
+
+div.race {
 	text-align: center;
 }
 
