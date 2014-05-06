@@ -23,7 +23,9 @@ function choosingARace(race) {
 		choosingARace(this)
 	})
 
-	addUpgradeIcons() //script.js
+	if ($('#upgrades').text().length==0) {
+		addUpgradeIcons() //script.js
+	}
 }
 
 function moveRaceSelector() {

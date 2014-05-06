@@ -7,4 +7,9 @@ $(document).ready(function() {
 	$('.race-selector span, li.race-selector').click(function() {
 		choosingARace(this) //race-selector.js
 	})
+
+	$('.tech span').click(function() {
+		console.log('click')
+		$('#upgrades').html('')
+	})
 })

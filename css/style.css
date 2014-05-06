@@ -1,3 +1,8 @@
+body {
+	font-variant: small-caps;
+	letter-spacing: 1.5px;
+}
+
 #otsikko {
 	display: block;
 	margin: auto;
@@ -11,4 +16,13 @@ div {
 
 div.tech {
 	margin-top: 0;
+}
+
+p {
+	margin: 0;
+}
+
+#upgrades span {
+	float: right;
+	cursor: pointer;
 }
