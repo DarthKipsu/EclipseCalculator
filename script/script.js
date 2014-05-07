@@ -1,10 +1,11 @@
-function addUpgradeIcons() {
-	$('#upgrades').load('upgrades.html')
+function addContentFromHTML(to, from) {
+	console.log(to, from)
+	$(to).load(from)
 }
 
 function hideShipPartIcons() {
 	$('#upgrades').html('<span>show ship part icons</span>')
 	$('#upgrades span').click(function() {
-		addUpgradeIcons()
+		addContentFromHTML('#upgrades', 'upgrades.html')
 	})
 }

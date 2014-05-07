@@ -24,8 +24,10 @@ function choosingARace(race) {
 	})
 
 	if ($('#upgrades').text().length==0) {
-		addUpgradeIcons() //script.js
+		addContentFromHTML('#upgrades', 'upgrades.html') //script.js
 	}
+	$('#player-ship').html('')
+	addContentFromHTML('#player-ship', 'ship-' + chosenRace + '.html')
 }
 
 function moveRaceSelector() {

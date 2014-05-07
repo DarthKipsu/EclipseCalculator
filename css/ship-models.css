@@ -1,0 +1,40 @@
+.ship-model > div.interceptor {
+    width: 319px;
+    height: 212px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.ship-model img {
+	margin: 2px;
+}
+
+.one, .two, .three, .four {
+    position: absolute;
+    width: 104px;
+    height: 104px;
+    border: 1px solid #B3B3B3;
+    padding: 0;
+    margin: 0;
+}
+
+div.terran:nth-child(1) {
+    top: 82px;
+    left: 0px;
+}
+
+div.terran:nth-child(2) {
+    top: 0;
+    left: 107px;
+}
+
+div.terran:nth-child(3) {
+    top: 107px;
+    left: 107px;
+}
+
+div.terran:nth-child(4) {
+    top: 82px;
+    left: 214px;
+}
