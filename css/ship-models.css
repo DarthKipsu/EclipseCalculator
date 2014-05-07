@@ -1,9 +1,19 @@
+.ship-model > div {
+	padding: 0;
+	margin: 8px;
+	position: relative;
+	display: inline-block;
+}
+
 .ship-model > div.interceptor {
     width: 319px;
     height: 212px;
-    padding: 0;
-    margin: 0;
-    position: relative;
+    vertical-align: top;
+}
+
+.ship-model > div.cruiser {
+    width: 319px;
+    height: 294px;
 }
 
 .ship-model > div > p {
@@ -15,7 +25,7 @@
     margin: 2px;
 }
 
-.one, .two, .three, .four {
+.one, .two, .three, .four, .five, .six, .seven, .eight {
     position: absolute;
     width: 104px;
     height: 104px;
@@ -52,5 +62,41 @@ div.terran.interceptor.four {
 div.terran.interceptor.init {
     height: 35px;
     top: 0px;
+    left: 220px;
+}
+
+div.terran.cruiser.one {
+    top: 82px;
+    left: 0px;
+}
+
+div.terran.cruiser.two {
+    top: 189px;
+    left: 0px;
+}
+
+div.terran.cruiser.three {
+    top: 0px;
+    left: 107px;
+}
+
+div.terran.cruiser.four {
+    top: 107px;
+    left: 107px;
+}
+
+div.terran.cruiser.five {
+    top: 82px;
+    left: 214px;
+}
+
+div.terran.cruiser.six {
+    top: 189px;
+    left: 214px;
+}
+
+div.terran.cruiser.init {
+    height: 35px;
+    top: 13px;
     left: 220px;
 }
