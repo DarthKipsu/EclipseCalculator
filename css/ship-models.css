@@ -6,8 +6,13 @@
     position: relative;
 }
 
+.ship-model > div > p {
+    position: absolute;
+    top: -18px;
+}
+
 .ship-model img {
-	margin: 2px;
+    margin: 2px;
 }
 
 .one, .two, .three, .four {
@@ -19,22 +24,33 @@
     margin: 0;
 }
 
-div.terran:nth-child(1) {
+.init {
+    width: 28px;
+    position: absolute;
+}
+
+div.terran.interceptor.one {
     top: 82px;
     left: 0px;
 }
 
-div.terran:nth-child(2) {
+div.terran.interceptor.two {
     top: 0;
     left: 107px;
 }
 
-div.terran:nth-child(3) {
+div.terran.interceptor.three {
     top: 107px;
     left: 107px;
 }
 
-div.terran:nth-child(4) {
+div.terran.interceptor.four {
     top: 82px;
     left: 214px;
+}
+
+div.terran.interceptor.init {
+    height: 35px;
+    top: 0px;
+    left: 220px;
 }
