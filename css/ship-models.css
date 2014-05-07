@@ -7,7 +7,7 @@
 }
 
 #player-ship, #player-ship > div {
-    width: 1400px;
+    width: 1370px;
 }
 
 .ship-model > div.interceptor {
@@ -21,6 +21,11 @@
 }
 
 .ship-model > div.dreadnought {
+    width: 322px;
+    height: 322px;
+}
+
+.ship-model > div.starbase {
     width: 322px;
     height: 322px;
 }
@@ -45,6 +50,12 @@
 
 .init {
     width: 28px;
+    position: absolute;
+}
+
+.energy {
+    width: 50px;
+    height: 50px;
     position: absolute;
 }
 
@@ -154,4 +165,42 @@ div.terran.dreadnought.seven {
 div.terran.dreadnought.eight {
     top: 214px;
     left: 214px;
+}
+
+/** TERRAN STARBASE */
+
+div.terran.starbase.one {
+    top: 107px;
+    left: 0px;
+}
+
+div.terran.starbase.two {
+    top: 0px;
+    left: 107px;
+}
+
+div.terran.starbase.three {
+    top: 107px;
+    left: 107px;
+}
+
+div.terran.starbase.four {
+    top: 214px;
+    left: 107px;
+}
+
+div.terran.starbase.five {
+    top: 107px;
+    left: 214px;
+}
+
+div.terran.starbase.init {
+    height: 63px;
+    top: -3px;
+    left: 220px;
+}
+
+div.terran.starbase.energy {
+    top: 180px;
+    left: 45px;
 }
