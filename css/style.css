@@ -26,3 +26,7 @@ p {
 	float: right;
 	cursor: pointer;
 }
+
+#upgrades {
+	min-height: 1px;
+}

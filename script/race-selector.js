@@ -27,6 +27,7 @@ function choosingARace(race) {
 		addContentFromHTML('#upgrades', 'upgrades.html') //script.js
 	}
 	$('#player-ship').html('')
+	console.log(chosenRace)
 	addContentFromHTML('#player-ship', 'ship-' + chosenRace + '.html')
 }
 
