@@ -1,5 +1,4 @@
 function addContentFromHTML(to, from) {
-	console.log(to, from)
 	$(to).load(from)
 }
 
