@@ -1,10 +1,10 @@
-function Interceptor(race, slotOne, slotTwo, slotThree, slotFour, initiative) {
+function Interceptor(race, weapons, initiative) {
     this.race = race
-    if (slotOne==null) this.slotOne = null
-    else this.slotOne = 'images/tech_' + slotOne + '.jpg'
-    this.slotTwo = 'images/tech_' + slotTwo + '.jpg'
-    this.slotThree = 'images/tech_' + slotThree + '.jpg'
-    this.slotFour = 'images/tech_' + slotFour + '.jpg'
+    if (weapons[0]==null) this.slotOne = null
+    else if (weapons[0]!=undefined) this.slotOne = 'images/tech_' + weapons[0] + '.jpg'
+    if (weapons[1]!=undefined) this.slotTwo = 'images/tech_' + weapons[1] + '.jpg'
+    if (weapons[2]!=undefined) this.slotThree = 'images/tech_' + weapons[2] + '.jpg'
+    if (weapons[3]!=undefined) this.slotFour = 'images/tech_' + weapons[3] + '.jpg'
     if (initiative==null) this.initiative = null
     else this.initiative = 'images/ship_' + initiative + '.jpg'
 }

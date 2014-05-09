@@ -1,0 +1,8 @@
+div.interceptor
+  p.interceptor
+  - var classes = ['one', 'two', 'three', 'four', 'init']
+  - for (var i=0; i<5; i++)
+    div(class= ship.race + ' interceptor ' + classes[i])
+      - var key = Object.keys(ship)[i+1]
+      if ship[key]
+        img(src=ship[key])
