@@ -1,12 +1,17 @@
-function Interceptor(race, weapons, initiative) {
+function Interceptor(race, slot1, slot2, slot3, slot4, initiative, energy, computer) {
     this.race = race
-    if (weapons[0]==null) this.slotOne = null
-    else if (weapons[0]!=undefined) this.slotOne = 'images/tech_' + weapons[0] + '.jpg'
-    if (weapons[1]!=undefined) this.slotTwo = 'images/tech_' + weapons[1] + '.jpg'
-    if (weapons[2]!=undefined) this.slotThree = 'images/tech_' + weapons[2] + '.jpg'
-    if (weapons[3]!=undefined) this.slotFour = 'images/tech_' + weapons[3] + '.jpg'
-    if (initiative==null) this.initiative = null
+    if (slot1=='missing') this.slotOne = 'missing'
+    else if (slot1!=null) this.slot1 = 'images/tech_' + slot1 + '.jpg'
+    else this.slot1 = null
+    this.slot2 = 'images/tech_' + slot2 + '.jpg'
+    this.slot3 = 'images/tech_' + slot3 + '.jpg'
+    this.slot4 = 'images/tech_' + slot4 + '.jpg'
+    if (initiative=='missing') this.initiative = 'missing'
     else this.initiative = 'images/ship_' + initiative + '.jpg'
+    if (energy=='missing') this.energy = 'missing'
+    else this.energy = 'images/ship_' + energy + '.jpg'
+    if (computer=='missing') this.computer = 'missing'
+    else this.computer = 'images/ship_' + computer + '.jpg'
 }
 
 function Cruiser(race, slotOne, slotTwo, slotThree, slotFour, slotFive, slotSix, initiative) {
