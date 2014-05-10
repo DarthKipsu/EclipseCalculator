@@ -1,54 +1,59 @@
 function Interceptor(race, slot1, slot2, slot3, slot4, initiative, energy, computer) {
     this.race = race
-    if (slot1=='missing') this.slotOne = 'missing'
-    else if (slot1!=null) this.slot1 = 'images/tech_' + slot1 + '.jpg'
-    else this.slot1 = null
+    if (slot1==null) this.slot1 = null
+    else if (slot1!='missing') this.slot1 = 'images/tech_' + slot1 + '.jpg'
+    else this.slot1 = 'missing'
     this.slot2 = 'images/tech_' + slot2 + '.jpg'
     this.slot3 = 'images/tech_' + slot3 + '.jpg'
     this.slot4 = 'images/tech_' + slot4 + '.jpg'
-    if (initiative=='missing') this.initiative = 'missing'
-    else this.initiative = 'images/ship_' + initiative + '.jpg'
+    if (initiative!='missing') this.initiative = 'images/ship_' + initiative + '.jpg'
+    else this.initiative = 'missing'
     if (energy=='missing') this.energy = 'missing'
     else this.energy = 'images/ship_' + energy + '.jpg'
     if (computer=='missing') this.computer = 'missing'
     else this.computer = 'images/ship_' + computer + '.jpg'
 }
 
-function Cruiser(race, slotOne, slotTwo, slotThree, slotFour, slotFive, slotSix, initiative) {
+function Cruiser(race, slot1, slot2, slot3, slot4, slot5, slot6, initiative, energy, computer) {
     this.race = race
-    this.slotOne = 'images/tech_' + slotOne + '.jpg'
-    if (slotTwo==null) this.slotTwo = null
-    else this.slotTwo = 'images/tech_' + slotTwo + '.jpg'
-    this.slotThree = 'images/tech_' + slotThree + '.jpg'
-    this.slotFour = 'images/tech_' + slotFour + '.jpg'
-    this.slotFive = 'images/tech_' + slotFive + '.jpg'
-    this.slotSix = 'images/tech_' + slotSix + '.jpg'
-    if (initiative==null) this.initiative = null
-    else this.initiative = 'images/ship_' + initiative + '.jpg'
+    this.slot1 = 'images/tech_' + slot1 + '.jpg'
+    if (slot2==null) this.slot2 = null
+    else if (slot2!='missing') this.slot2 = 'images/tech_' + slot2 + '.jpg'
+    else this.slot2 = 'missing'
+    this.slot3 = 'images/tech_' + slot3 + '.jpg'
+    this.slot4 = 'images/tech_' + slot4 + '.jpg'
+    this.slot5 = 'images/tech_' + slot5 + '.jpg'
+    this.slot6 = 'images/tech_' + slot6 + '.jpg'
+    if (initiative!='missing') this.initiative = 'images/ship_' + initiative + '.jpg'
+    else this.initiative = 'missing'
+    if (energy=='missing') this.energy = 'missing'
+    else this.energy = 'images/ship_' + energy + '.jpg'
+    if (computer=='missing') this.computer = 'missing'
+    else this.computer = 'images/ship_' + computer + '.jpg'
 }
 
-function Dreadnought(race, slotOne, slotTwo, slotThree, slotFour, slotFive, slotSix,
-  slotSeven, slotEight, initiative) {
+function Dreadnought(race, slot1, slot2, slot3, slot4, slot5, slot6,
+  slot7, slot8, initiative) {
     this.race = race
-    this.slotOne = 'images/tech_' + slotOne + '.jpg'
-    this.slotTwo = 'images/tech_' + slotTwo + '.jpg'
-    this.slotThree = 'images/tech_' + slotThree + '.jpg'
-    this.slotFour = 'images/tech_' + slotFour + '.jpg'
-    if (slotFive==null) this.slotFive = null
-    else this.slotFive = 'images/tech_' + slotFive + '.jpg'
-    this.slotSix = 'images/tech_' + slotSix + '.jpg'
-    this.slotSeven = 'images/tech_' + slotSeven + '.jpg'
-    this.slotEight = 'images/tech_' + slotEight + '.jpg'
+    this.slot1 = 'images/tech_' + slot1 + '.jpg'
+    this.slot2 = 'images/tech_' + slot2 + '.jpg'
+    this.slot3 = 'images/tech_' + slot3 + '.jpg'
+    this.slot4 = 'images/tech_' + slot4 + '.jpg'
+    if (slot5==null) this.slot5 = null
+    else this.slot5 = 'images/tech_' + slot5 + '.jpg'
+    this.slot6 = 'images/tech_' + slot6 + '.jpg'
+    this.slot7 = 'images/tech_' + slot7 + '.jpg'
+    this.slot8 = 'images/tech_' + slot8 + '.jpg'
 }
 
-function Starbase(race, slotOne, slotTwo, slotThree, slotFour, initiative, energy) {
+function Starbase(race, slot1, slot2, slot3, slot4, initiative, energy) {
     this.race = race
-    this.slotOne = 'images/tech_' + slotOne + '.jpg'
-    this.slotTwo = 'images/tech_' + slotTwo + '.jpg'
-    this.slotThree = 'images/tech_' + slotThree + '.jpg'
-    if (slotFour==null) this.slotFour = null
-    else this.slotFour = 'images/tech_' + slotFour + '.jpg'
-    this.slotFive = 'images/tech_' + slotFive + '.jpg'
+    this.slot1 = 'images/tech_' + slot1 + '.jpg'
+    this.slot2 = 'images/tech_' + slot2 + '.jpg'
+    this.slot3 = 'images/tech_' + slot3 + '.jpg'
+    if (slot4==null) this.slot4 = null
+    else this.slot4 = 'images/tech_' + slot4 + '.jpg'
+    this.slot5 = 'images/tech_' + slot5 + '.jpg'
     this.initiative = 'images/ship_' + initiative + '.jpg'
     this.energy = 'images/ship_' + energy + '.jpg'
 }

@@ -1,0 +1,9 @@
+div.cruiser
+  p.cruiser
+  - var classes = ['one', 'two', 'three', 'four', 'five', 'six', 'init', 'energy', 'computer']
+  - for (var i=0; i<9; i++)
+    - var key = Object.keys(ship)[i+1]
+    if ship[key]!='missing'
+      div(class= ship.race + ' cruiser ' + classes[i])
+        if ship[key]
+          img(src=ship[key])
