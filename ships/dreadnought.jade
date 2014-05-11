@@ -1,0 +1,9 @@
+div.dreadnought
+  p.dreadnought
+  - var classes = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'init', 'energy', 'computer']
+  - for (var i=0; i<11; i++)
+    - var key = Object.keys(ship)[i+1]
+    if ship[key]!='missing'
+      div(class= ship.race + ' dreadnought ' + classes[i])
+        if ship[key]
+          img(src=ship[key])

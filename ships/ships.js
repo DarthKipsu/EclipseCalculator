@@ -16,6 +16,7 @@ var raceShips = {
 
 createInterceptors()
 createCruisers()
+createDreadnoughts()
 
 console.log(raceShips)
 
@@ -46,5 +47,20 @@ function createCruisers() {
             slots[5], slots[6], slots[7], slots[8])
         }
         raceShips[race].push(jade.renderFile('cruiser.jade', cruiser))
+    }
+}
+
+function createDreadnoughts() {
+    for (var i=0; i<7; i++) {
+        var race = Object.keys(raceTraits)[i]
+        var slots = []
+        for (var j=0; j<11; j++) {
+            slots.push(raceTraits[race].dreadnought[j])
+        }
+        var dreadnought = {
+            ship: new Dreadnought(race, slots[0], slots[1], slots[2], slots[3], slots[4],
+            slots[5], slots[6], slots[7], slots[8], slots[9], slots[10])
+        }
+        raceShips[race].push(jade.renderFile('dreadnought.jade', dreadnought))
     }
 }
