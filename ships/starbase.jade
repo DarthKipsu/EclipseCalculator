@@ -1,0 +1,9 @@
+div.starbase
+  p.starbase
+  - var classes = ['one', 'two', 'three', 'four', 'five', 'init', 'energy', 'computer']
+  - for (var i=0; i<8; i++)
+    - var key = Object.keys(ship)[i+1]
+    if ship[key]!='missing'
+      div(class= ship.race + ' starbase ' + classes[i])
+        if ship[key]
+          img(src=ship[key])

@@ -54,7 +54,7 @@ function Dreadnought(race, slot1, slot2, slot3, slot4, slot5, slot6,
     else this.computer = 'images/ship_' + computer + '.jpg'
 }
 
-function Starbase(race, slot1, slot2, slot3, slot4, initiative, energy, computer) {
+function Starbase(race, slot1, slot2, slot3, slot4, slot5, initiative, energy, computer) {
     this.race = race
     this.slot1 = 'images/tech_' + slot1 + '.jpg'
     this.slot2 = 'images/tech_' + slot2 + '.jpg'

@@ -14,53 +14,47 @@ var raceShips = {
     orion: []
 }
 
-createInterceptors()
-createCruisers()
-createDreadnoughts()
+createShipHTML('interceptor')
+createShipHTML('cruiser')
+createShipHTML('dreadnought')
+createShipHTML('starbase')
 
 console.log(raceShips)
 
-function createInterceptors() {
+function createShipHTML(shipType) {
     for (var i=0; i<7; i++) {
         var race = Object.keys(raceTraits)[i]
         var slots = []
-        for (var j=0; j<7; j++) {
-            slots.push(raceTraits[race].interceptor[j])
+        var weaponsArray = raceTraits[race][shipType]
+        console.log(weaponsArray.length)
+        for (var j=0; j<weaponsArray.length; j++) {
+            slots.push(weaponsArray[j])
         }
-        var interceptor = {
-            ship: new Interceptor(race, slots[0], slots[1], slots[2], slots[3], slots[4],
-            slots[5], slots[6])
+        var shipAttributes
+        if (shipType=='interceptor') {
+            shipAttributes = {
+                ship: new Interceptor(race, slots[0], slots[1], slots[2], slots[3], slots[4],
+                slots[5], slots[6])
+            }
         }
-        raceShips[race].push(jade.renderFile('interceptor.jade', interceptor))
-    }
-}
-
-function createCruisers() {
-    for (var i=0; i<7; i++) {
-        var race = Object.keys(raceTraits)[i]
-        var slots = []
-        for (var j=0; j<9; j++) {
-            slots.push(raceTraits[race].cruiser[j])
+        else if (shipType=='cruiser') {
+            shipAttributes = {
+                ship: new Cruiser(race, slots[0], slots[1], slots[2], slots[3], slots[4],
+                slots[5], slots[6], slots[7], slots[8])
+            }
         }
-        var cruiser = {
-            ship: new Cruiser(race, slots[0], slots[1], slots[2], slots[3], slots[4],
-            slots[5], slots[6], slots[7], slots[8])
+        else if (shipType=='dreadnought') {
+            shipAttributes = {
+                ship: new Dreadnought(race, slots[0], slots[1], slots[2], slots[3], slots[4],
+                slots[5], slots[6], slots[7], slots[8], slots[9], slots[10])
+            }
         }
-        raceShips[race].push(jade.renderFile('cruiser.jade', cruiser))
-    }
-}
-
-function createDreadnoughts() {
-    for (var i=0; i<7; i++) {
-        var race = Object.keys(raceTraits)[i]
-        var slots = []
-        for (var j=0; j<11; j++) {
-            slots.push(raceTraits[race].dreadnought[j])
+        else if (shipType=='starbase') {
+            shipAttributes = {
+                ship: new Starbase(race, slots[0], slots[1], slots[2], slots[3], slots[4],
+                slots[5], slots[6], slots[7])
+            }
         }
-        var dreadnought = {
-            ship: new Dreadnought(race, slots[0], slots[1], slots[2], slots[3], slots[4],
-            slots[5], slots[6], slots[7], slots[8], slots[9], slots[10])
-        }
-        raceShips[race].push(jade.renderFile('dreadnought.jade', dreadnought))
+        raceShips[race].push(jade.renderFile(shipType + '.jade', shipAttributes))
     }
 }
