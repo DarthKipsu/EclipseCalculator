@@ -2,7 +2,7 @@ var jade = require('jade')
 var fs = require('fs')
 
 eval(fs.readFileSync('ship-constructors.js') + '')
-eval(fs.readFileSync('../race-traits.js') + '')
+eval(fs.readFileSync('race-traits.js') + '')
 
 var raceShips = {
     terran: [],
