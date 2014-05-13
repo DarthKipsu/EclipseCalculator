@@ -1,4 +1,4 @@
-.ship-model > div {
+#player-ship > div {
     padding: 0;
     margin: 8px;
     position: relative;
@@ -6,36 +6,36 @@
     vertical-align: top;
 }
 
-#player-ship, #player-ship > div {
+#player-ship {
     width: 1370px;
 }
 
-.ship-model > div.interceptor {
+#player-ship > div.interceptor {
     width: 319px;
     height: 212px;
 }
 
-.ship-model > div.cruiser {
+#player-ship > div.cruiser {
     width: 319px;
     height: 294px;
 }
 
-.ship-model > div.dreadnought {
+#player-ship > div.dreadnought {
     width: 322px;
     height: 322px;
 }
 
-.ship-model > div.starbase {
+#player-ship > div.starbase {
     width: 322px;
     height: 322px;
 }
 
-.ship-model > div > p {
+#player-ship > div > p {
     position: absolute;
     top: -18px;
 }
 
-.ship-model img {
+#player-ship img {
     margin: 2px;
 }
 
@@ -61,81 +61,103 @@
 
 /** INTERCEPTOR */
 
-div.terran.interceptor.one, div.eridani.interceptor.one, div.hydran.interceptor.one {
+div.interceptor.one {
     top: 82px;
     left: 0px;
 }
 
-div.terran.interceptor.two, div.planta.interceptor.two, div.eridani.interceptor.two, div.hydran.interceptor.two {
+div.interceptor.two {
     top: 0;
     left: 107px;
 }
 
-div.terran.interceptor.three, div.planta.interceptor.three, div.eridani.interceptor.three, div.hydran.interceptor.three {
+div.interceptor.three {
     top: 107px;
     left: 107px;
 }
 
-div.terran.interceptor.four, div.planta.interceptor.four, div.eridani.interceptor.four, div.hydran.interceptor.four {
+div.interceptor.four {
     top: 82px;
     left: 214px;
 }
 
-div.terran.interceptor.init, div.eridani.interceptor.init, div.hydran.interceptor.init {
+div.interceptor.init {
     height: 35px;
     top: 0px;
     left: 220px;
 }
 
-div.planta.interceptor.computer {
+div.orion.interceptor.init {
+    height: 49px;
+    top: -14px;
+    left: 220px;
+}
+
+div.interceptor.computer {
     top: 50px;
     left: 45px;
 }
 
-div.planta.interceptor.energy {
+div.interceptor.energy {
     top: 100px;
     left: 45px;
 }
 
+div.orion.interceptor.energy {
+    top: -10px;
+    left: 50px;
+}
+
 /** CRUISER */
 
-div.terran.cruiser.one, div.planta.cruiser.one, div.eridani.cruiser.one, div.hydran.cruiser.one {
+div.cruiser.one {
     top: 82px;
     left: 0px;
 }
 
-div.terran.cruiser.two, div.eridani.cruiser.two, div.hydran.cruiser.two {
+div.cruiser.two {
     top: 189px;
     left: 0px;
 }
 
-div.terran.cruiser.three, div.planta.cruiser.three, div.eridani.cruiser.three, div.hydran.cruiser.three {
+div.cruiser.three {
     top: 0px;
     left: 107px;
 }
 
-div.terran.cruiser.four, div.planta.cruiser.four, div.eridani.cruiser.four, div.hydran.cruiser.four {
+div.cruiser.four {
     top: 107px;
     left: 107px;
 }
 
-div.terran.cruiser.five, div.planta.cruiser.five, div.eridani.cruiser.five, div.hydran.cruiser.five {
+div.cruiser.five {
     top: 82px;
     left: 214px;
 }
 
-div.terran.cruiser.six, div.planta.cruiser.six, div.eridani.cruiser.six, div.hydran.cruiser.six {
+div.cruiser.six {
     top: 189px;
     left: 214px;
 }
 
-div.terran.cruiser.init, div.eridani.cruiser.init, div.hydran.cruiser.init {
+div.cruiser.init {
     height: 35px;
     top: 13px;
     left: 220px;
 }
 
-div.planta.cruiser.computer {
+div.orion.cruiser.init {
+    height: 35px;
+    top: 0px;
+    left: 220px;
+}
+
+div.cruiser.computer {
+    top: -10px;
+    left: 45px;
+}
+
+div.cruiser.energy {
     top: -10px;
     left: 45px;
 }
@@ -147,52 +169,52 @@ div.planta.cruiser.energy {
 
 /** DREADNOUGHT */
 
-div.terran.dreadnought.one, div.planta.dreadnought.one, div.eridani.dreadnought.one, div.hydran.dreadnought.one {
+div.dreadnought.one {
     top: 0px;
     left: 0px;
 }
 
-div.terran.dreadnought.two, div.planta.dreadnought.two, div.eridani.dreadnought.two, div.hydran.dreadnought.two {
+div.dreadnought.two {
     top: 107px;
     left: 0px;
 }
 
-div.terran.dreadnought.three, div.planta.dreadnought.three, div.eridani.dreadnought.three, div.hydran.dreadnought.three {
+div.dreadnought.three {
     top: 214px;
     left: 0px;
 }
 
-div.terran.dreadnought.four, div.planta.dreadnought.four, div.eridani.dreadnought.four, div.hydran.dreadnought.four {
+div.dreadnought.four {
     top: 62px;
     left: 107px;
 }
 
-div.terran.dreadnought.five, div.eridani.dreadnought.five, div.hydran.dreadnought.five {
+div.dreadnought.five {
     top: 169px;
     left: 107px;
 }
 
-div.terran.dreadnought.six, div.planta.dreadnought.six, div.eridani.dreadnought.six, div.hydran.dreadnought.six {
+div.dreadnought.six {
     top: 0px;
     left: 214px;
 }
 
-div.terran.dreadnought.seven, div.planta.dreadnought.seven, div.eridani.dreadnought.seven, div.hydran.dreadnought.seven {
+div.dreadnought.seven {
     top: 107px;
     left: 214px;
 }
 
-div.terran.dreadnought.eight, div.planta.dreadnought.eight, div.eridani.dreadnought.eight, div.hydran.dreadnought.eight {
+div.dreadnought.eight {
     top: 214px;
     left: 214px;
 }
 
-div.planta.dreadnought.computer {
+div.dreadnought.computer {
     top: 130px;
     left: 107px;
 }
 
-div.eridani.dreadnought.energy {
+div.dreadnought.energy {
     top: 233px;
     left: 137px;
 }
@@ -202,34 +224,39 @@ div.planta.dreadnought.energy {
     left: 157px;
 }
 
+div.dreadnought.init {
+     top: -5px;
+     left: 145px;
+ }
+
 /** STARBASE */
 
-div.terran.starbase.one, div.planta.starbase.one, div.eridani.starbase.one, div.hydran.starbase.one {
+div.starbase.one {
     top: 107px;
     left: 0px;
 }
 
-div.terran.starbase.two, div.planta.starbase.two, div.eridani.starbase.two, div.hydran.starbase.two {
+div.starbase.two {
     top: 0px;
     left: 107px;
 }
 
-div.terran.starbase.three, div.planta.starbase.three, div.eridani.starbase.three, div.hydran.starbase.three {
+div.starbase.three {
     top: 107px;
     left: 107px;
 }
 
-div.terran.starbase.four, div.eridani.starbase.four, div.hydran.starbase.four {
+div.starbase.four {
     top: 214px;
     left: 107px;
 }
 
-div.terran.starbase.five, div.planta.starbase.five, div.eridani.starbase.five, div.hydran.starbase.five {
+div.starbase.five {
     top: 107px;
     left: 214px;
 }
 
-div.terran.starbase.init, div.eridani.starbase.init, div.hydran.starbase.init {
+div.starbase.init {
     height: 63px;
     top: -3px;
     left: 220px;
@@ -241,12 +268,18 @@ div.planta.starbase.init {
     left: 220px;
 }
 
-div.planta.starbase.computer {
+div.orion.starbase.init {
+    height: 77px;
+    top: -20px;
+    left: 220px;
+}
+
+div.starbase.computer {
     top: 10px;
     left: 45px;
 }
 
-div.terran.starbase.energy, div.planta.starbase.energy, div.eridani.starbase.energy, div.hydran.starbase.energy {
+div.starbase.energy {
     top: 180px;
     left: 45px;
 }

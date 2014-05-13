@@ -22,7 +22,8 @@ function Cruiser(race, slot) {
     else this.slot2 = 'missing'
     this.slot3 = 'images/tech_' + slot[2] + '.jpg'
     this.slot4 = 'images/tech_' + slot[3] + '.jpg'
-    this.slot5 = 'images/tech_' + slot[4] + '.jpg'
+    if (slot[4]!=null) this.slot5 = 'images/tech_' + slot[4] + '.jpg'
+    else this.slot5 = null
     this.slot6 = 'images/tech_' + slot[5] + '.jpg'
     if (slot[6]!='missing') this.initiative = 'images/ship_' + slot[6] + '.jpg'
     else this.initiative = 'missing'
@@ -42,7 +43,7 @@ function Dreadnought(race, slot) {
     if (slot[4]!='missing') this.slot5 = 'images/tech_' + slot[4] + '.jpg'
     else this.slot5 = 'missing'
     this.slot6 = 'images/tech_' + slot[5] + '.jpg'
-    if (slot[6]!='missing') this.slot7 = 'images/tech_' + slot[6] + '.jpg'
+    if (slot[6]!=null) this.slot7 = 'images/tech_' + slot[6] + '.jpg'
     else this.slot7 = null
     this.slot8 = 'images/tech_' + slot[7] + '.jpg'
     if (slot[8]=='missing') this.initiative = 'missing'
@@ -59,7 +60,8 @@ function Starbase(race, slot) {
     this.slot2 = 'images/tech_' + slot[1] + '.jpg'
     this.slot3 = 'images/tech_' + slot[2] + '.jpg'
     if (slot[3]==null) this.slot4 = null
-    else this.slot4 = 'missing'
+    else if (slot[3]=='missing') this.slot4 = 'missing'
+    else this.slot4 = 'images/tech_' + slot[3] + '.jpg'
     this.slot5 = 'images/tech_' + slot[4] + '.jpg'
     this.initiative = 'images/ship_' + slot[5] + '.jpg'
     this.energy = 'images/ship_' + slot[6] + '.jpg'

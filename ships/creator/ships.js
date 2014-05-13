@@ -26,7 +26,7 @@ for (var i=0; i<raceNames.length; i++) {
 }
 
 function writeShipsToFile(race) {
-    fs.writeFile('ship-'+ race + '.html', raceShips[race], function(err) {
+    fs.writeFile('../ship-'+ race + '.html', raceShips[race], function(err) {
        if (err) console.log(err)
        else console.log(race, 'ship models created!')
     })

@@ -28,7 +28,7 @@ function choosingARace(race) {
 	}
 	$('#player-ship').html('')
 	console.log(chosenRace)
-	addContentFromHTML('#player-ship', 'ship-' + chosenRace + '.html')
+	addContentFromHTML('#player-ship', 'ships/ship-' + chosenRace + '.html')
 }
 
 function moveRaceSelector() {
