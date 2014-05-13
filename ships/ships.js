@@ -19,14 +19,26 @@ createShipHTML('cruiser')
 createShipHTML('dreadnought')
 createShipHTML('starbase')
 
-console.log(raceShips)
+writeShipsToFile('terran')
+writeShipsToFile('eridani')
+writeShipsToFile('hydran')
+writeShipsToFile('planta')
+writeShipsToFile('draco')
+writeShipsToFile('mechanema')
+writeShipsToFile('orion')
+
+function writeShipsToFile(race) {
+    fs.writeFile('ship-'+ race + '.html', raceShips[race], function(err) {
+       if (err) console.log(err)
+       else console.log(race, 'ship models created!')
+    })
+}
 
 function createShipHTML(shipType) {
     for (var i=0; i<7; i++) {
         var race = Object.keys(raceTraits)[i]
         var slots = []
         var weaponsArray = raceTraits[race][shipType]
-        console.log(weaponsArray.length)
         for (var j=0; j<weaponsArray.length; j++) {
             slots.push(weaponsArray[j])
         }
