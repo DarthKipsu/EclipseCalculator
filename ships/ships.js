@@ -14,18 +14,16 @@ var raceShips = {
     orion: []
 }
 
-createShipHTML('interceptor')
-createShipHTML('cruiser')
-createShipHTML('dreadnought')
-createShipHTML('starbase')
+var shipNames = ['interceptor', 'cruiser', 'dreadnought', 'starbase']
+var raceNames = ['terran', 'eridani', 'hydran', 'planta', 'draco', 'mechanema', 'orion']
 
-writeShipsToFile('terran')
-writeShipsToFile('eridani')
-writeShipsToFile('hydran')
-writeShipsToFile('planta')
-writeShipsToFile('draco')
-writeShipsToFile('mechanema')
-writeShipsToFile('orion')
+for (var i=0; i<shipNames.length; i++) {
+    createShipHTML(shipNames[i])
+}
+
+for (var i=0; i<raceNames.length; i++) {
+    writeShipsToFile(raceNames[i])
+}
 
 function writeShipsToFile(race) {
     fs.writeFile('ship-'+ race + '.html', raceShips[race], function(err) {
@@ -43,29 +41,17 @@ function createShipHTML(shipType) {
             slots.push(weaponsArray[j])
         }
         var shipAttributes
-        if (shipType=='interceptor') {
-            shipAttributes = {
-                ship: new Interceptor(race, slots[0], slots[1], slots[2], slots[3], slots[4],
-                slots[5], slots[6])
-            }
+        if (shipType=='interceptor') shipAttributes = {
+            ship: new Interceptor(race, slots)
         }
-        else if (shipType=='cruiser') {
-            shipAttributes = {
-                ship: new Cruiser(race, slots[0], slots[1], slots[2], slots[3], slots[4],
-                slots[5], slots[6], slots[7], slots[8])
-            }
+        else if (shipType=='cruiser') shipAttributes = {
+            ship: new Cruiser(race, slots)
         }
-        else if (shipType=='dreadnought') {
-            shipAttributes = {
-                ship: new Dreadnought(race, slots[0], slots[1], slots[2], slots[3], slots[4],
-                slots[5], slots[6], slots[7], slots[8], slots[9], slots[10])
-            }
+        else if (shipType=='dreadnought') shipAttributes = {
+            ship: new Dreadnought(race, slots)
         }
-        else if (shipType=='starbase') {
-            shipAttributes = {
-                ship: new Starbase(race, slots[0], slots[1], slots[2], slots[3], slots[4],
-                slots[5], slots[6], slots[7])
-            }
+        else if (shipType=='starbase') shipAttributes = {
+            ship: new Starbase(race, slots)
         }
         raceShips[race].push(jade.renderFile(shipType + '.jade', shipAttributes))
     }

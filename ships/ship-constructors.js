@@ -1,69 +1,68 @@
-function Interceptor(race, slot1, slot2, slot3, slot4, initiative, energy, computer) {
+function Interceptor(race, slot) {
     this.race = race
-    if (slot1==null) this.slot1 = null
-    else if (slot1!='missing') this.slot1 = 'images/tech_' + slot1 + '.jpg'
+    if (slot[0]==null) this.slot1 = null
+    else if (slot[0]!='missing') this.slot1 = 'images/tech_' + slot[0] + '.jpg'
     else this.slot1 = 'missing'
-    this.slot2 = 'images/tech_' + slot2 + '.jpg'
-    this.slot3 = 'images/tech_' + slot3 + '.jpg'
-    this.slot4 = 'images/tech_' + slot4 + '.jpg'
-    if (initiative!='missing') this.initiative = 'images/ship_' + initiative + '.jpg'
+    this.slot2 = 'images/tech_' + slot[1] + '.jpg'
+    this.slot3 = 'images/tech_' + slot[2] + '.jpg'
+    this.slot4 = 'images/tech_' + slot[3] + '.jpg'
+    if (slot[4]!='missing') this.initiative = 'images/ship_' + slot[4] + '.jpg'
     else this.initiative = 'missing'
-    if (energy=='missing') this.energy = 'missing'
-    else this.energy = 'images/ship_' + energy + '.jpg'
-    if (computer=='missing') this.computer = 'missing'
-    else this.computer = 'images/ship_' + computer + '.jpg'
+    if (slot[5]=='missing') this.energy = 'missing'
+    else this.energy = 'images/ship_' + slot[5] + '.jpg'
+    if (slot[6]=='missing') this.computer = 'missing'
+    else this.computer = 'images/ship_' + slot[6] + '.jpg'
 }
 
-function Cruiser(race, slot1, slot2, slot3, slot4, slot5, slot6, initiative, energy, computer) {
+function Cruiser(race, slot) {
     this.race = race
-    this.slot1 = 'images/tech_' + slot1 + '.jpg'
-    if (slot2==null) this.slot2 = null
-    else if (slot2!='missing') this.slot2 = 'images/tech_' + slot2 + '.jpg'
+    this.slot1 = 'images/tech_' + slot[0] + '.jpg'
+    if (slot[1]==null) this.slot2 = null
+    else if (slot[1]!='missing') this.slot2 = 'images/tech_' + slot[1] + '.jpg'
     else this.slot2 = 'missing'
-    this.slot3 = 'images/tech_' + slot3 + '.jpg'
-    this.slot4 = 'images/tech_' + slot4 + '.jpg'
-    this.slot5 = 'images/tech_' + slot5 + '.jpg'
-    this.slot6 = 'images/tech_' + slot6 + '.jpg'
-    if (initiative!='missing') this.initiative = 'images/ship_' + initiative + '.jpg'
+    this.slot3 = 'images/tech_' + slot[2] + '.jpg'
+    this.slot4 = 'images/tech_' + slot[3] + '.jpg'
+    this.slot5 = 'images/tech_' + slot[4] + '.jpg'
+    this.slot6 = 'images/tech_' + slot[5] + '.jpg'
+    if (slot[6]!='missing') this.initiative = 'images/ship_' + slot[6] + '.jpg'
     else this.initiative = 'missing'
-    if (energy=='missing') this.energy = 'missing'
-    else this.energy = 'images/ship_' + energy + '.jpg'
-    if (computer=='missing') this.computer = 'missing'
-    else this.computer = 'images/ship_' + computer + '.jpg'
+    if (slot[7]=='missing') this.energy = 'missing'
+    else this.energy = 'images/ship_' + slot[7] + '.jpg'
+    if (slot[8]=='missing') this.computer = 'missing'
+    else this.computer = 'images/ship_' + slot[8] + '.jpg'
 }
 
-function Dreadnought(race, slot1, slot2, slot3, slot4, slot5, slot6,
-  slot7, slot8, initiative, energy, computer) {
+function Dreadnought(race, slot) {
     this.race = race
-    this.slot1 = 'images/tech_' + slot1 + '.jpg'
-    this.slot2 = 'images/tech_' + slot2 + '.jpg'
-    if (slot3==null) this.slot3 = null
-    else this.slot3 = 'images/tech_' + slot3 + '.jpg'
-    this.slot4 = 'images/tech_' + slot4 + '.jpg'
-    if (slot5!='missing') this.slot5 = 'images/tech_' + slot5 + '.jpg'
+    this.slot1 = 'images/tech_' + slot[0] + '.jpg'
+    this.slot2 = 'images/tech_' + slot[1] + '.jpg'
+    if (slot[2]==null) this.slot3 = null
+    else this.slot3 = 'images/tech_' + slot[2] + '.jpg'
+    this.slot4 = 'images/tech_' + slot[3] + '.jpg'
+    if (slot[4]!='missing') this.slot5 = 'images/tech_' + slot[4] + '.jpg'
     else this.slot5 = 'missing'
-    this.slot6 = 'images/tech_' + slot6 + '.jpg'
-    if (slot7!='missing') this.slot7 = 'images/tech_' + slot7 + '.jpg'
+    this.slot6 = 'images/tech_' + slot[5] + '.jpg'
+    if (slot[6]!='missing') this.slot7 = 'images/tech_' + slot[6] + '.jpg'
     else this.slot7 = null
-    this.slot8 = 'images/tech_' + slot8 + '.jpg'
-    if (initiative=='missing') this.initiative = 'missing'
-    else this.initiative = 'images/ship_' + initiative + '.jpg'
-    if (energy!='missing') this.energy = 'images/ship_' + energy + '.jpg'
+    this.slot8 = 'images/tech_' + slot[7] + '.jpg'
+    if (slot[8]=='missing') this.initiative = 'missing'
+    else this.initiative = 'images/ship_' + slot[8] + '.jpg'
+    if (slot[9]!='missing') this.energy = 'images/ship_' + slot[9] + '.jpg'
     else this.energy = 'missing'
-    if (computer=='missing') this.computer = 'missing'
-    else this.computer = 'images/ship_' + computer + '.jpg'
+    if (slot[10]=='missing') this.computer = 'missing'
+    else this.computer = 'images/ship_' + slot[10] + '.jpg'
 }
 
-function Starbase(race, slot1, slot2, slot3, slot4, slot5, initiative, energy, computer) {
+function Starbase(race, slot) {
     this.race = race
-    this.slot1 = 'images/tech_' + slot1 + '.jpg'
-    this.slot2 = 'images/tech_' + slot2 + '.jpg'
-    this.slot3 = 'images/tech_' + slot3 + '.jpg'
-    if (slot4==null) this.slot4 = null
+    this.slot1 = 'images/tech_' + slot[0] + '.jpg'
+    this.slot2 = 'images/tech_' + slot[1] + '.jpg'
+    this.slot3 = 'images/tech_' + slot[2] + '.jpg'
+    if (slot[3]==null) this.slot4 = null
     else this.slot4 = 'missing'
-    this.slot5 = 'images/tech_' + slot5 + '.jpg'
-    this.initiative = 'images/ship_' + initiative + '.jpg'
-    this.energy = 'images/ship_' + energy + '.jpg'
-    if (computer=='missing') this.computer = 'missing'
-    else this.computer = 'images/ship_' + computer + '.jpg'
+    this.slot5 = 'images/tech_' + slot[4] + '.jpg'
+    this.initiative = 'images/ship_' + slot[5] + '.jpg'
+    this.energy = 'images/ship_' + slot[6] + '.jpg'
+    if (slot[7]=='missing') this.computer = 'missing'
+    else this.computer = 'images/ship_' + slot[7] + '.jpg'
 }
