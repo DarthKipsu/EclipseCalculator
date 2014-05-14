@@ -8,6 +8,7 @@
 
 #player-ship {
     width: 1370px;
+    overflow: hidden;
 }
 
 #player-ship > div.interceptor {
