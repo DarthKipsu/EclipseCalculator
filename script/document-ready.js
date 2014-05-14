@@ -11,5 +11,7 @@ $(document).ready(function() {
 	$('.race-selector span, li.race-selector').click(function() {
 		choosingARace(this) //race-selector.js
         if ($('.enemy-selector:hidden')) addEnemySelector() //race-selector.js
+		$('ul').hide()
+		$('.race-selector span, .enemy-selector span').css('border-bottom', '1px solid #DBDBDB')
 	})
 })

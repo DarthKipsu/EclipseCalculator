@@ -13,6 +13,7 @@ function hideShipPartIcons() {
 
 function changeCssForUpgrade(zoom, margin, width) {
     $('#player-ship').css('zoom', zoom).css('-moz-transform', 'scale(' + zoom + ')')
-    $('#player-ship').css('margin', margin)
+    //$('#player-ship').css('margin', margin)
+    $('#player-ship').css('-moz-transform-origin', 'center top')
     $('.title').css('width', width)
 }
