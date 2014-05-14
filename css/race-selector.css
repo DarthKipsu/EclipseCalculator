@@ -2,7 +2,7 @@ div.race {
 	text-align: center;
 }
 
-.race-selector span {
+.race-selector span, .enemy-selector span {
 	display: block;
 	width: 240px;
 	height: 20px;
@@ -13,12 +13,17 @@ div.race {
 	font-size: 14px;
 }
 
-.race-selector {
+.race-selector, .enemy-selector {
 	width: 240px;
 	margin: auto;
+    display: inline-block;
 }
 
-ul.race-selector {
+#enemy-race {
+    display: inline-block;
+}
+
+ul.race-selector, ul.enemy-selector {
 	padding: 0;
 	display: inline-block;
 	border: 1px solid #DBDBDB;
@@ -28,7 +33,7 @@ ul.race-selector {
 	background: white;
 }
 
-li.race-selector {
+li.race-selector, li.enemy-selector {
 	display: block;
 	line-height: 20px;
 	padding: 5px 0 5px 0;
@@ -38,7 +43,7 @@ li.race-selector {
 	cursor: pointer;
 }
 
-li.race-selector:hover, .race-selector span:hover {
+li.race-selector:hover, .race-selector span:hover, li.enemy-selector:hover, .enemy-selector span:hover {
 	color: white;
 	font-weight: bold;
 	font-size: 15px;

@@ -7,7 +7,7 @@ function hideShipPartIcons() {
     changeCssForUpgrade('0.5', '-80px auto', '740px')
 	$('#upgrades span').click(function() {
 		addContentFromHTML('#upgrades', 'upgrades.html')
-        changeCssForUpgrade('1', '40px auto', '1740px')
+        changeCssForUpgrade('1', '40px auto', '1250px')
 	})
 }
 

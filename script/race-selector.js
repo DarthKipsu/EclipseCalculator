@@ -1,13 +1,17 @@
 var chosenRace
 
-function raceSelectorMenu() {
-	$('ul.race-selector').slideDown('slow')
-	$('.race-selector span').css('border-bottom', 'none')
+function raceSelectorMenu(race) {
+	$('ul.' + race + '-selector').slideDown('slow')
+	$('.' + race + '-selector span').css('border-bottom', 'none')
 
-	$('div.race-selector').mouseleave(function() {
-		$('ul.race-selector').slideUp('slow')
-		$('.race-selector span').css('border-bottom', '1px solid #DBDBDB')
+	$('div.' + race + '-selector').mouseleave(function() {
+		$('ul.' + race + '-selector').slideUp('slow')
+		$('.' + race + '-selector span').css('border-bottom', '1px solid #DBDBDB')
 	})
+}
+
+function addEnemySelector() {
+    $('#enemy-race, .enemy-selector').show()
 }
 
 function choosingARace(race) {
@@ -32,11 +36,11 @@ function choosingARace(race) {
 }
 
 function moveRaceSelector() {
-	$('#choose-race, ul.race-selector').hide()
+	$('#choose-race').html('You: ')
 	$('.race-selector span, li.race-selector').unbind('click')
 	$('.race-selector span').css('border-bottom', '1px solid #DBDBDB')
 	$('div.race').css('margin-top', '20px')
-	$('.race-selector').css('margin', '0')
+	$('.race-selector').css('margin', '0 20px 0 0')
 }
 
 function reorderRaceSelectorRaces(race, chosenRace, topRaceOnSelector) {
