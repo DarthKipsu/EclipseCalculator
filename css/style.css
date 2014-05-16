@@ -36,3 +36,8 @@ p {
 #upgrades {
 	min-height: 1px;
 }
+
+.tech > img:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}

@@ -23,4 +23,6 @@ $(document).ready(function() {
         selectChosenRace(this, 'enemy') //race-selector.js
         hideSelectorPopUps() //script.js
     })
+
+
 })
