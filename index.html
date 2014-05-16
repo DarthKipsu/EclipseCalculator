@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Probability calculator for the galaxy!</title>
-		<link rel="stylesheet" type="text/css" href="css/race-selector.css">
-		<link rel="stylesheet" type="text/css" href="css/ship-models.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script type="text/javascript" src="script/race-selector.js"></script>
-		<script type="text/javascript" src="script/script.js"></script>
-		<script type="text/javascript" src="script/document-ready.js"></script>
-	</head>
-	<body>
-		<img id="otsikko" src="images/otsikko.jpg">
-		<div class="race">
-			<span id='choose-race'>Choose your race: </span>
-			<div class="race-selector">
-			<span class="race-selector" data-race="terran">Terran</span>
-			<UL class="race-selector">
-				<LI class="race-selector" data-race="eridani">Eridani Empire</LI>
-				<LI class="race-selector" data-race="hydran">Hydran Progress</LI>
-				<LI class="race-selector" data-race="planta">Planta</LI>
-				<LI class="race-selector" data-race="draco">Decendants of Draco</LI>
-				<LI class="race-selector" data-race="mechanema">Mechanema</LI>
-				<LI class="race-selector" data-race="orion">Orion Hegemony</LI>
-			</UL>
-			</div>
+    <head>
+        <title>Probability calculator for the galaxy!</title>
+        <link rel="stylesheet" type="text/css" href="css/race-selector.css">
+        <link rel="stylesheet" type="text/css" href="css/ship-models.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="script/race-selector.js"></script>
+        <script type="text/javascript" src="script/script.js"></script>
+        <script type="text/javascript" src="script/document-ready.js"></script>
+    </head>
+    <body>
+        <img id="otsikko" src="images/otsikko.jpg">
+        <div class="race">
+            <span id='choose-race'>Choose your race: </span>
+            <div class="race-selector">
+                <span class="race-selector" data-race="terran">Terran</span>
+                <UL class="race-selector">
+                    <LI class="race-selector" data-race="eridani">Eridani Empire</LI>
+                    <LI class="race-selector" data-race="hydran">Hydran Progress</LI>
+                    <LI class="race-selector" data-race="planta">Planta</LI>
+                    <LI class="race-selector" data-race="draco">Decendants of Draco</LI>
+                    <LI class="race-selector" data-race="mechanema">Mechanema</LI>
+                    <LI class="race-selector" data-race="orion">Orion Hegemony</LI>
+                </UL>
+            </div>
             <span id="enemy-race"> Enemy: </span>
-			<div class="enemy-selector">
-			<span class="enemy-selector" data-race="terran">Terran</span>
-			<UL class="enemy-selector">
-				<LI class="enemy-selector" data-race="eridani">Eridani Empire</LI>
-				<LI class="enemy-selector" data-race="hydran">Hydran Progress</LI>
-				<LI class="enemy-selector" data-race="planta">Planta</LI>
-				<LI class="enemy-selector" data-race="draco">Decendants of Draco</LI>
-				<LI class="enemy-selector" data-race="mechanema">Mechanema</LI>
-				<LI class="enemy-selector" data-race="orion">Orion Hegemony</LI>
-			</UL>
-			</div>
-
-		</div>
-		<div id="upgrades"></div>
+            <div class="enemy-selector">
+                <span class="enemy-selector" data-race="terran">Terran</span>
+                <UL class="enemy-selector">
+                    <LI class="enemy-selector" data-race="eridani">Eridani Empire</LI>
+                    <LI class="enemy-selector" data-race="hydran">Hydran Progress</LI>
+                    <LI class="enemy-selector" data-race="planta">Planta</LI>
+                    <LI class="enemy-selector" data-race="draco">Decendants of Draco</LI>
+                    <LI class="enemy-selector" data-race="mechanema">Mechanema</LI>
+                    <LI class="enemy-selector" data-race="orion">Orion Hegemony</LI>
+                </UL>
+            </div>
+        </div>
+        <div id="upgrades"></div>
         <p class='title'>Your ships:</p>
-		<div id='player-ship'></div>
-	</body>
+        <div id='player-ship'></div>
+        <p class='title'>Enemy ships:</p>
+        <div id='enemy-ship'></div>
+    </body>
 </html>

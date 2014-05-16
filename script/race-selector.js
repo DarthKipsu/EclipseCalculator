@@ -13,8 +13,9 @@ function raceSelectorMenu(race) {
 
 function choosingARace(selection) {
     chosenRace =$(selection).data('race')
+    $('.race-selector span, li.race-selector').unbind('click')
     
-    checkIfReorderIsNeeded(selection, 'race', chosenRace)
+    reorderIfNeeded(selection, 'race', chosenRace)
 
     $('.race-selector span, li.race-selector').click(function() {
         choosingARace(this)
@@ -31,20 +32,27 @@ function choosingARace(selection) {
 
 function choosingEnemy(selection) {
     enemyRace = $(selection).data('race')
+    $('.enemy-selector span, li.enemy-selector').unbind('click')
     
-    checkIfReorderIsNeeded(selection, 'enemy', enemyRace)
+    reorderIfNeeded(selection, 'enemy', enemyRace)
+    $('#enemy-ship').html('')
+    addContentFromHTML('#enemy-ship', 'ships/ship-' + enemyRace + '.html') 
+    
+    $('.enemy-selector span, li.enemy-selector').click(function() {
+        choosingEnemy(this) //race-selector.js
+        hideRaceSelectorPopUps()
+    })
 }
 
-function checkIfReorderIsNeeded(selection, player, race) {
+function reorderIfNeeded(selection, player, race) {
     var topRaceOnSelector = $('.' + player + '-selector span').attr('data-race')
-    if (chosenRace!=topRaceOnSelector) {
+    if (race!=topRaceOnSelector) {
         reorderRaceSelectorRaces(selection, race, topRaceOnSelector, player)
     }
 }
 
 function moveRaceSelector() {
     $('#choose-race').html('You: ')
-    $('.race-selector span, li.race-selector').unbind('click')
     $('.race-selector span').css('border-bottom', '1px solid #DBDBDB')
     $('div.race').css('margin-top', '20px')
     $('.race-selector').css('margin', '0 20px 0 0')

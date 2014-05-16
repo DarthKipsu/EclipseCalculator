@@ -1,4 +1,4 @@
-#player-ship > div {
+#player-ship > div, #enemy-ship > div {
     padding: 0;
     margin: 8px;
     position: relative;
@@ -6,37 +6,32 @@
     vertical-align: top;
 }
 
-#player-ship {
+#player-ship, #enemy-ship {
     width: 1370px;
     overflow: hidden;
 }
 
-#player-ship > div.interceptor {
+#player-ship > div.interceptor, #enemy-ship > div.interceptor {
     width: 319px;
     height: 212px;
 }
 
-#player-ship > div.cruiser {
+#player-ship > div.cruiser, #enemy-ship > div.cruiser {
     width: 319px;
     height: 294px;
 }
 
-#player-ship > div.dreadnought {
+#player-ship > div.dreadnought, #enemy-ship > div.dreadnought {
     width: 322px;
     height: 322px;
 }
 
-#player-ship > div.starbase {
+#player-ship > div.starbase, #enemy-ship > div.starbase {
     width: 322px;
     height: 322px;
 }
 
-#player-ship > div > p {
-    position: absolute;
-    top: -18px;
-}
-
-#player-ship img {
+#player-ship img, #enemy-ship img {
     margin: 2px;
 }
 
