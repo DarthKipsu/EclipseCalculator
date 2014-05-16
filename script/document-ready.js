@@ -20,8 +20,11 @@ $(document).ready(function() {
     })
     
     $('.enemy-selector span, li.enemy-selector').click(function() {
-        selectChosenRace(this, 'enemy') //race-selector.js
-        hideSelectorPopUps() //script.js
+        var selectedRace = $(this).data('race')
+        if (selectedRace=='terran' || selectedRace!=chosenRace) {
+            selectChosenRace(this, 'enemy') //race-selector.js
+            hideSelectorPopUps() //script.js
+        }
     })
 
 
