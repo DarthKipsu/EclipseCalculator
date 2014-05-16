@@ -12,10 +12,11 @@ function hideShipPartIcons() {
 }
 
 function changeCssForUpgrade(zoom, width) {
-    $('#player-ship').css('transform', 'scale(' + zoom + ')')
-    $('#player-ship').css('-webkit-transform', 'scale(' + zoom + ')')
-    $('#player-ship').css('transform-origin', 'center top')
-    $('#player-ship').css('-webkit-transform-origin', 'center top')
+    var target = $('#player-ship, #enemy-ship')
+    $(target).css('transform', 'scale(' + zoom + ')')
+    $(target).css('-webkit-transform', 'scale(' + zoom + ')')
+    $(target).css('transform-origin', 'center top')
+    $(target).css('-webkit-transform-origin', 'center top')
     $('.title').css('width', width)
 }
 
