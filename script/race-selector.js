@@ -1,71 +1,52 @@
 var chosenRace
 var enemyRace
 
-function raceSelectorMenu(race) {
+function openRaceSelectorMenu(race) {
     $('ul.' + race + '-selector').slideDown('slow')
-    $('.' + race + '-selector span').css('border-bottom', 'none')
 
     $('div.' + race + '-selector').mouseleave(function() {
         $('ul.' + race + '-selector').slideUp('slow')
-        $('.' + race + '-selector span').css('border-bottom', '1px solid #DBDBDB')
     })
 }
 
-function choosingARace(selection) {
-    chosenRace =$(selection).data('race')
-    $('.race-selector span, li.race-selector').unbind('click')
+function selectChosenRace(selection, player) {
+    var selectedRace = $(selection).data('race')
+    if (player=='enemy') enemyRace = selectedRace
+    else chosenRace = selectedRace
     
-    reorderIfNeeded(selection, 'race', chosenRace)
+    reorderSelectorIfNeeded(selection, player, selectedRace)
+    
+    if (player=='enemy') addShipModels('enemy', selectedRace)
+    else addShipModels('player', selectedRace)
 
-    $('.race-selector span, li.race-selector').click(function() {
-        choosingARace(this)
-        hideRaceSelectorPopUps()
-    })
-
-    if ($('#upgrades').text().length==0) {
-        addContentFromHTML('#upgrades', 'upgrades.html') //script.js
-    }
-    $('#player-ship').html('')
-    addContentFromHTML('#player-ship', 'ships/ship-' + chosenRace + '.html')
-    $('.title').show()
+    refreshClick(player)
 }
 
-function choosingEnemy(selection) {
-    enemyRace = $(selection).data('race')
-    $('.enemy-selector span, li.enemy-selector').unbind('click')
-    
-    reorderIfNeeded(selection, 'enemy', enemyRace)
-    $('#enemy-ship').html('')
-    addContentFromHTML('#enemy-ship', 'ships/ship-' + enemyRace + '.html') 
-    
-    $('.enemy-selector span, li.enemy-selector').click(function() {
-        choosingEnemy(this) //race-selector.js
-        hideRaceSelectorPopUps()
-    })
-}
-
-function reorderIfNeeded(selection, player, race) {
+function reorderSelectorIfNeeded(selection, player, race) {
     var topRaceOnSelector = $('.' + player + '-selector span').attr('data-race')
     if (race!=topRaceOnSelector) {
-        reorderRaceSelectorRaces(selection, race, topRaceOnSelector, player)
+        reorderSelectorRaces(selection, race, topRaceOnSelector, player)
     }
 }
 
-function moveRaceSelector() {
-    $('#choose-race').html('You: ')
-    $('.race-selector span').css('border-bottom', '1px solid #DBDBDB')
-    $('div.race').css('margin-top', '20px')
-    $('.race-selector').css('margin', '0 20px 0 0')
-}
-
-function reorderRaceSelectorRaces(selection, race, topRaceOnSelector, player) {
+function reorderSelectorRaces(selection, race, topRaceOnSelector, player) {
     var newLi = document.createElement('li')
     $(newLi).addClass(player + '-selector')
     $(newLi).appendTo('ul.' + player + '-selector')
-    $(newLi).attr('data-race', topRaceOnSelector)
-    $(newLi).text($('.' + player + '-selector span').text())
-    $('.' + player + '-selector span').html($(selection).text())
-    $('.' + player + '-selector span').attr('data-race', race)
-    var oldLi = $('li.' + player + '-selector[data-race="' + race + '"]')
-    $(oldLi).remove()
+    $(newLi).attr('data-race', topRaceOnSelector).text($('.' + player + '-selector span').text())
+    $('.' + player + '-selector span').html($(selection).text()).attr('data-race', race)
+    $('li.' + player + '-selector[data-race="' + race + '"]').remove()
+}
+
+function addShipModels(player, race) {
+    $('#' + player + '-ship').html('')
+    addContentFromHTML('#' + player + '-ship', 'ships/ship-' + race + '.html')
+}
+
+function refreshClick(player) {
+    $('.' + player + '-selector span, li.' + player + '-selector').unbind('click')
+    $('.' + player + '-selector span, li.' + player + '-selector').click(function() {
+        selectChosenRace(this, player)
+        hideSelectorPopUps()
+    })
 }

@@ -31,6 +31,7 @@ ul.race-selector, ul.enemy-selector {
 	z-index: 50;
 	position: absolute;
 	background: white;
+        margin-top: -1px;
 }
 
 li.race-selector, li.enemy-selector {

@@ -28,7 +28,7 @@ describe('race selector', function() {
 
     it('replaces the selectors first race with users choise', function() {
 	var clickedRace = $('li:nth-child(3)')
-        choosingARace(clickedRace)
+        selectChosenRace(clickedRace, 'race')
 	var firstRace = $('span.race-selector').attr('data-race')
         var dataRaces = document.querySelectorAll('[data-race]')
 	expect(firstRace).toEqual('planta')
