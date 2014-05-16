@@ -9,6 +9,16 @@ var raceTraits = {
         starbase: ['hull', 'ion-cannon', 'hull', , 'electron-computer',
 	    'up4', 'energy3', 'missing']
     },
+    enemyTerran: {
+        interceptor: [, 'ion-cannon', 'nuclear-source', 'nuclear-drive',
+	'up2', 'missing', 'missing'],
+        cruiser: ['hull', , 'ion-cannon', 'nuclear-source', 'electron-computer',
+	'nuclear-drive', 'up1', 'missing', 'missing'],
+        dreadnought: ['ion-cannon', 'hull', , 'hull', 'nuclear-source', 'ion-cannon',
+        'electron-computer', 'nuclear-drive', 'missing', 'missing', 'missing'],
+        starbase: ['hull', 'ion-cannon', 'hull', , 'electron-computer',
+	    'up4', 'energy3', 'missing']
+    },
     eridani: {
         interceptor: [, 'ion-cannon', 'nuclear-source', 'nuclear-drive',
 	'up2', 'missing', 'missing'],

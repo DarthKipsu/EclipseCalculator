@@ -6,6 +6,7 @@ eval(fs.readFileSync('race-traits.js') + '')
 
 var raceShips = {
     terran: [],
+    enemyTerran: [],
     eridani: [],
     hydran: [],
     planta: [],
@@ -15,7 +16,7 @@ var raceShips = {
 }
 
 var shipNames = ['interceptor', 'cruiser', 'dreadnought', 'starbase']
-var raceNames = ['terran', 'eridani', 'hydran', 'planta', 'draco', 'mechanema', 'orion']
+var raceNames = ['terran', 'enemyTerran', 'eridani', 'hydran', 'planta', 'draco', 'mechanema', 'orion']
 
 for (var i=0; i<shipNames.length; i++) {
     createShipHTML(shipNames[i])
