@@ -9,6 +9,21 @@ function openRaceSelectorMenu(race) {
     })
 }
 
+function moveRaceSelector() {
+    $('#choose-race').html('You: ')
+    $('div.race').css('margin-top', '20px')
+    $('.race-selector').css('margin', '0 20px 0 0')
+}
+
+function addEnemySelector() {
+    $('#enemy-race, .enemy-selector').show()
+}
+
+function hideSelectorPopUps() {
+    $('ul').hide()
+    $('.race-selector span, .enemy-selector span').css('border-bottom', '1px solid #DBDBDB')
+}
+
 function selectChosenRace(selection, player) {
     var selectedRace = $(selection).data('race')
     if (player=='enemy') enemyRace = selectedRace
