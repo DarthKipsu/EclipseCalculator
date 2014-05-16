@@ -1,56 +1,63 @@
 var chosenRace
+var enemyRace
 
 function raceSelectorMenu(race) {
-	$('ul.' + race + '-selector').slideDown('slow')
-	$('.' + race + '-selector span').css('border-bottom', 'none')
+    $('ul.' + race + '-selector').slideDown('slow')
+    $('.' + race + '-selector span').css('border-bottom', 'none')
 
-	$('div.' + race + '-selector').mouseleave(function() {
-		$('ul.' + race + '-selector').slideUp('slow')
-		$('.' + race + '-selector span').css('border-bottom', '1px solid #DBDBDB')
-	})
+    $('div.' + race + '-selector').mouseleave(function() {
+        $('ul.' + race + '-selector').slideUp('slow')
+        $('.' + race + '-selector span').css('border-bottom', '1px solid #DBDBDB')
+    })
 }
 
-function addEnemySelector() {
-    $('#enemy-race, .enemy-selector').show()
-}
+function choosingARace(selection) {
+    chosenRace =$(selection).data('race')
+    
+    checkIfReorderIsNeeded(selection, 'race', chosenRace)
 
-function choosingARace(race) {
-	moveRaceSelector()
-	
-	chosenRace = $(race).data('race')
-	var topRaceOnSelector = $('.race-selector span').attr('data-race')
-	if (chosenRace!=topRaceOnSelector) {
-		reorderRaceSelectorRaces(race, chosenRace, topRaceOnSelector)
-	}
+    $('.race-selector span, li.race-selector').click(function() {
+        choosingARace(this)
+        hideRaceSelectorPopUps()
+    })
 
-	$('.race-selector span, li.race-selector').click(function() {
-		choosingARace(this)
-	})
-
-	if ($('#upgrades').text().length==0) {
-		addContentFromHTML('#upgrades', 'upgrades.html') //script.js
-	}
-	$('#player-ship').html('')
-	addContentFromHTML('#player-ship', 'ships/ship-' + chosenRace + '.html')
+    if ($('#upgrades').text().length==0) {
+        addContentFromHTML('#upgrades', 'upgrades.html') //script.js
+    }
+    $('#player-ship').html('')
+    addContentFromHTML('#player-ship', 'ships/ship-' + chosenRace + '.html')
     $('.title').show()
 }
 
-function moveRaceSelector() {
-	$('#choose-race').html('You: ')
-	$('.race-selector span, li.race-selector').unbind('click')
-	$('.race-selector span').css('border-bottom', '1px solid #DBDBDB')
-	$('div.race').css('margin-top', '20px')
-	$('.race-selector').css('margin', '0 20px 0 0')
+function choosingEnemy(selection) {
+    enemyRace = $(selection).data('race')
+    
+    checkIfReorderIsNeeded(selection, 'enemy', enemyRace)
 }
 
-function reorderRaceSelectorRaces(race, chosenRace, topRaceOnSelector) {
-	var newLi = document.createElement('li')
-	$(newLi).addClass('race-selector')
-	$(newLi).appendTo('ul.race-selector')
-	$(newLi).attr('data-race', topRaceOnSelector)
-	$(newLi).text($('.race-selector span').text())
-	$('.race-selector span').html($(race).text())
-	$('.race-selector span').attr('data-race', chosenRace)
-	var oldLi = $('li.race-selector[data-race="' + chosenRace + '"]')
-	$(oldLi).remove()
+function checkIfReorderIsNeeded(selection, player, race) {
+    var topRaceOnSelector = $('.' + player + '-selector span').attr('data-race')
+    if (chosenRace!=topRaceOnSelector) {
+        reorderRaceSelectorRaces(selection, race, topRaceOnSelector, player)
+    }
+}
+
+function moveRaceSelector() {
+    $('#choose-race').html('You: ')
+    $('.race-selector span, li.race-selector').unbind('click')
+    $('.race-selector span').css('border-bottom', '1px solid #DBDBDB')
+    $('div.race').css('margin-top', '20px')
+    $('.race-selector').css('margin', '0 20px 0 0')
+}
+
+function reorderRaceSelectorRaces(selection, race, topRaceOnSelector, player) {
+    var newLi = document.createElement('li')
+    $(newLi).addClass(player + '-selector')
+    $(newLi).appendTo('ul.' + player + '-selector')
+    $(newLi).attr('data-race', topRaceOnSelector)
+    $(newLi).text($('.' + player + '-selector span').text())
+    $('.' + player + '-selector span').html($(selection).text())
+    $('.' + player + '-selector span').attr('data-race', race)
+    var oldLi = $('li.' + player + '-selector[data-race="' + race + '"]')
+    $(oldLi).remove()
 }
