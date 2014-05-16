@@ -61,10 +61,14 @@ function addShipModels(player, race) {
 function refreshClick(player) {
     $('.' + player + '-selector span, li.' + player + '-selector').unbind('click')
     $('.' + player + '-selector span, li.' + player + '-selector').click(function() {
-        var selectedRace = $(this).data('race')
-        if (selectedRace=='terran' || (selectedRace!=chosenRace && selectedRace!=enemyRace)) {
-            selectChosenRace(this, player)
-            hideSelectorPopUps()
-        }
+        handleClick(player, this)
     })
+}
+
+function handleClick(player, selection) {
+    var selectedRace = $(selection).data('race')
+    if (selectedRace=='terran' || (selectedRace!=chosenRace && selectedRace!=enemyRace)) {
+        selectChosenRace(selection, player)
+        hideSelectorPopUps()
+    }
 }
