@@ -6,6 +6,10 @@
     vertical-align: top;
 }
 
+#enemy-ship > div {
+    display: none;
+}
+
 #player-ship, #enemy-ship {
     width: 1370px;
     overflow: hidden;

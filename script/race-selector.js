@@ -13,6 +13,14 @@ function moveRaceSelector() {
     $('#choose-race').html('You: ')
     $('div.race').css('margin-top', '20px')
     $('.race-selector').css('margin', '0 20px 0 0')
+    $('.race-selector span').unbind('mouseenter')
+    $('.race-selector span').css({
+        'background':'none',
+        'color':'black',
+        'font-weight':'normal',
+        'font-size':'14px',
+        'cursor':'default'
+    })
 }
 
 function addEnemySelector() {
@@ -24,17 +32,15 @@ function hideSelectorPopUps() {
     $('.race-selector span, .enemy-selector span').css('border-bottom', '1px solid #DBDBDB')
 }
 
-function selectChosenRace(selection, player) {
+function selectChosenRace(selection) {
     var selectedRace = $(selection).data('race')
-    if (player=='enemy') enemyRace = selectedRace
-    else chosenRace = selectedRace
+    chosenRace = selectedRace
     
-    reorderSelectorIfNeeded(selection, player, selectedRace)
-    
-    if (player=='enemy') addShipModels('enemy', selectedRace)
-    else addShipModels('player', selectedRace)
+    reorderSelectorIfNeeded(selection, 'race', selectedRace)
+    addContentFromHTML('#player-ship', 'ships/ship-' + selectedRace + '.html')
+    addContentFromHTML('#enemy-ship', 'ships/enemy-ships.html')
 
-    refreshClick(player)
+    refreshClick()
 }
 
 function reorderSelectorIfNeeded(selection, player, race) {
@@ -53,22 +59,31 @@ function reorderSelectorRaces(selection, race, topRaceOnSelector, player) {
     $('li.' + player + '-selector[data-race="' + race + '"]').remove()
 }
 
-function addShipModels(player, race) {
-    $('#' + player + '-ship').html('')
-    addContentFromHTML('#' + player + '-ship', 'ships/ship-' + race + '.html')
-}
-
-function refreshClick(player) {
-    $('.' + player + '-selector span, li.' + player + '-selector').unbind('click')
-    $('.' + player + '-selector span, li.' + player + '-selector').click(function() {
-        handleClick(player, this)
-    })
-}
-
-function handleClick(player, selection) {
+function handleClick(selection) {
     var selectedRace = $(selection).data('race')
-    if (selectedRace=='terran' || (selectedRace!=chosenRace && selectedRace!=enemyRace)) {
-        selectChosenRace(selection, player)
+    if (selectedRace!=chosenRace) {
+        selectEnemyRace(selection, selectedRace)
         hideSelectorPopUps()
     }
+}
+
+function selectEnemyRace(selection, selectedRace) {
+    enemyRace = selectedRace
+
+    reorderSelectorIfNeeded(selection, 'enemy', selectedRace)
+    showEnemyShipModels()
+
+    refreshClick()
+}
+
+function showEnemyShipModels() {
+    $('#enemy-ship > div').css('display', 'none')
+    $('#enemy-ship > div.' + enemyRace).css('display', 'inline-block')
+}
+
+function refreshClick() {
+    $('.enemy-selector span, li.enemy-selector').unbind('click')
+    $('.enemy-selector span, li.enemy-selector').click(function() {
+        handleClick(this)
+    })
 }

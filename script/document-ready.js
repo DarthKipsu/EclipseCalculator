@@ -14,14 +14,8 @@ $(document).ready(function() {
         addEnemySelector() //race-selector.js
         hideSelectorPopUps() //race-selector.js
         
-        selectChosenRace(this, 'race') //race-selector.js
+        selectChosenRace(this) //race-selector.js
         addContentFromHTML('#upgrades', 'upgrades.html') //script.js
         $('.title').show()
     })
-    
-    $('.enemy-selector span, li.enemy-selector').click(function() {
-        handleClick('enemy', this) //race-selector.js
-    })
-
-
 })

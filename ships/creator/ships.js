@@ -16,25 +16,15 @@ var raceShips = {
 }
 
 var shipNames = ['interceptor', 'cruiser', 'dreadnought', 'starbase']
-var raceNames = ['terran', 'enemyTerran', 'eridani', 'hydran', 'planta', 'draco', 'mechanema', 'orion']
+var raceNames = ['terran', 'enemyTerran', 'eridani', 'hydran', 'planta', 'draco',
+    'mechanema', 'orion']
 
 for (var i=0; i<shipNames.length; i++) {
     createShipHTML(shipNames[i])
 }
 
-for (var i=0; i<raceNames.length; i++) {
-    writeShipsToFile(raceNames[i])
-}
-
-function writeShipsToFile(race) {
-    fs.writeFile('../ship-'+ race + '.html', raceShips[race].join(''), function(err) {
-       if (err) console.log(err)
-       else console.log(race, 'ship models created!')
-    })
-}
-
 function createShipHTML(shipType) {
-    for (var i=0; i<7; i++) {
+    for (var i=0; i<8; i++) {
         var race = Object.keys(raceTraits)[i]
         var slots = []
         var weaponsArray = raceTraits[race][shipType]
@@ -56,4 +46,30 @@ function createShipHTML(shipType) {
         }
         raceShips[race].push(jade.renderFile(shipType + '.jade', shipAttributes))
     }
+}
+
+for (var i=0; i<raceNames.length; i++) {
+    if (i!=1) {
+        writeShipsToFile(raceNames[i])
+    }
+}
+
+function writeShipsToFile(race) {
+    fs.writeFile('../ship-'+ race + '.html', raceShips[race].join('\n'), function(err) {
+       if (err) console.log(err)
+       else console.log(race, 'ship models created!')
+    })
+}
+
+fs.writeFile('../enemy-ships.html', allEnemies(), function(err) {
+    if (err) console.log(err)
+    else console.log('enemy ships created')
+})
+
+function allEnemies() {
+    var enemyShips = []
+    for (var i=1; i<raceNames.length; i++) {
+        enemyShips.push(raceShips[raceNames[i]].join('\n'))
+    }
+    return enemyShips.join('\n')
 }
