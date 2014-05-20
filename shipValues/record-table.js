@@ -5,9 +5,16 @@ var recordTable = {
             two: 'ionCannon',
             three: 'nuclearSource',
             four: 'nuclearDrive',
-            initiative: 2,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 0,
+            shield: 0,
+            hull: 0,
+            initiative: 3,
+            energy: 1,
+            speed: 1
         },
         cruiser: {
             one: 'hull',
@@ -16,9 +23,16 @@ var recordTable = {
             four: 'nuclearSource',
             five: 'electronComputer',
             six: 'nuclearDrive',
-            initiative: 1,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 1,
+            initiative: 2,
+            energy: 1,
+            speed: 1
         },
         dreadnought: {
             one: 'ionCannon',
@@ -29,9 +43,16 @@ var recordTable = {
             six: 'ionCannon',
             seven: 'electronComputer',
             eight: 'nuclearDrive',
-            initiative: 0,
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 2,
+            dice: 2,
+            computer: 1,
+            shield: 0,
+            hull: 2,
+            initiative: 1,
             energy: 0,
-            computer: 0
+            speed: 1
         },
         starbase: {
             one: 'hull',
@@ -39,9 +60,16 @@ var recordTable = {
             three: 'hull',
             four: null,
             five: 'electronComputer',
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 2,
             initiative: 4,
-            energy: 3,
-            computer: 0
+            energy: 2,
+            speed: 0
         }
     },
 
@@ -51,9 +79,16 @@ var recordTable = {
             two: 'ionCannon',
             three: 'nuclearSource',
             four: 'nuclearDrive',
-            initiative: 2,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 0,
+            shield: 0,
+            hull: 0,
+            initiative: 3,
+            energy: 1,
+            speed: 1
         },
         cruiser: {
             one: 'hull',
@@ -62,9 +97,16 @@ var recordTable = {
             four: 'nuclearSource',
             five: 'electronComputer',
             six: 'nuclearDrive',
-            initiative: 1,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 1,
+            initiative: 2,
+            energy: 1,
+            speed: 1
         },
         dreadnought: {
             one: 'ionCannon',
@@ -75,9 +117,16 @@ var recordTable = {
             six: 'ionCannon',
             seven: 'electronComputer',
             eight: 'nuclearDrive',
-            initiative: 0,
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 2,
+            dice: 2,
+            computer: 1,
+            shield: 0,
+            hull: 2,
+            initiative: 1,
             energy: 0,
-            computer: 0
+            speed: 1
         },
         starbase: {
             one: 'hull',
@@ -85,9 +134,16 @@ var recordTable = {
             three: 'hull',
             four: null,
             five: 'electronComputer',
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 2,
             initiative: 4,
-            energy: 3,
-            computer: 0
+            energy: 2,
+            speed: 0
         }
     },
 
@@ -97,9 +153,16 @@ var recordTable = {
             two: 'ionCannon',
             three: 'nuclearSource',
             four: 'nuclearDrive',
-            initiative: 2,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 0,
+            shield: 0,
+            hull: 0,
+            initiative: 3,
+            energy: 1,
+            speed: 1
         },
         cruiser: {
             one: 'hull',
@@ -108,9 +171,16 @@ var recordTable = {
             four: 'nuclearSource',
             five: 'electronComputer',
             six: 'nuclearDrive',
-            initiative: 1,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 1,
+            initiative: 2,
+            energy: 1,
+            speed: 1
         },
         dreadnought: {
             one: 'ionCannon',
@@ -121,9 +191,16 @@ var recordTable = {
             six: 'ionCannon',
             seven: 'electronComputer',
             eight: 'nuclearDrive',
-            initiative: 0,
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 2,
+            dice: 2,
+            computer: 1,
+            shield: 0,
+            hull: 2,
+            initiative: 1,
             energy: 1,
-            computer: 0
+            speed: 1
         },
         starbase: {
             one: 'hull',
@@ -131,9 +208,16 @@ var recordTable = {
             three: 'hull',
             four: null,
             five: 'electronComputer',
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 2,
             initiative: 4,
-            energy: 3,
-            computer: 0
+            energy: 2,
+            speed: 0
         }
     },
 
@@ -143,9 +227,16 @@ var recordTable = {
             two: 'ionCannon',
             three: 'nuclearSource',
             four: 'nuclearDrive',
-            initiative: 2,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 0,
+            shield: 0,
+            hull: 0,
+            initiative: 3,
+            energy: 1,
+            speed: 1
         },
         cruiser: {
             one: 'hull',
@@ -154,9 +245,16 @@ var recordTable = {
             four: 'nuclearSource',
             five: 'electronComputer',
             six: 'nuclearDrive',
-            initiative: 1,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 1,
+            initiative: 2,
+            energy: 1,
+            speed: 1
         },
         dreadnought: {
             one: 'ionCannon',
@@ -167,9 +265,16 @@ var recordTable = {
             six: 'ionCannon',
             seven: 'electronComputer',
             eight: 'nuclearDrive',
-            initiative: 0,
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 2,
+            dice: 2,
+            computer: 1,
+            shield: 0,
+            hull: 2,
+            initiative: 1,
             energy: 0,
-            computer: 0
+            speed: 1
         },
         starbase: {
             one: 'hull',
@@ -177,9 +282,16 @@ var recordTable = {
             three: 'hull',
             four: null,
             five: 'electronComputer',
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 2,
             initiative: 4,
-            energy: 3,
-            computer: 0
+            energy: 2,
+            speed: 0
         }
     },
 
@@ -189,9 +301,16 @@ var recordTable = {
             two: 'ionCannon',
             three: 'nuclearSource',
             four: 'nuclearDrive',
-            initiative: 0,
-            energy: 2,
-            computer: 1
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 0,
+            initiative: 1,
+            energy: 3,
+            speed: 1
         },
         cruiser: {
             one: 'hull',
@@ -200,9 +319,16 @@ var recordTable = {
             four: 'nuclearSource',
             five: null,
             six: 'nuclearDrive',
-            initiative: 0,
-            energy: 2,
-            computer: 1
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 1,
+            initiative: 1,
+            energy: 3,
+            speed: 1
         },
         dreadnought: {
             one: 'ionCannon',
@@ -213,9 +339,16 @@ var recordTable = {
             six: 'ionCannon',
             seven: null,
             eight: 'nuclearDrive',
-            initiative: 0,
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 2,
+            dice: 2,
+            computer: 1,
+            shield: 0,
+            hull: 2,
+            initiative: 1,
             energy: 2,
-            computer: 1
+            speed: 1
         },
         starbase: {
             one: 'hull',
@@ -223,9 +356,16 @@ var recordTable = {
             three: 'hull',
             four: null,
             five: 'electronComputer',
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 2,
             initiative: 2,
-            energy: 5,
-            computer: 1
+            energy: 4,
+            speed: 0
         }
     },
 
@@ -235,9 +375,16 @@ var recordTable = {
             two: 'ionCannon',
             three: 'nuclearSource',
             four: 'nuclearDrive',
-            initiative: 2,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 0,
+            shield: 0,
+            hull: 0,
+            initiative: 3,
+            energy: 1,
+            speed: 1
         },
         cruiser: {
             one: 'hull',
@@ -246,9 +393,16 @@ var recordTable = {
             four: 'nuclearSource',
             five: 'electronComputer',
             six: 'nuclearDrive',
-            initiative: 1,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 1,
+            initiative: 2,
+            energy: 1,
+            speed: 1
         },
         dreadnought: {
             one: 'ionCannon',
@@ -259,9 +413,16 @@ var recordTable = {
             six: 'ionCannon',
             seven: 'electronComputer',
             eight: 'nuclearDrive',
-            initiative: 0,
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 2,
+            dice: 2,
+            computer: 1,
+            shield: 0,
+            hull: 2,
+            initiative: 1,
             energy: 0,
-            computer: 0
+            speed: 1
         },
         starbase: {
             one: 'hull',
@@ -269,9 +430,16 @@ var recordTable = {
             three: 'hull',
             four: null,
             five: 'electronComputer',
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 2,
             initiative: 4,
-            energy: 3,
-            computer: 0
+            energy: 2,
+            speed: 0
         }
     },
 
@@ -281,9 +449,16 @@ var recordTable = {
             two: 'ionCannon',
             three: 'nuclearSource',
             four: 'nuclearDrive',
-            initiative: 2,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 0,
+            shield: 0,
+            hull: 0,
+            initiative: 3,
+            energy: 1,
+            speed: 1
         },
         cruiser: {
             one: 'hull',
@@ -292,9 +467,16 @@ var recordTable = {
             four: 'nuclearSource',
             five: 'electronComputer',
             six: 'nuclearDrive',
-            initiative: 1,
-            energy: 0,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 1,
+            initiative: 2,
+            energy: 1,
+            speed: 1
         },
         dreadnought: {
             one: 'ionCannon',
@@ -305,9 +487,16 @@ var recordTable = {
             six: 'ionCannon',
             seven: 'electronComputer',
             eight: 'nuclearDrive',
-            initiative: 0,
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 2,
+            dice: 2,
+            computer: 1,
+            shield: 0,
+            hull: 2,
+            initiative: 1,
             energy: 0,
-            computer: 0
+            speed: 1
         },
         starbase: {
             one: 'hull',
@@ -315,9 +504,16 @@ var recordTable = {
             three: 'hull',
             four: null,
             five: 'electronComputer',
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: 0,
+            hull: 2,
             initiative: 4,
-            energy: 3,
-            computer: 0
+            energy: 2,
+            speed: 0
         }
     },
 
@@ -327,9 +523,16 @@ var recordTable = {
             two: 'ionCannon',
             three: 'nuclearSource',
             four: 'nuclearDrive',
-            initiative: 3,
-            energy: 1,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 0,
+            shield: -1,
+            hull: 0,
+            initiative: 4,
+            energy: 2,
+            speed: 1
         },
         cruiser: {
             one: 'hull',
@@ -338,9 +541,16 @@ var recordTable = {
             four: 'nuclearSource',
             five: 'electronComputer',
             six: 'nuclearDrive',
-            initiative: 2,
-            energy: 2,
-            computer: 0
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: -1,
+            hull: 1,
+            initiative: 3,
+            energy: 3,
+            speed: 1
         },
         dreadnought: {
             one: 'ionCannon',
@@ -351,9 +561,16 @@ var recordTable = {
             six: 'ionCannon',
             seven: 'electronComputer',
             eight: 'nuclearDrive',
-            initiative: 1,
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 2,
+            dice: 2,
+            computer: 1,
+            shield: -1,
+            hull: 2,
+            initiative: 2,
             energy: 3,
-            computer: 0
+            speed: 1
         },
         starbase: {
             one: 'hull',
@@ -361,16 +578,24 @@ var recordTable = {
             three: 'hull',
             four: 'gaussShield',
             five: 'electronComputer',
+            missileHitpoints: 0,
+            missileDice: 0,
+            hitpoints: 1,
+            dice: 1,
+            computer: 1,
+            shield: -1,
+            hull: 2,
             initiative: 5,
-            energy: 3,
-            computer: 0
+            energy: 2,
+            speed: 0
         }
     }
 }
 
 var upgradeAttributes = {
     ionTurret: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 1,
         dice: 2,
         computer: 0,
@@ -381,7 +606,8 @@ var upgradeAttributes = {
         speed: 0
     },
     ionMissile: {
-        missile: true,
+        missileHitpoints: 1,
+        missileDice: 3,
         hitpoints: 1,
         dice: 3,
         computer: 0,
@@ -392,7 +618,8 @@ var upgradeAttributes = {
         speed: 0
     },
     axionComputer: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 3,
@@ -403,7 +630,8 @@ var upgradeAttributes = {
         speed: 0
     },
     shardHull: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -414,7 +642,8 @@ var upgradeAttributes = {
         speed: 0
     },
     fluxShield: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -425,7 +654,8 @@ var upgradeAttributes = {
         speed: 0
     },
     conformalDrive: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -436,7 +666,8 @@ var upgradeAttributes = {
         speed: 4
     },
     hypergridSource: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -447,7 +678,8 @@ var upgradeAttributes = {
         speed: 0
     },
     ionCannon: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 1,
         dice: 1,
         computer: 0,
@@ -458,7 +690,8 @@ var upgradeAttributes = {
         speed: 0
     },
     electronComputer: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 1,
@@ -469,7 +702,8 @@ var upgradeAttributes = {
         speed: 0
     },
     hull: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -480,7 +714,8 @@ var upgradeAttributes = {
         speed: 0
     },
     nuclearDrive: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -491,7 +726,8 @@ var upgradeAttributes = {
         speed: 1
     },
     nuclearSource: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -502,7 +738,8 @@ var upgradeAttributes = {
         speed: 0
     },
     plasmaCannon: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 2,
         dice: 1,
         computer: 0,
@@ -513,7 +750,8 @@ var upgradeAttributes = {
         speed: 0
     },
     plasmaMissile: {
-        missile: true,
+        missileHitpoints: 2,
+        missileDice: 2,
         hitpoints: 2,
         dice: 2,
         computer: 0,
@@ -524,7 +762,8 @@ var upgradeAttributes = {
         speed: 0
     },
     antimatterCannon: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 4,
         dice: 1,
         computer: 0,
@@ -535,7 +774,8 @@ var upgradeAttributes = {
         speed: 0
     },
     positronComputer: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 2,
@@ -546,7 +786,8 @@ var upgradeAttributes = {
         speed: 0
     },
     gluonComputer: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 3,
         computer: 0,
@@ -557,7 +798,8 @@ var upgradeAttributes = {
         speed: 0
     },
     improvedHull: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -568,7 +810,8 @@ var upgradeAttributes = {
         speed: 0
     },
     gaussShield: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -579,7 +822,8 @@ var upgradeAttributes = {
         speed: 0
     },
     phaseShield: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -590,7 +834,8 @@ var upgradeAttributes = {
         speed: 0
     },
     fusionDrive: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -601,7 +846,8 @@ var upgradeAttributes = {
         speed: 2
     },
     tachyonDrive: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -612,7 +858,8 @@ var upgradeAttributes = {
         speed: 3
     },
     fusionSource: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
@@ -623,7 +870,8 @@ var upgradeAttributes = {
         speed: 0
     },
     tachyonSource: {
-        missile: false,
+        missileHitpoints: 0,
+        missileDice: 0,
         hitpoints: 0,
         dice: 0,
         computer: 0,
