@@ -30,7 +30,12 @@ $(document).on('click', '.tech > img', function() {
 })
 
 function checkValidity(classList, upgradeData, upgradeSlot) {
-    totalEnergy(classList, upgradeData, upgradeSlot)
+    var energy = totalEnergy(classList, upgradeData, upgradeSlot)
+    if (energy<0) console.log('NOT ENOUGH ENERGY! (' + energy + ')')
+    if (classList[1]!='starbase') {
+        var speed = totalSpeed(classList, upgradeData, upgradeSlot)
+        if (speed<1) console.log('NEED ENGINE!')
+    }
 }
 
 function totalEnergy(classList, upgradeData, upgradeSlot) {
@@ -39,6 +44,14 @@ function totalEnergy(classList, upgradeData, upgradeSlot) {
         var removedUpgradeEnergy = upgradeAttributes[upgradeSlot[classList[2]]].energy
     } else var removedUpgradeEnergy = 0
     var newUpgradeEnergy = upgradeAttributes[upgradeData]['energy']
-    console.log('energy:', currentEnergy, '-', removedUpgradeEnergy, '+', newUpgradeEnergy, '=', currentEnergy - removedUpgradeEnergy + newUpgradeEnergy)
     return currentEnergy - removedUpgradeEnergy + newUpgradeEnergy
+}
+
+function totalSpeed(classList, upgradeData, upgradeSlot) {
+    var currentSpeed = upgradeSlot.speed
+    if (upgradeAttributes[upgradeSlot[classList[2]]]) {
+        var removedSpeed = upgradeAttributes[upgradeSlot[classList[2]]].speed
+    } else var removedSpeed = 0
+    var newUpgradeSpeed = upgradeAttributes[upgradeData]['speed']
+    return currentSpeed - removedSpeed + newUpgradeSpeed
 }
