@@ -16,28 +16,29 @@ $(document).on('click', '.tech > img', function() {
     })
 
     $(upgradableShipParts).click(function() {
-        console.log(upgradeData, this.classList[0], this.classList[1])
-        checkValidity(this.classList, upgradeData)
+        console.log('upgrade:', upgradeData, 'race:', this.classList[0], 'ship:', this.classList[1], 'slot:', this.classList[2])
+        var upgradeSlot = recordTable[this.classList[0]][this.classList[1]]
+        checkValidity(this.classList, upgradeData, upgradeSlot)
         $(this).html('')
         var img = document.createElement('img')
         img.src = upgradeSrc
         $(img).appendTo(this)
 
-        var upgradeSlot = recordTable[this.classList[0]][this.classList[1]][this.classList[2]]
-        upgradeSlot = upgradeData
-        console.log(upgradeSlot)
+        upgradeSlot.energy = totalEnergy(this.classList, upgradeData, upgradeSlot)
+        upgradeSlot[this.classList[2]] = upgradeData
     })
 })
 
-function checkValidity(classList, upgradeData) {
-    var upgradedShip = recordTable[classList[0]][classList[1]]
-    var energy = upgradedShip.energy + upgradeAttributes[upgradeData]['energy']
-    totalEnergy(classList, upgradeData, upgradedShip)
-    console.log('energy:', energy)
+function checkValidity(classList, upgradeData, upgradeSlot) {
+    totalEnergy(classList, upgradeData, upgradeSlot)
 }
 
-function totalEnergy(classList, upgradeData, upgradedShip) {
-    for (var i=0; i<upgradedShip.length; i++) {
-    }
-    console.log('spgraded ship', upgradedShip)
+function totalEnergy(classList, upgradeData, upgradeSlot) {
+    var currentEnergy = upgradeSlot.energy
+    if (upgradeAttributes[upgradeSlot[classList[2]]]) {
+        var removedUpgradeEnergy = upgradeAttributes[upgradeSlot[classList[2]]].energy
+    } else var removedUpgradeEnergy = 0
+    var newUpgradeEnergy = upgradeAttributes[upgradeData]['energy']
+    console.log('energy:', currentEnergy, '-', removedUpgradeEnergy, '+', newUpgradeEnergy, '=', currentEnergy - removedUpgradeEnergy + newUpgradeEnergy)
+    return currentEnergy - removedUpgradeEnergy + newUpgradeEnergy
 }
