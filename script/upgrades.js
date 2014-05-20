@@ -17,6 +17,7 @@ $(document).on('click', '.tech > img', function() {
 
     $(upgradableShipParts).click(function() {
         console.log(upgradeData, this.classList[0], this.classList[1])
+        checkValidity(this.classList, upgradeData)
         $(this).html('')
         var img = document.createElement('img')
         img.src = upgradeSrc
@@ -27,3 +28,16 @@ $(document).on('click', '.tech > img', function() {
         console.log(upgradeSlot)
     })
 })
+
+function checkValidity(classList, upgradeData) {
+    var upgradedShip = recordTable[classList[0]][classList[1]]
+    var energy = upgradedShip.energy + upgradeAttributes[upgradeData]['energy']
+    totalEnergy(classList, upgradeData, upgradedShip)
+    console.log('energy:', energy)
+}
+
+function totalEnergy(classList, upgradeData, upgradedShip) {
+    for (var i=0; i<upgradedShip.length; i++) {
+    }
+    console.log('spgraded ship', upgradedShip)
+}
