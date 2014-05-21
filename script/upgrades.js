@@ -24,34 +24,36 @@ $(document).on('click', '.tech > img', function() {
         img.src = upgradeSrc
         $(img).appendTo(this)
 
-        upgradeSlot.energy = totalEnergy(this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.dice1HPmissile = addAttribute('dice1HPmissile', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.dice2HPmissile = addAttribute('dice2HPmissile', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.dice1HP = addAttribute('dice1HP', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.dice2HP = addAttribute('dice2HP', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.dice4HP = addAttribute('dice4HP', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.computer = addAttribute('computer', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.shield = addAttribute('shield', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.hull = addAttribute('hull', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.initiative = addAttribute('initiative', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.energy = addAttribute('energy', this.classList, upgradeData, upgradeSlot)
+        upgradeSlot.speed = addAttribute('speed', this.classList, upgradeData, upgradeSlot)
         upgradeSlot[this.classList[2]] = upgradeData
+        console.log(recordTable[this.classList[0]][this.classList[1]])
     })
 })
 
 function checkValidity(classList, upgradeData, upgradeSlot) {
-    var energy = totalEnergy(classList, upgradeData, upgradeSlot)
+    var energy = addAttribute('energy', classList, upgradeData, upgradeSlot)
     if (energy<0) console.log('NOT ENOUGH ENERGY! (' + energy + ')')
     if (classList[1]!='starbase') {
-        var speed = totalSpeed(classList, upgradeData, upgradeSlot)
+        var speed = addAttribute('speed', classList, upgradeData, upgradeSlot)
         if (speed<1) console.log('NEED ENGINE!')
     }
 }
 
-function totalEnergy(classList, upgradeData, upgradeSlot) {
-    var currentEnergy = upgradeSlot.energy
+function addAttribute(attribute, classList, upgradeData, upgradeSlot) {
+    var currentAttribute = upgradeSlot[attribute]
     if (upgradeAttributes[upgradeSlot[classList[2]]]) {
-        var removedUpgradeEnergy = upgradeAttributes[upgradeSlot[classList[2]]].energy
-    } else var removedUpgradeEnergy = 0
-    var newUpgradeEnergy = upgradeAttributes[upgradeData]['energy']
-    return currentEnergy - removedUpgradeEnergy + newUpgradeEnergy
-}
-
-function totalSpeed(classList, upgradeData, upgradeSlot) {
-    var currentSpeed = upgradeSlot.speed
-    if (upgradeAttributes[upgradeSlot[classList[2]]]) {
-        var removedSpeed = upgradeAttributes[upgradeSlot[classList[2]]].speed
-    } else var removedSpeed = 0
-    var newUpgradeSpeed = upgradeAttributes[upgradeData]['speed']
-    return currentSpeed - removedSpeed + newUpgradeSpeed
+        var removedUpgrade = upgradeAttributes[upgradeSlot[classList[2]]][attribute]
+    } else var removedUpgrade = 0
+    var newUpgrade = upgradeAttributes[upgradeData][attribute]
+    return currentAttribute - removedUpgrade + newUpgrade
 }
