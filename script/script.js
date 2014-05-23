@@ -30,7 +30,7 @@ function resizeShipModels(zoom, width) {
 }
 
 function hideInputs() {
-    $('#player-input, #enemy-input').hide()
+    $('#player-input, #enemy-input, #go').hide()
 }
 
 function stopUpgrades() {
@@ -39,5 +39,5 @@ function stopUpgrades() {
 }
 
 function displayInputs() {
-    $('#player-input, #enemy-input').show()
+    $('#player-input, #enemy-input, #go').show()
 }
