@@ -1,5 +1,5 @@
 var chosenRace
-var enemyRace
+var enemyRace = 'enemyTerran'
 
 function openRaceSelectorMenu(race) {
     $('ul.' + race + '-selector').slideDown('slow')

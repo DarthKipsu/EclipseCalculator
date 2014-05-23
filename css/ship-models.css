@@ -10,6 +10,10 @@
     display: none;
 }
 
+#enemy-ship > div.enemyTerran {
+    display: inline-block;
+}
+
 #player-ship, #enemy-ship {
     width: 1370px;
     overflow: hidden;
