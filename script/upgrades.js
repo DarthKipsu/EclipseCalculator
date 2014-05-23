@@ -31,8 +31,6 @@ function upgradeOldPart(selection, upgradeSrc, upgradeName) {
     replaceUpgradeName(upgradeSlot, selection.classList, upgradeName)
 
     checkValidity(selection.classList, upgradeSlot)
-    console.log('ship:', recordTable[selection.classList[0]][selection.classList[1]])
-
 }
 
 function replaceImage(selection, upgradeSrc) {

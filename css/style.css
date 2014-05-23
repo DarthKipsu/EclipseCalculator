@@ -41,3 +41,22 @@ p {
     opacity: 0.5!important;
     cursor: pointer;
 }
+
+#player-input, #enemy-input {
+    width:: 740px;
+    display: none;
+    margin: -180px auto 20px;
+    text-align: center;
+}
+
+#player-input > div, #enemy-input > div {
+    width: 170px;
+    display: inline-block;
+    text-align: center;
+}
+
+input {
+    width: 90px;
+    background: #FCFAE1;
+    border: 1px solid #DBDBDB;
+}
