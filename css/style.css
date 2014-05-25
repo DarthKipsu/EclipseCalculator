@@ -72,4 +72,5 @@ input {
     text-align: center;
     vertical-align: middle;
     border: 3px solid #DBDBDB;
+    cursor: pointer;
 }

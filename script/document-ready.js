@@ -18,4 +18,9 @@ $(document).ready(function() {
         addContentFromHTML('#upgrades', 'upgrades.html') //script.js
         $('.title').show()
     })
+
+    $('#go').click(function() {
+        $('#results').show()
+        showResults() //results.js
+    })
 })

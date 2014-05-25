@@ -1,0 +1,18 @@
+#results {
+    display: none;
+    width: 740px;
+    height: 600px;
+    background: white;
+    border: 1px solid #DBDBDB;
+    box-shadow: 0 0 15px #FCFAE1;
+    position: absolute;
+    top: 267px;
+    left: 50%;
+    margin-left: -370px;
+}
+
+.close {
+    width: 20px;
+    margin: 5px 0 0 718px;
+    cursor: pointer;
+}
