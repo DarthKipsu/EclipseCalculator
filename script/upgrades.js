@@ -70,27 +70,60 @@ var energyValidity = 'valid'
 var speedValidity = 'valid'
 
 function checkValidity(classList, upgradeSlot) {
+    checkEnergyValidity(classList, upgradeSlot)
+    checkSpeedValidity(classList, upgradeSlot)
+}
+
+function checkEnergyValidity(classList, upgradeSlot) {
     if (upgradeSlot.energy<0) {
-        console.log('NOT ENOUGH ENERGY! (' + upgradeSlot.energy + ')', '.' + classList[0] + ' ' + classList[1])
-        $('.' + classList[0] + ' .' + classList[1]).css('background','#FF3333')
-        energyValidity = 'not enough energy'
-        var div = document.createElement('div')
-        div.className = 'flash'
-        document.body.appendChild(div)
-        $('.flash').html('<p>Not enough energy!</p>')
-        $('.flash').slideDown(function() {
-            setTimeout(function() {
-                $('.flash').slideUp(150)
-                setTimeout(function() {
-                    document.body.removeChild(div)
-                }, 100)
-            }, 600)
-        })
-    } else if (energyValidity!='valid') {
+        energyValidity = 'Not enough energy! (' + upgradeSlot.energy + ')'
+        highlightShip(classList, '#FF3333')
+        showFlashMessage(energyValidity)
+    } else if (energyValidity!='valid' && speedValidity=='valid') {
         energyValidity = 'valid'
-        $('.' + classList[0] + ' .' + classList[1]).css('background','white')
+        highlightShip(classList, 'white')
     }
-    if (classList[1]!='starbase') {
-        if (upgradeSlot.speed<1) console.log('NEED ENGINE!')
+}
+
+function checkSpeedValidity(classList, upgradeSlot) {
+    if (classList[1]!='starbase' && upgradeSlot.speed<1) {
+        speedValidity = 'Need engine!'
+        highlightShip(classList, '#FF3333')
+        showFlashMessage(speedValidity)
+    } else if (speedValidity!='valid' && energyValidity=='valid') {
+        speedValidity = 'valid'
+        highlightShip(classList, 'white')
     }
+}
+
+function highlightShip(classList, color) {
+    $('.' + classList[0] + ' .' + classList[1]).css('background', color)
+}
+
+function showFlashMessage(message) {
+    var div = createFlashDiv(message)
+    slideDownFlash(div)
+}
+
+function createFlashDiv(message) {
+    var div = document.createElement('div')
+    div.className = 'flash'
+    document.body.appendChild(div)
+    $('.flash').html('<p>' + message + '</p>')
+    return div
+}
+
+function slideDownFlash(div) {
+    $('.flash').slideDown(function() {
+        setTimeout(function() {
+            slideUpFlash(div)
+        }, 600)
+    })
+}
+
+function slideUpFlash(div) {
+    $('.flash').slideUp(150)
+    setTimeout(function() {
+        document.body.removeChild(div)
+    }, 100)
 }
