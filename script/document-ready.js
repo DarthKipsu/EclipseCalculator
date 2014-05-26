@@ -19,8 +19,20 @@ $(document).ready(function() {
         $('.title').show()
     })
 
+    $('#go').mouseenter(function() {
+        if (energyValidity=='valid' && speedValidity=='valid') {
+            $('#go').css('background','#FCFAE1')
+        } else $('#go').css('background','red')
+    })
+
+    $('#go').mouseleave(function() {
+        $('#go').css('background','white')
+    })
+
     $('#go').click(function() {
-        $('#results').show()
-        showResults() //results.js
+        if (energyValidity=='valid' && speedValidity=='valid') {
+            $('#results').show()
+            showResults() //results.js
+        }
     })
 })

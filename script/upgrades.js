@@ -66,8 +66,30 @@ function replaceUpgradeName(upgradeSlot, classList, upgradeName) {
     upgradeSlot[classList[2]] = upgradeName
 }
 
+var energyValidity = 'valid'
+var speedValidity = 'valid'
+
 function checkValidity(classList, upgradeSlot) {
-    if (upgradeSlot.energy<0) console.log('NOT ENOUGH ENERGY! (' + upgradeSlot.energy + ')')
+    if (upgradeSlot.energy<0) {
+        console.log('NOT ENOUGH ENERGY! (' + upgradeSlot.energy + ')', '.' + classList[0] + ' ' + classList[1])
+        $('.' + classList[0] + ' .' + classList[1]).css('background','#FF3333')
+        energyValidity = 'not enough energy'
+        var div = document.createElement('div')
+        div.className = 'flash'
+        document.body.appendChild(div)
+        $('.flash').html('<p>Not enough energy!</p>')
+        $('.flash').slideDown(function() {
+            setTimeout(function() {
+                $('.flash').slideUp(150)
+                setTimeout(function() {
+                    document.body.removeChild(div)
+                }, 100)
+            }, 600)
+        })
+    } else if (energyValidity!='valid') {
+        energyValidity = 'valid'
+        $('.' + classList[0] + ' .' + classList[1]).css('background','white')
+    }
     if (classList[1]!='starbase') {
         if (upgradeSlot.speed<1) console.log('NEED ENGINE!')
     }

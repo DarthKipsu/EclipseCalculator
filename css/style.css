@@ -68,9 +68,27 @@ input {
     height: 35px;
     font-size: 18px;
     line-height: 35px;
-    background: #FCFAE1;
     text-align: center;
     vertical-align: middle;
     border: 3px solid #DBDBDB;
     cursor: pointer;
+}
+
+.flash {
+    background: #FF3333;
+    width: 560px;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin: 0 0 0 -280px;
+    text-align: center;
+    display: none;
+    z-index: 99;
+}
+
+.flash > p {
+    line-height: 60px;
+    vertical-align: bottom;
+    font-size: 24px;
 }
