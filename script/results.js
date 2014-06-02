@@ -9,6 +9,7 @@ function showResults() {
     addResultsCloseX()
 
     var shipsAttending = countTheShips()
+    if (shipsAttending.length==0) console.log('no ships selected!')
 
     var initiativeOrder = []
     
