@@ -20,7 +20,7 @@ $(document).ready(function() {
     })
 
     $('#go').mouseenter(function() {
-        if (energyValidity=='valid' && speedValidity=='valid') {
+        if (allShipsAreValid()) {
             $('#go').css('background','#FCFAE1')
         } else $('#go').css('background','red')
     })
@@ -30,9 +30,11 @@ $(document).ready(function() {
     })
 
     $('#go').click(function() {
-        if (energyValidity=='valid' && speedValidity=='valid') {
+        if (allShipsAreValid()) { //results.js
             $('#results').show()
             showResults() //results.js
+        } else {
+            showFlashMessage('Fix the red ships first!') //upgrades.js
         }
     })
 })

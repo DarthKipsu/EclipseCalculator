@@ -66,9 +66,6 @@ function replaceUpgradeName(upgradeSlot, classList, upgradeName) {
     upgradeSlot[classList[2]] = upgradeName
 }
 
-var energyValidity = 'valid'
-var speedValidity = 'valid'
-
 function checkValidity(classList, upgradeSlot) {
     checkEnergyValidity(classList, upgradeSlot)
     checkSpeedValidity(classList, upgradeSlot)
@@ -76,28 +73,26 @@ function checkValidity(classList, upgradeSlot) {
 
 function checkEnergyValidity(classList, upgradeSlot) {
     if (upgradeSlot.energy<0) {
-        energyValidity = 'Not enough energy! (' + upgradeSlot.energy + ')'
-        highlightShip(classList, '#FF3333')
-        showFlashMessage(energyValidity)
-    } else if (energyValidity!='valid' && speedValidity=='valid') {
-        energyValidity = 'valid'
-        highlightShip(classList, 'white')
+        highlightShip(classList, '#FF3333', true)
+        showFlashMessage('Not enough energy! (' + upgradeSlot.energy + ')')
+    } else if (classList[1]=='starbase' || upgradeSlot.speed>=1) {
+        highlightShip(classList, 'white', false)
     }
 }
 
 function checkSpeedValidity(classList, upgradeSlot) {
     if (classList[1]!='starbase' && upgradeSlot.speed<1) {
-        speedValidity = 'Need engine!'
-        highlightShip(classList, '#FF3333')
-        showFlashMessage(speedValidity)
-    } else if (speedValidity!='valid' && energyValidity=='valid') {
-        speedValidity = 'valid'
-        highlightShip(classList, 'white')
+        highlightShip(classList, '#FF3333', true)
+        showFlashMessage('Need engine!')
+    } else if (upgradeSlot.energy>=0) {
+        highlightShip(classList, 'white', false)
     }
 }
 
-function highlightShip(classList, color) {
+function highlightShip(classList, color, addInvalidClass) {
     $('.' + classList[0] + ' .' + classList[1]).css('background', color)
+    if (addInvalidClass) $('.' + classList[0] + ' .' + classList[1]).addClass('invalid')
+    else $('.' + classList[0] + ' .' + classList[1]).removeClass('invalid')
 }
 
 function showFlashMessage(message) {
