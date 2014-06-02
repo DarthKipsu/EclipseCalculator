@@ -13,6 +13,7 @@ function addResumeLink() {
     $('#upgrades').html('<span>Continue upgrading ships</span>')
 
     $('#upgrades span').click(function() {
+        $('#results').hide()
         addContentFromHTML('#upgrades', 'upgrades.html')
         resizeShipModels('1', '1250px')
         hideInputs()
