@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: [
      'http://code.jquery.com/jquery-1.10.1.min.js',
       'script/*.js',
+      'shipValues/*.js',
       'specs/*.spec.js'
     ],
 
