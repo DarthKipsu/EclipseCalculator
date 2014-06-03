@@ -1,6 +1,7 @@
 var recordTable = {
     terran: {
         interceptor: {
+            type: 'interceptor',
             one: null,
             two: 'ionCannon',
             three: 'nuclearSource',
@@ -18,6 +19,7 @@ var recordTable = {
             speed: 1
         },
         cruiser: {
+            type: 'cruiser',
             one: 'hull',
             two: null,
             three: 'ionCannon',
@@ -37,6 +39,7 @@ var recordTable = {
             speed: 1
         },
         dreadnought: {
+            type: 'dreadnought',
             one: 'ionCannon',
             two: 'hull',
             three: null,
@@ -58,6 +61,7 @@ var recordTable = {
             speed: 1
         },
         starbase: {
+            type: 'starbase',
             one: 'hull',
             two: 'ionCannon',
             three: 'hull',
@@ -79,6 +83,7 @@ var recordTable = {
 
     enemyTerran: {
         interceptor: {
+            type: 'interceptor',
             one: null,
             two: 'ionCannon',
             three: 'nuclearSource',
@@ -96,6 +101,7 @@ var recordTable = {
             speed: 1
         },
         cruiser: {
+            type: 'cruiser',
             one: 'hull',
             two: null,
             three: 'ionCannon',
@@ -115,6 +121,7 @@ var recordTable = {
             speed: 1
         },
         dreadnought: {
+            type: 'dreadnought',
             one: 'ionCannon',
             two: 'hull',
             three: null,
@@ -136,6 +143,7 @@ var recordTable = {
             speed: 1
         },
         starbase: {
+            type: 'starbase',
             one: 'hull',
             two: 'ionCannon',
             three: 'hull',
@@ -157,6 +165,7 @@ var recordTable = {
 
     eridani: {
         interceptor: {
+            type: 'interceptor',
             one: null,
             two: 'ionCannon',
             three: 'nuclearSource',
@@ -174,6 +183,7 @@ var recordTable = {
             speed: 1
         },
         cruiser: {
+            type: 'cruiser',
             one: 'hull',
             two: null,
             three: 'ionCannon',
@@ -193,6 +203,7 @@ var recordTable = {
             speed: 1
         },
         dreadnought: {
+            type: 'dreadnought',
             one: 'ionCannon',
             two: 'hull',
             three: null,
@@ -214,6 +225,7 @@ var recordTable = {
             speed: 1
         },
         starbase: {
+            type: 'starbase',
             one: 'hull',
             two: 'ionCannon',
             three: 'hull',
@@ -235,6 +247,7 @@ var recordTable = {
 
     hydran: {
         interceptor: {
+            type: 'interceptor',
             one: null,
             two: 'ionCannon',
             three: 'nuclearSource',
@@ -252,6 +265,7 @@ var recordTable = {
             speed: 1
         },
         cruiser: {
+            type: 'cruiser',
             one: 'hull',
             two: null,
             three: 'ionCannon',
@@ -271,6 +285,7 @@ var recordTable = {
             speed: 1
         },
         dreadnought: {
+            type: 'dreadnought',
             one: 'ionCannon',
             two: 'hull',
             three: null,
@@ -292,6 +307,7 @@ var recordTable = {
             speed: 1
         },
         starbase: {
+            type: 'starbase',
             one: 'hull',
             two: 'ionCannon',
             three: 'hull',
@@ -313,6 +329,7 @@ var recordTable = {
 
     planta: {
         interceptor: {
+            type: 'interceptor',
             one: null,
             two: 'ionCannon',
             three: 'nuclearSource',
@@ -330,6 +347,7 @@ var recordTable = {
             speed: 1
         },
         cruiser: {
+            type: 'cruiser',
             one: 'hull',
             two: null,
             three: 'ionCannon',
@@ -349,6 +367,7 @@ var recordTable = {
             speed: 1
         },
         dreadnought: {
+            type: 'dreadnought',
             one: 'ionCannon',
             two: 'hull',
             three: 'hull',
@@ -370,6 +389,7 @@ var recordTable = {
             speed: 1
         },
         starbase: {
+            type: 'starbase',
             one: 'hull',
             two: 'ionCannon',
             three: 'hull',
@@ -391,6 +411,7 @@ var recordTable = {
 
     draco: {
         interceptor: {
+            type: 'interceptor',
             one: null,
             two: 'ionCannon',
             three: 'nuclearSource',
@@ -408,6 +429,7 @@ var recordTable = {
             speed: 1
         },
         cruiser: {
+            type: 'cruiser',
             one: 'hull',
             two: null,
             three: 'ionCannon',
@@ -427,6 +449,7 @@ var recordTable = {
             speed: 1
         },
         dreadnought: {
+            type: 'dreadnought',
             one: 'ionCannon',
             two: 'hull',
             three: null,
@@ -448,6 +471,7 @@ var recordTable = {
             speed: 1
         },
         starbase: {
+            type: 'starbase',
             one: 'hull',
             two: 'ionCannon',
             three: 'hull',
@@ -469,6 +493,7 @@ var recordTable = {
 
     mechanema: {
         interceptor: {
+            type: 'interceptor',
             one: null,
             two: 'ionCannon',
             three: 'nuclearSource',
@@ -486,6 +511,7 @@ var recordTable = {
             speed: 1
         },
         cruiser: {
+            type: 'cruiser',
             one: 'hull',
             two: null,
             three: 'ionCannon',
@@ -505,6 +531,7 @@ var recordTable = {
             speed: 1
         },
         dreadnought: {
+            type: 'dreadnought',
             one: 'ionCannon',
             two: 'hull',
             three: null,
@@ -526,6 +553,7 @@ var recordTable = {
             speed: 1
         },
         starbase: {
+            type: 'starbase',
             one: 'hull',
             two: 'ionCannon',
             three: 'hull',
@@ -547,6 +575,7 @@ var recordTable = {
 
     orion: {
         interceptor: {
+            type: 'interceptor',
             one: 'gaussShield',
             two: 'ionCannon',
             three: 'nuclearSource',
@@ -564,6 +593,7 @@ var recordTable = {
             speed: 1
         },
         cruiser: {
+            type: 'cruiser',
             one: 'hull',
             two: 'gaussShield',
             three: 'ionCannon',
@@ -583,6 +613,7 @@ var recordTable = {
             speed: 1
         },
         dreadnought: {
+            type: 'dreadnought',
             one: 'ionCannon',
             two: 'hull',
             three: 'gaussShield',
@@ -604,6 +635,7 @@ var recordTable = {
             speed: 1
         },
         starbase: {
+            type: 'starbase',
             one: 'hull',
             two: 'ionCannon',
             three: 'hull',

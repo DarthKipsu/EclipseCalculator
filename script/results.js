@@ -6,16 +6,17 @@ function allShipsAreValid() {
 
 function showResults() {
     addContentFromHTML('#results', 'results.html')
-    addResultsCloseX()
+    hideResultsWithX()
 
     var shipsAttending = countTheShips()
     if (shipsAttending.length==0) console.log('no ships selected!')
+    console.log(shipsAttending)
 
     var initiativeOrder = []
     
 }
 
-function addResultsCloseX() {
+function hideResultsWithX() {
     $('#results').on('click', '.close', function() {
         $('#results').hide()
     })
@@ -27,7 +28,9 @@ function countTheShips() {
     for (var i=0; i<inputs.length; i++) {
         if (inputs[i].value>0) {
             for (var j=0; j<inputs[i].value; j++) {
-                shipsAttending.push([inputs[i].classList[0], inputs[i].name])
+                if (inputs[i].classList[0]=='player') {
+                    shipsAttending.push([recordTable[chosenRace][inputs[i].name], 'player'])
+                } else shipsAttending.push([recordTable[enemyRace][inputs[i].name], 'enemy'])
             }
         }
     }
