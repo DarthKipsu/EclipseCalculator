@@ -20,6 +20,11 @@ function showResults() {
                 biggestInitiative = shipsAttending[i]
                 index = i
                 console.log(biggestInitiative[0].initiative)
+            } else if (shipsAttending[i][0].initiative==biggestInitiative[0].initiative &&
+                       shipsAttending[i][1]=='defender') {
+                biggestInitiative = shipsAttending[i]
+                index = i
+                console.log('defender')
             }
         }
         console.log('push')
@@ -39,12 +44,19 @@ function hideResultsWithX() {
 function countTheShips() {
     var inputs = document.getElementsByTagName('input')
     var shipsAttending = []
+    var player = 'defender'
+    var enemy = 'attacker'
+    if (inputs[4].checked) {
+        player = 'attacker'
+        enemy = 'defender'
+    }
+    console.log(player)
     for (var i=0; i<inputs.length; i++) {
         if (inputs[i].value>0) {
             for (var j=0; j<inputs[i].value; j++) {
                 if (inputs[i].classList[0]=='player') {
-                    shipsAttending.push([recordTable[chosenRace][inputs[i].name], 'player'])
-                } else shipsAttending.push([recordTable[enemyRace][inputs[i].name], 'enemy'])
+                    shipsAttending.push([recordTable[chosenRace][inputs[i].name], player])
+                } else shipsAttending.push([recordTable[enemyRace][inputs[i].name], enemy])
             }
         }
     }
