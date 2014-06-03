@@ -10,10 +10,24 @@ function showResults() {
 
     var shipsAttending = countTheShips()
     if (shipsAttending.length==0) console.log('no ships selected!')
-    console.log(shipsAttending)
 
     var initiativeOrder = []
-    
+    while (shipsAttending.length>0) {
+        var biggestInitiative = [{initiative: -1}]
+        var index
+        for (i=0; i<shipsAttending.length; i++) {
+            if (shipsAttending[i][0].initiative>biggestInitiative[0].initiative) {
+                biggestInitiative = shipsAttending[i]
+                index = i
+                console.log(biggestInitiative[0].initiative)
+            }
+        }
+        console.log('push')
+        initiativeOrder.push(biggestInitiative)
+        shipsAttending.splice(index,1)
+        biggestInitiative = [{initiative: -1}]
+    }
+    console.log('init order:', initiativeOrder)
 }
 
 function hideResultsWithX() {
