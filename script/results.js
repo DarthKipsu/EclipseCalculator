@@ -8,8 +8,9 @@ function showResults() {
     addContentFromHTML('#results', 'results.html')
     hideResultsWithX()
 
-    var initiativeOrder = createInitiativeOrder()
-    firstRoundWinPropability(initiativeOrder)
+    var enemy = attackerOrDefender()
+    var initiativeOrder = createInitiativeOrder(enemy)
+    firstRoundWinPropability(initiativeOrder, enemy)
 }
 
 function hideResultsWithX() {
@@ -18,8 +19,14 @@ function hideResultsWithX() {
     })
 }
 
-function createInitiativeOrder() {
-    var shipsAttending = countTheShips()
+function attackerOrDefender() {
+    var inputs = document.getElementsByTagName('input')
+    var enemy = inputs[4].checked?'defender':'attacker'
+    return enemy
+}
+
+function createInitiativeOrder(enemy) {
+    var shipsAttending = countTheShips(enemy)
     if (shipsAttending.length==0) console.log('no ships selected!')
 
     var initiativeOrder = []
@@ -30,10 +37,9 @@ function createInitiativeOrder() {
     return initiativeOrder
 }
 
-function countTheShips() {
+function countTheShips(enemy) {
     var inputs = document.getElementsByTagName('input')
     var player = inputs[4].checked?'attacker':'defender'
-    var enemy = inputs[4].checked?'defender':'attacker'
     return addShipsBasedOnInputs(inputs, player, enemy)
 }
 
@@ -72,12 +78,21 @@ function moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder) {
     shipsAttending.splice(index,1)
 }
 
-function firstRoundWinPropability(initiativeOrder) {
+function firstRoundWinPropability(initiativeOrder, enemy) {
     var hitsToWin = 0
+    var hitRates = []
     for (var i=0; i<initiativeOrder.length; i++) {
         if (initiativeOrder[i][1] == 'defender') {
             hitsToWin += initiativeOrder[i][0].hull + 1
+        } else {
+            for (var j=0; j<initiativeOrder[i][0].dice1HP; j++) {
+                var shipHitRate = 0
+                shipHitRate += ( 1 + initiativeOrder[i][0].computer ) / 6
+                console.log(initiativeOrder[i][0].dice1HP, initiativeOrder[i][0].computer)
+                hitRates.push(shipHitRate)
+            }
         }
     }
     console.log('you need', hitsToWin, 'hits to win')
+    console.log('your turret hit rates are', hitRates)
 }
