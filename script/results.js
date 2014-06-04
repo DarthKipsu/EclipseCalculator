@@ -9,6 +9,7 @@ function showResults() {
     hideResultsWithX()
 
     var initiativeOrder = createInitiativeOrder()
+    firstRoundWinPropability(initiativeOrder)
 }
 
 function hideResultsWithX() {
@@ -69,4 +70,14 @@ function moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder) {
     }
     initiativeOrder.push(biggestInitiative)
     shipsAttending.splice(index,1)
+}
+
+function firstRoundWinPropability(initiativeOrder) {
+    var hitsToWin = 0
+    for (var i=0; i<initiativeOrder.length; i++) {
+        if (initiativeOrder[i][1] == 'defender') {
+            hitsToWin += initiativeOrder[i][0].hull + 1
+        }
+    }
+    console.log('you need', hitsToWin, 'hits to win')
 }
