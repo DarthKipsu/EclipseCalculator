@@ -100,36 +100,24 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         console.log('TARGET hp:', targetHitPoints, '('+ target[0].type +')')
         
         //chance to hit hull with turrets [hitRate, hits] 
-        var hitRates = []
+        var hitRate = (1 + initiativeOrder[ship][0].computer) / 6
         var weapons = ['dice4HP', 'dice2HP', 'dice1HP']
         var weapons1HP = initiativeOrder[ship][0].dice1HP
         var weapons2HP = initiativeOrder[ship][0].dice2HP
         var weapons4HP = initiativeOrder[ship][0].dice4HP
-        for (var j=0; j<4; j++) {
-            for (var k=0; k<initiativeOrder[ship][0][weapons[j]]; k++) {
-                var hitRate = 0
-                hitRate += ( 1 + initiativeOrder[ship][0].computer ) / 6
-                var hits = parseInt(weapons[j].substring(5,4))
-                hitRates.push([hitRate, hits])
-            }
-        }
+        var allWeapons = weapons1HP + weapons2HP + weapons4HP
         //console.log('hit rates:', hitRates)
 
         //chance to destroy enemy hull
-        for (var weapon=0; weapon<hitRates.length; weapon++) {
-            var hitProbability = 0
-            for (var j=0; j<hitRates.length-weapon; j++) {
-                hitProbability += hitRates[j][0]
-            }
+        for (var weapon=0; weapon<allWeapons; weapon++) {
+            var hitProbability = calculateHitChance(weapon+1, allWeapons, hitRate)
             console.log('probability to get', weapon+1, 'hits:', hitProbability.toPrecision(2))
-            if (weapon==hitRates.length-1) {
-                var allWeapons = weapons1HP + weapons2HP + weapons4HP
+
+            if (weapon==allWeapons-1) {
                 if (targetHitPoints>allWeapons) {
                     console.log('no chance of destroying the enemy')
                 } else {
-                    var destroyChance = 0
-                    if (targetHitPoints==1) destroyChance = allWeapons*hitRates[weapon][0]
-                    else if (targetHitPoints==allWeapons) destroyChance = hitProbability
+                    var destroyChance = calculateDestoryChance(allWeapons, hitRate, weapon, targetHitPoints, weapons1HP, weapons2HP, weapons4HP, hitProbability)
                     console.log(destroyChance.toPrecision(2), 'chance of destroying the enemy')
                 }
             }
@@ -137,4 +125,31 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
 
         //initiativeOrder[targetIndex].push({hitRates: hitRates, summedHitRates: summedHitRates})
     }
+}
+
+function calculateHitChance(weapon, allWeapons, hitRate) {
+    var hitProbability
+    if (weapon==1) hitProbability = allWeapons*hitRate
+    else if (weapon==allWeapons) hitProbability = Math.pow(hitRate, weapon)
+    else if ((weapon==2 && allWeapons==3) || (weapon==3 && allWeapons==4) || (weapon==4 &&
+        allWeapons==5)) hitProbability = allWeapons*Math.pow(hitRate, weapon)
+    else if (weapon==2 && allWeapons==6) hitProbability = 6*Math.pow(hitRate, weapon)
+    else if (((weapon==2 || weapon==3) && allWeapons==5) || (weapon==4 && allWeapons==6))
+        hitProbability = 10*Math.pow(hitRate, weapon)
+    else if (weapon==2 && allWeapons==6) hitProbability = 15*Math.pow(hitRate, weapon)
+    else if (weapon==3 && allWeapons==6) hitProbability = 20*Math.pow(hitRate, weapon)
+    else if (weapon==5 && allWeapons==6) hitProbability = 5*Math.pow(hitRate, weapon)
+    return hitProbability
+}
+
+function calculateDestoryChance(allWeapons, hitRate, weapon, targetHitPoints, weapons1HP, weapons2HP, weapons4HP, hitProbability) {
+    var destroyChance = 0
+    if (targetHitPoints==1) destroyChance = allWeapons*hitRate
+    else if (targetHitPoints==allWeapons) destroyChance = hitProbability
+    else if (targetHitPoints==2) {
+        if (weapons2HP<=1 || weapons4HP<=1) destroyChance = weapons2HP*hitRate +
+          weapons4HP*hitRate + Math.floor(weapons1HP/2)*Math.pow(hitRate,2)
+        else destroyChance = Math.floor(weapons1HP/2)*Math.pow(hitRate,2)
+    }
+    return destroyChance
 }
