@@ -80,13 +80,20 @@ function moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder) {
 
 function firstRoundWinProbability(initiativeOrder, enemy) {
     for (var i=0; i<initiativeOrder.length; i++) {
+        console.log('attacker:', initiativeOrder[i][0].type, initiativeOrder[i][1])
 
         // target with smallest hull
         var target = null
+        var targetIndex
         for (var j=0; j<initiativeOrder.length; j++) {
             if (initiativeOrder[i][1]!=initiativeOrder[j][1]) {
-                if (target==null) target = initiativeOrder[j]
-                else if (initiativeOrder[j][0].hull<target[0].hull) target = initiativeOrder[j]
+                if (target==null) {
+                    target = initiativeOrder[j]
+                    targetIndex = j
+                } else if (initiativeOrder[j][0].hull<target[0].hull) {
+                    target = initiativeOrder[j]
+                    targetIndex = j
+                }
             }
         }
         var targetHitPoints = target[0].hull+1
@@ -112,29 +119,12 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         }
         if (targetHitPoints<=hitRates.length) console.log('propability to destroy target:', summedHitRates/(targetHitPoints))
         else console.log('impossible to destroy target')
-        for (var j=0; j<targetHitPoints; j++) {
+        for (var j=1; j<targetHitPoints; j++) {
             if (hitRates.length>=targetHitPoints-j) {
                 console.log('probability to get', targetHitPoints-j, 'hit:', summedHitRates/(targetHitPoints-j))
             } else console.log('impossible to get', targetHitPoints-j, 'hits')
         }
-        
-        //prop to kill all shields = summedHitRates/(target.hull+1)
-        //prop to kill some shields = summedHitRates/(target.hull+1-X)
-    }
 
-    /*var hitsToWin = 0
-    var hitRates = []
-    for (var i=0; i<initiativeOrder.length; i++) {
-        if (initiativeOrder[i][1] == 'defender') {
-            hitsToWin += initiativeOrder[i][0].hull + 1
-        } else {
-            for (var j=0; j<initiativeOrder[i][0].dice1HP; j++) {
-                var shipHitRate = 0
-                shipHitRate += ( 1 + initiativeOrder[i][0].computer ) / 6
-                hitRates.push(shipHitRate)
-            }
-        }
+        initiativeOrder[targetIndex].push({hitRates: hitRates, summedHitRates: summedHitRates})
     }
-    console.log('you need', hitsToWin, 'hits to win')
-    console.log('your turret hit rates are', hitRates)*/
 }
