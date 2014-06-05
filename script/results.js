@@ -79,14 +79,14 @@ function moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder) {
 }
 
 function firstRoundWinProbability(initiativeOrder, enemy) {
-    for (var i=0; i<initiativeOrder.length; i++) {
-        console.log('attacker:', initiativeOrder[i][0].type, initiativeOrder[i][1])
+    for (var ship=0; ship<initiativeOrder.length; ship++) {
+        console.log('ATTACKER:', initiativeOrder[ship][0].type, initiativeOrder[ship][1])
 
         // target with smallest hull
         var target = null
         var targetIndex
         for (var j=0; j<initiativeOrder.length; j++) {
-            if (initiativeOrder[i][1]!=initiativeOrder[j][1]) {
+            if (initiativeOrder[ship][1]!=initiativeOrder[j][1]) {
                 if (target==null) {
                     target = initiativeOrder[j]
                     targetIndex = j
@@ -97,34 +97,44 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
             }
         }
         var targetHitPoints = target[0].hull+1
-        console.log('target hit points:', targetHitPoints, '('+ target[0].type +')')
+        console.log('TARGET hp:', targetHitPoints, '('+ target[0].type +')')
         
         //chance to hit hull with turrets [hitRate, hits] 
         var hitRates = []
-        var weapons = ['dice1HP', 'dice2HP', 'dice4HP']
+        var weapons = ['dice4HP', 'dice2HP', 'dice1HP']
+        var weapons1HP = initiativeOrder[ship][0].dice1HP
+        var weapons2HP = initiativeOrder[ship][0].dice2HP
+        var weapons4HP = initiativeOrder[ship][0].dice4HP
         for (var j=0; j<4; j++) {
-            for (var k=0; k<initiativeOrder[i][0][weapons[j]]; k++) {
+            for (var k=0; k<initiativeOrder[ship][0][weapons[j]]; k++) {
                 var hitRate = 0
-                hitRate += ( 1 + initiativeOrder[i][0].computer ) / 6
+                hitRate += ( 1 + initiativeOrder[ship][0].computer ) / 6
                 var hits = parseInt(weapons[j].substring(5,4))
                 hitRates.push([hitRate, hits])
             }
         }
-        console.log('hit rates:', hitRates)
+        //console.log('hit rates:', hitRates)
 
         //chance to destroy enemy hull
-        var summedHitRates = 0
-        for (var j=0; j<hitRates.length; j++) {
-            summedHitRates += hitRates[j][0] * hitRates[j][1]
-        }
-        if (targetHitPoints<=hitRates.length) console.log('propability to destroy target:', summedHitRates/(targetHitPoints))
-        else console.log('impossible to destroy target')
-        for (var j=1; j<targetHitPoints; j++) {
-            if (hitRates.length>=targetHitPoints-j) {
-                console.log('probability to get', targetHitPoints-j, 'hit:', summedHitRates/(targetHitPoints-j))
-            } else console.log('impossible to get', targetHitPoints-j, 'hits')
+        for (var weapon=0; weapon<hitRates.length; weapon++) {
+            var hitProbability = 0
+            for (var j=0; j<hitRates.length-weapon; j++) {
+                hitProbability += hitRates[j][0]
+            }
+            console.log('probability to get', weapon+1, 'hits:', hitProbability.toPrecision(2))
+            if (weapon==hitRates.length-1) {
+                var allWeapons = weapons1HP + weapons2HP + weapons4HP
+                if (targetHitPoints>allWeapons) {
+                    console.log('no chance of destroying the enemy')
+                } else {
+                    var destroyChance = 0
+                    if (targetHitPoints==1) destroyChance = allWeapons*hitRates[weapon][0]
+                    else if (targetHitPoints==allWeapons) destroyChance = hitProbability
+                    console.log(destroyChance.toPrecision(2), 'chance of destroying the enemy')
+                }
+            }
         }
 
-        initiativeOrder[targetIndex].push({hitRates: hitRates, summedHitRates: summedHitRates})
+        //initiativeOrder[targetIndex].push({hitRates: hitRates, summedHitRates: summedHitRates})
     }
 }
