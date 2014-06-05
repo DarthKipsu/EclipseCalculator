@@ -10,7 +10,7 @@ function showResults() {
 
     var enemy = attackerOrDefender()
     var initiativeOrder = createInitiativeOrder(enemy)
-    firstRoundWinPropability(initiativeOrder, enemy)
+    firstRoundWinProbability(initiativeOrder, enemy)
 }
 
 function hideResultsWithX() {
@@ -78,8 +78,51 @@ function moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder) {
     shipsAttending.splice(index,1)
 }
 
-function firstRoundWinPropability(initiativeOrder, enemy) {
-    var hitsToWin = 0
+function firstRoundWinProbability(initiativeOrder, enemy) {
+    for (var i=0; i<initiativeOrder.length; i++) {
+
+        // target with smallest hull
+        var target = null
+        for (var j=0; j<initiativeOrder.length; j++) {
+            if (initiativeOrder[i][1]!=initiativeOrder[j][1]) {
+                if (target==null) target = initiativeOrder[j]
+                else if (initiativeOrder[j][0].hull<target[0].hull) target = initiativeOrder[j]
+            }
+        }
+        var targetHitPoints = target[0].hull+1
+        console.log('target hit points:', targetHitPoints, '('+ target[0].type +')')
+        
+        //chance to hit hull with turrets [hitRate, hits] 
+        var hitRates = []
+        var weapons = ['dice1HP', 'dice2HP', 'dice4HP']
+        for (var j=0; j<4; j++) {
+            for (var k=0; k<initiativeOrder[i][0][weapons[j]]; k++) {
+                var hitRate = 0
+                hitRate += ( 1 + initiativeOrder[i][0].computer ) / 6
+                var hits = parseInt(weapons[j].substring(5,4))
+                hitRates.push([hitRate, hits])
+            }
+        }
+        console.log('hit rates:', hitRates)
+
+        //chance to destroy enemy hull
+        var summedHitRates = 0
+        for (var j=0; j<hitRates.length; j++) {
+            summedHitRates += hitRates[j][0] * hitRates[j][1]
+        }
+        if (targetHitPoints<=hitRates.length) console.log('propability to destroy target:', summedHitRates/(targetHitPoints))
+        else console.log('impossible to destroy target')
+        for (var j=0; j<targetHitPoints; j++) {
+            if (hitRates.length>=targetHitPoints-j) {
+                console.log('probability to get', targetHitPoints-j, 'hit:', summedHitRates/(targetHitPoints-j))
+            } else console.log('impossible to get', targetHitPoints-j, 'hits')
+        }
+        
+        //prop to kill all shields = summedHitRates/(target.hull+1)
+        //prop to kill some shields = summedHitRates/(target.hull+1-X)
+    }
+
+    /*var hitsToWin = 0
     var hitRates = []
     for (var i=0; i<initiativeOrder.length; i++) {
         if (initiativeOrder[i][1] == 'defender') {
@@ -88,11 +131,10 @@ function firstRoundWinPropability(initiativeOrder, enemy) {
             for (var j=0; j<initiativeOrder[i][0].dice1HP; j++) {
                 var shipHitRate = 0
                 shipHitRate += ( 1 + initiativeOrder[i][0].computer ) / 6
-                console.log(initiativeOrder[i][0].dice1HP, initiativeOrder[i][0].computer)
                 hitRates.push(shipHitRate)
             }
         }
     }
     console.log('you need', hitsToWin, 'hits to win')
-    console.log('your turret hit rates are', hitRates)
+    console.log('your turret hit rates are', hitRates)*/
 }
