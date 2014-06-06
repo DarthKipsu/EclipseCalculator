@@ -109,6 +109,7 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         //console.log('hit rates:', hitRates)
 
         //chance to destroy enemy hull
+        console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
         for (var weapon=0; weapon<allWeapons; weapon++) {
             var hitProbability = nCr(allWeapons,weapon+1)*Math.pow(hitRate, weapon+1)
             console.log('probability to get', weapon+1, 'hits:', hitProbability.toPrecision(2))
@@ -127,8 +128,12 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     }
 }
 
-function nCr(n,r) {
-    return factional(n) / (factional(r) * factional(n-r))
+function binomial(weapons, hits, hitRate) {
+    return nCr(weapons, hits)*Math.pow(hitRate, hits)*Math.pow(1-hitRate, weapons-hits)
+}
+
+function nCr(weapons, hits) {
+    return factional(weapons) / (factional(hits) * factional(weapons-hits))
 }
 
 function factional(number) {
