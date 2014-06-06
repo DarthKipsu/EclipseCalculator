@@ -100,7 +100,8 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         console.log('TARGET hp:', targetHitPoints, '('+ target[0].type +')')
         
         //chance to hit hull with turrets [hitRate, hits] 
-        var hitRate = (1 + initiativeOrder[ship][0].computer) / 6
+        var hitRate = (1 + initiativeOrder[ship][0].computer + target[0].shield) / 6
+        if (hitRate<1/6) hitRate = 1/6
         var weapons = ['dice4HP', 'dice2HP', 'dice1HP']
         var weapons1HP = initiativeOrder[ship][0].dice1HP
         var weapons2HP = initiativeOrder[ship][0].dice2HP
