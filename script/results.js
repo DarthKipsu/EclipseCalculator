@@ -9,7 +9,7 @@ function showResults() {
     hideResultsWithX()
 
     var enemy = attackerOrDefender()
-    var initiativeOrder = createInitiativeOrder(enemy)
+    var initiativeOrder = initiative.create(enemy)
     firstRoundWinProbability(initiativeOrder, enemy)
 }
 
@@ -25,60 +25,62 @@ function attackerOrDefender() {
     return enemy
 }
 
-function createInitiativeOrder(enemy) {
-    var shipsAttending = countTheShips(enemy)
-    if (shipsAttending.length==0) console.log('no ships selected!')
+var initiative = {
+    create: function(enemy) {
+        var shipsAttending = initiative.countTheShips(enemy)
+        if (shipsAttending.length==0) console.log('no ships selected!')
 
-    var initiativeOrder = []
-    while (shipsAttending.length>0) {
-        moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder)
-    }
-    console.log('init order:', initiativeOrder)
-    return initiativeOrder
-}
-
-function countTheShips(enemy) {
-    var inputs = document.getElementsByTagName('input')
-    var player = inputs[4].checked?'attacker':'defender'
-    return addShipsBasedOnInputs(inputs, player, enemy)
-}
-
-function addShipsBasedOnInputs(inputs, player, enemy) {
-    var shipsAttending = []
-    for (var i=0; i<inputs.length; i++) {
-        if (inputs[i].value>0) {
-            addAsManyShipsAsInputValue(inputs, player, enemy, i, shipsAttending)
+        var initiativeOrder = []
+        while (shipsAttending.length>0) {
+            initiative.moveBiggestInitiative(shipsAttending, initiativeOrder)
         }
-    }
-    return shipsAttending
-}
+        console.log('init order:', initiativeOrder)
+        return initiativeOrder
+    },
 
-function addAsManyShipsAsInputValue(inputs, player, enemy, i, shipsAttending) {
-    for (var j=0; j<inputs[i].value; j++) {
-        if (inputs[i].classList[0]=='player') {
-            shipsAttending.push([recordTable[chosenRace][inputs[i].name], player])
-        } else shipsAttending.push([recordTable[enemyRace][inputs[i].name], enemy])
-    }
-}
+    countTheShips: function(enemy) {
+        var inputs = document.getElementsByTagName('input')
+        var player = inputs[4].checked?'attacker':'defender'
+        return initiative.addShipsBasedOnInputs(inputs, player, enemy)
+    },
 
-function moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder) {
-    var biggestInitiative = [{initiative: -1}]
-    var index
-    for (i=0; i<shipsAttending.length; i++) {
-        if (shipsAttending[i][0].initiative>biggestInitiative[0].initiative) {
-            biggestInitiative = shipsAttending[i]
-            index = i
-        } else if (shipsAttending[i][0].initiative==biggestInitiative[0].initiative &&
-                   shipsAttending[i][1]=='defender') {
-            biggestInitiative = shipsAttending[i]
-            index = i
+    addShipsBasedOnInputs: function(inputs, player, enemy) {
+        var shipsAttending = []
+        for (var i=0; i<inputs.length; i++) {
+            if (inputs[i].value>0) {
+                initiative.addAsManyShipsAsInputValue(inputs, player, enemy, i, shipsAttending)
+            }
         }
+        return shipsAttending
+    },
+
+    addAsManyShipsAsInputValue: function(inputs, player, enemy, i, shipsAttending) {
+        for (var j=0; j<inputs[i].value; j++) {
+            if (inputs[i].classList[0]=='player') {
+                shipsAttending.push([recordTable[chosenRace][inputs[i].name], player])
+            } else shipsAttending.push([recordTable[enemyRace][inputs[i].name], enemy])
+        }
+    },
+
+    moveBiggestInitiative: function(shipsAttending, initiativeOrder) {
+        var removeIndex
+        var biggestInitiative = shipsAttending.reduce(function (accumulator, ship, index) {
+            if (ship[0].initiative > accumulator[0].initiative 
+                    || (ship[0].initiative == accumulator[0].initiative 
+                    && ship[1] == "defender")) {
+                accumulator = ship
+                removeIndex = index
+            }
+            return accumulator
+        })
+
+        initiativeOrder.push(biggestInitiative)
+        shipsAttending.splice(removeIndex,1)
     }
-    initiativeOrder.push(biggestInitiative)
-    shipsAttending.splice(index,1)
 }
 
 function firstRoundWinProbability(initiativeOrder, enemy) {
+    console.log(initiativeOrder, enemy)
     for (var ship=0; ship<initiativeOrder.length; ship++) {
         console.log('ATTACKER:', initiativeOrder[ship][0].type, initiativeOrder[ship][1])
 
@@ -88,15 +90,7 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         console.log('TARGET hp:', targetHitPoints, '('+ target[0].type +')')
         
         //weapon and hitRate info
-        var weapons = {
-            hitRate: (1 + initiativeOrder[ship][0].computer + target[0].shield) / 6,
-            w1HP: initiativeOrder[ship][0].dice1HP,
-            w2HP: initiativeOrder[ship][0].dice2HP,
-            w4HP: initiativeOrder[ship][0].dice4HP,
-        }
-        weapons.all = weapons.w1HP + weapons.w2HP + weapons.w4HP
-        console.log(weapons)
-        if (weapons.hitRate<1/6) weapons.hitRate = 1/6
+        var weapons = addHitRates(initiativeOrder, ship, target)
 
         //chance to destroy enemy hull
         console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
@@ -149,23 +143,30 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     }
 }
 
-function selectTarget(initiativeOrder, ship) {
-        var target = null
-        var targetIndex
-        for (var j=0; j<initiativeOrder.length; j++) {
-            if (initiativeOrder[ship][1]!=initiativeOrder[j][1]) {
-                if (target==null) {
-                    target = initiativeOrder[j]
-                    targetIndex = j
-                } else if (initiativeOrder[j][0].hull<target[0].hull) {
-                    target = initiativeOrder[j]
-                    targetIndex = j
-                }
-            }
+function selectTarget(initiativeOrder, attacker) {
+    var attackerSide = initiativeOrder[attacker][1]
+    var targets = initiativeOrder.filter(function (ship) {
+        return ship[1] != attackerSide
+    })
+    return targets.reduce(function(accumulator, ship) {
+        if (ship[0].hull<accumulator[0].hull) {
+            accumulator = ship
         }
-        return target
+        return accumulator
+    })
 }
 
+function addHitRates(initiativeOrder, ship, target) {
+    var weapons = {
+        hitRate: (1 + initiativeOrder[ship][0].computer + target[0].shield) / 6,
+        w1HP: initiativeOrder[ship][0].dice1HP,
+        w2HP: initiativeOrder[ship][0].dice2HP,
+        w4HP: initiativeOrder[ship][0].dice4HP,
+    }
+    weapons.all = weapons.w1HP + weapons.w2HP + weapons.w4HP
+    if (weapons.hitRate<1/6) weapons.hitRate = 1/6
+    return weapons
+}
 
 function countHitProbabilities(targetHP, weaponHP, name, savedHits, weapons) {
         console.log('first', name, savedHits)

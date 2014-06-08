@@ -15,7 +15,7 @@ describe('adding ships in initiative order', function() {
     })
 
     it('adds the right ship types in game', function() {
-        var shipsAttending = addShipsBasedOnInputs(inputs, 'attacker', 'defender')
+        var shipsAttending = initiative.addShipsBasedOnInputs(inputs, 'attacker', 'defender')
         expect(shipsAttending.length).toBe(10)
         expect(shipsAttending[0]).toEqual(shipsAttending[1])
         expect(shipsAttending[0]).not.toEqual(shipsAttending[2])
@@ -24,10 +24,10 @@ describe('adding ships in initiative order', function() {
     it('adds enemyTerran defending interceptors before terran players attacking ones', function() {
         chosenRace = 'terran'
         enemyRace = 'enemyTerran'
-        var shipsAttending = addShipsBasedOnInputs(inputs, 'attacker', 'defender')
+        var shipsAttending = initiative.addShipsBasedOnInputs(inputs, 'attacker', 'defender')
         var initiativeOrder = []
         while (shipsAttending.length>0) {
-            moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder)
+            initiative.moveBiggestInitiative(shipsAttending, initiativeOrder)
         }
         expect(initiativeOrder[1][0].type).toBe('interceptor')
         expect(initiativeOrder[1][1]).toBe('defender')
@@ -38,10 +38,10 @@ describe('adding ships in initiative order', function() {
     it('adds planta starbase only after attacking terran interceptors', function() {
         chosenRace = 'terran'
         enemyRace = 'planta'
-        var shipsAttending = addShipsBasedOnInputs(inputs, 'attacker', 'defender')
+        var shipsAttending = initiative.addShipsBasedOnInputs(inputs, 'attacker', 'defender')
         var initiativeOrder = []
         while (shipsAttending.length>0) {
-            moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder)
+            initiative.moveBiggestInitiative(shipsAttending, initiativeOrder)
         }
         expect(initiativeOrder[1][0].type).toBe('interceptor')
         expect(initiativeOrder[1][1]).toBe('attacker')
@@ -54,10 +54,10 @@ describe('adding ships in initiative order', function() {
         function setInitiativeOrder(chosen, enemy) {
             chosenRace = chosen
             enemyRace = enemy
-            var shipsAttending = addShipsBasedOnInputs(inputs, 'attacker', 'defender')
+            var shipsAttending = initiative.addShipsBasedOnInputs(inputs, 'attacker', 'defender')
             var initiativeOrder = []
             while (shipsAttending.length>0) {
-                moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder)
+                initiative.moveBiggestInitiative(shipsAttending, initiativeOrder)
             }
             return initiativeOrder
         }
@@ -65,8 +65,28 @@ describe('adding ships in initiative order', function() {
         it('selects target with smallest hitpoints', function() {
             var initiativeOrder = setInitiativeOrder('terran', 'enemyTerran')
             var target = selectTarget(initiativeOrder, 0)
+            recordTable.enemyTerran.interceptor.hull = 3
+            console.log(target, target[0].type)
             expect(target[0].hull).toEqual(0)
+            expect(target[1]).toBe("attacker")
         })
+    })
+
+})
+
+describe('hit probabilities', function() {
+
+    describe('terran interceptor vs terran interceptor', function() {
+        
+        var initiativeOrder = [[recordTable.terran.interceptor, 'attacker'],
+            [recordTable.enemyTerran.interceptor, 'defender']]
+
+        it('will give defending ship 1/6 chance to hit', function() {
+            var target = selectTarget(initiativeOrder, 0)
+            var weapons = addHitRates(initiativeOrder, 0, target)
+            expect(weapons.hitRate).toEqual(1/6)
+        })
+
     })
 
 })
