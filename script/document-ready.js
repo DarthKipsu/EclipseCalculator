@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     $('#go').click(function() {
         if (allShipsAreValid()) { //results.js
-            $('#results').show()
+            //$('#results').show()
             showResults() //results.js
         } else {
             showFlashMessage('Fix the red ships first!') //upgrades.js
