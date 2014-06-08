@@ -64,9 +64,8 @@ describe('adding ships in initiative order', function() {
 
         it('selects target with smallest hitpoints', function() {
             var initiativeOrder = setInitiativeOrder('terran', 'enemyTerran')
-            var target = selectTarget(initiativeOrder, 0)
+            var target = selectTarget(initiativeOrder, initiativeOrder[0])
             recordTable.enemyTerran.interceptor.hull = 3
-            console.log(target, target[0].type)
             expect(target[0].hull).toEqual(0)
             expect(target[1]).toBe("attacker")
         })
@@ -76,15 +75,57 @@ describe('adding ships in initiative order', function() {
 
 describe('hit probabilities', function() {
 
-    describe('terran interceptor vs terran interceptor', function() {
+    describe('defending enemyTerran interceptor vs attacking terran interceptor', function() {
         
         var initiativeOrder = [[recordTable.terran.interceptor, 'attacker'],
             [recordTable.enemyTerran.interceptor, 'defender']]
+        var attacker = initiativeOrder[1]
+        var target = selectTarget(initiativeOrder, attacker)
+        var targetHitPoints = target[0].hull + 1
 
-        it('will give defending ship 1/6 chance to hit', function() {
-            var target = selectTarget(initiativeOrder, 0)
-            var weapons = addHitRates(initiativeOrder, 0, target)
+        it('will hit terran interceptor', function() {
+            expect(target[0].type).toEqual('interceptor')
+        })
+
+        it('will have 1/6 chance to hit', function() {
+            var weapons = addHitRates(attacker, target)
             expect(weapons.hitRate).toEqual(1/6)
+        })
+
+        it('gets zero hits with 4HP weapons', function() {
+            var weapons = addHitRates(attacker, target)
+            var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
+            var w4HPhits = preservedHP.every(function(n) {
+                return n.name != 'w4HP'
+            })
+            expect(w4HPhits).toBe(true)
+        })
+
+        it('gets zero hits with 2HP weapons', function() {
+            var weapons = addHitRates(attacker, target)
+            var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
+            var w2HPhits = preservedHP.every(function(n) {
+                return n.name != 'w2HP'
+            })
+            expect(w2HPhits).toBe(true)
+        })
+
+        it('gets one or no hits with 1HP weapons', function() {
+            var weapons = addHitRates(attacker, target)
+            var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
+            var w1HPhits = preservedHP.filter(function(n) {
+                return n.name == 'w1HP'
+            })
+            expect(w1HPhits.length).toBe(2)
+        })
+
+        it('will remove 1 hp with a hit and 0 with a miss', function() {
+            var weapons = addHitRates(attacker, target)
+            var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
+            expect(preservedHP[0].hits).toBe(0)
+            expect(preservedHP[0].targetHP).toBe(targetHitPoints)
+            expect(preservedHP[1].hits).toBe(1)
+            expect(preservedHP[1].targetHP).toBe(0)
         })
 
     })

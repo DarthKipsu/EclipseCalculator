@@ -83,17 +83,20 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     console.log(initiativeOrder, enemy)
     for (var ship=0; ship<initiativeOrder.length; ship++) {
         console.log('ATTACKER:', initiativeOrder[ship][0].type, initiativeOrder[ship][1])
+        var attacker = initiativeOrder[ship]
 
         // target with smallest hull
-        var target = selectTarget(initiativeOrder, ship)
+        var target = selectTarget(initiativeOrder, attacker)
         var targetHitPoints = target[0].hull+1
         console.log('TARGET hp:', targetHitPoints, '('+ target[0].type +')')
         
         //weapon and hitRate info
-        var weapons = addHitRates(initiativeOrder, ship, target)
+        var weapons = addHitRates(attacker, target)
 
         //chance to destroy enemy hull
-        console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
+        hitOutcomes(attacker, targetHitPoints, weapons)
+
+        /*console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
 
         var targetHP = target[0].hull + 1
         var savedHits = {
@@ -103,7 +106,7 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         }
         var savedHitsValues = [[4, 'w4HP'],[2, 'w2HP'],[1, 'w1HP']]
 
-        /*for (var j=0; j<savedHitsValues.length; j++) {
+        for (var j=0; j<savedHitsValues.length; j++) {
             console.log('start', savedHits)
             countHitProbabilities(targetHP, savedHitsValues[j][0], savedHitsValues[j][1],
                 savedHits, weapons)
@@ -144,7 +147,7 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
 }
 
 function selectTarget(initiativeOrder, attacker) {
-    var attackerSide = initiativeOrder[attacker][1]
+    var attackerSide = attacker[1]
     var targets = initiativeOrder.filter(function (ship) {
         return ship[1] != attackerSide
     })
@@ -156,19 +159,32 @@ function selectTarget(initiativeOrder, attacker) {
     })
 }
 
-function addHitRates(initiativeOrder, ship, target) {
+function addHitRates(attacker, target) {
     var weapons = {
-        hitRate: (1 + initiativeOrder[ship][0].computer + target[0].shield) / 6,
-        w1HP: initiativeOrder[ship][0].dice1HP,
-        w2HP: initiativeOrder[ship][0].dice2HP,
-        w4HP: initiativeOrder[ship][0].dice4HP,
+        hitRate: (1 + attacker[0].computer + target[0].shield) / 6,
+        w1HP: attacker[0].dice1HP,
+        w2HP: attacker[0].dice2HP,
+        w4HP: attacker[0].dice4HP,
     }
     weapons.all = weapons.w1HP + weapons.w2HP + weapons.w4HP
     if (weapons.hitRate<1/6) weapons.hitRate = 1/6
     return weapons
 }
 
-function countHitProbabilities(targetHP, weaponHP, name, savedHits, weapons) {
+function hitOutcomes(attacker, targetHitPoints, weapons) {
+    var result = []
+    for (var i=0; i<weapons.w1HP+1; i++) {
+        var outcome = {
+            name: 'w1HP',
+            hits: i,
+            targetHP: targetHitPoints - i * 1
+        }
+        result.push(outcome)
+    }
+    return result
+}
+
+/*function countHitProbabilities(targetHP, weaponHP, name, savedHits, weapons) {
         console.log('first', name, savedHits)
         var loopHP = targetHP
 
@@ -177,7 +193,7 @@ function countHitProbabilities(targetHP, weaponHP, name, savedHits, weapons) {
             loopHP -= i * weaponHP
         }
         console.log('second', name, savedHits)
-}
+}*/
 
 function binomial(weapons, hp, hitRate) {
     return nCr(weapons, hp)*Math.pow(hitRate, hp)*Math.pow(1-hitRate, weapons-hp)
