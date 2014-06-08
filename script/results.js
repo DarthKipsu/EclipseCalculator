@@ -83,19 +83,7 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         console.log('ATTACKER:', initiativeOrder[ship][0].type, initiativeOrder[ship][1])
 
         // target with smallest hull
-        var target = null
-        var targetIndex
-        for (var j=0; j<initiativeOrder.length; j++) {
-            if (initiativeOrder[ship][1]!=initiativeOrder[j][1]) {
-                if (target==null) {
-                    target = initiativeOrder[j]
-                    targetIndex = j
-                } else if (initiativeOrder[j][0].hull<target[0].hull) {
-                    target = initiativeOrder[j]
-                    targetIndex = j
-                }
-            }
-        }
+        var target = selectTarget(initiativeOrder, ship)
         var targetHitPoints = target[0].hull+1
         console.log('TARGET hp:', targetHitPoints, '('+ target[0].type +')')
         
@@ -119,24 +107,75 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
             w2HP: [],
             w4HP: []
         }
+        var savedHitsValues = [[4, 'w4HP'],[2, 'w2HP'],[1, 'w1HP']]
+
+        /*for (var j=0; j<savedHitsValues.length; j++) {
+            console.log('start', savedHits)
+            countHitProbabilities(targetHP, savedHitsValues[j][0], savedHitsValues[j][1],
+                savedHits, weapons)
+            console.log(savedHits, 'round', j, targetHP, savedHitsValues[j][0], savedHitsValues[j][1], savedHits, weapons)
+            if (savedHitsValues[j][1]=='w2HP' && savedHits.w4HP.length>1) {
+                for (var k=1; k<savedHits.w4HP.length; k++) {
+                    countHitProbabilities(savedHits.w4HP[k][1], savedHitsValues[j][0],
+                        'w2HP', savedHits, weapons)
+                }
+            } else if (savedHitsValues[j][1]=='w1HP') {
+                if (savedHits.w4HP.length>1) {
+                    console.log(savedHits.w4HP[1][1])
+
+                    for (var k=1; k<savedHits.w4HP.length; k++) {
+                        countHitProbabilities(savedHits.w4HP[k][1], savedHitsValues[j][0],
+                            'w4HP', savedHits, weapons)
+                    }
+                } 
+                if (savedHits.w2HP.length>1) {
+                    console.log(savedHits.w2HP)
+                    for (var k=1; k<savedHits.w2HP.length; k++) {
+                        countHitProbabilities(savedHits.w2HP[k][1], savedHitsValues[j][0],
+                            'w2HP', savedHits, weapons)
+                    }
+                }
+
+            }
+        }
 
         if (weapons.w4HP>0) countHitProbabilities(targetHP, 4, 'w4HP', savedHits, weapons)
         if (weapons.w2HP>0) {
             countHitProbabilities(targetHP, 2, 'w2HP', savedHits, weapons)
         }
-        if (weapons.w1HP>0) countHitProbabilities(targetHP, 1, 'w1HP', savedHits, weapons)
-        console.log('weapon HP', savedHits)
+        if (weapons.w1HP>0) countHitProbabilities(targetHP, 1, 'w1HP', savedHits, weapons)*/
+        //console.log('weapon HP', savedHits)
 
     }
 }
 
+function selectTarget(initiativeOrder, ship) {
+        var target = null
+        var targetIndex
+        for (var j=0; j<initiativeOrder.length; j++) {
+            if (initiativeOrder[ship][1]!=initiativeOrder[j][1]) {
+                if (target==null) {
+                    target = initiativeOrder[j]
+                    targetIndex = j
+                } else if (initiativeOrder[j][0].hull<target[0].hull) {
+                    target = initiativeOrder[j]
+                    targetIndex = j
+                }
+            }
+        }
+        return target
+}
+
+
 function countHitProbabilities(targetHP, weaponHP, name, savedHits, weapons) {
+        console.log('first', name, savedHits)
         var loopHP = targetHP
 
         for (i=0; loopHP>=0; i++) {
             if (weapons[name] >= i) savedHits[name].push([i, targetHP - i * weaponHP, name])
             loopHP -= i * weaponHP
         }
+        console.log('second', name, savedHits)
 }
 
 function binomial(weapons, hp, hitRate) {

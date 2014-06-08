@@ -49,4 +49,24 @@ describe('adding ships in initiative order', function() {
         expect(initiativeOrder[2][1]).toBe('defender')
     })
 
+    describe('target selection', function() {
+
+        function setInitiativeOrder(chosen, enemy) {
+            chosenRace = chosen
+            enemyRace = enemy
+            var shipsAttending = addShipsBasedOnInputs(inputs, 'attacker', 'defender')
+            var initiativeOrder = []
+            while (shipsAttending.length>0) {
+                moveTheShipWithBiggestInitiative(shipsAttending, initiativeOrder)
+            }
+            return initiativeOrder
+        }
+
+        it('selects target with smallest hitpoints', function() {
+            var initiativeOrder = setInitiativeOrder('terran', 'enemyTerran')
+            var target = selectTarget(initiativeOrder, 0)
+            expect(target[0].hull).toEqual(0)
+        })
+    })
+
 })
