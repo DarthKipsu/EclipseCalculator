@@ -94,55 +94,12 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         var weapons = addHitRates(attacker, target)
 
         //chance to destroy enemy hull
-        hitOutcomes(attacker, targetHitPoints, weapons)
+        var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
+        var killProbability = (countKillChance(preservedHP, weapons)).toPrecision(3)
+        var noHitsProbability = (countMissChance(preservedHP, weapons, targetHitPoints)).toPrecision(3)
+        console.log('chance to kill enemy:', killProbability, '%. Chance to get no hits:', noHitsProbability, '%.')
 
-        /*console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
-
-        var targetHP = target[0].hull + 1
-        var savedHits = {
-            w1HP: [],
-            w2HP: [],
-            w4HP: []
-        }
-        var savedHitsValues = [[4, 'w4HP'],[2, 'w2HP'],[1, 'w1HP']]
-
-        for (var j=0; j<savedHitsValues.length; j++) {
-            console.log('start', savedHits)
-            countHitProbabilities(targetHP, savedHitsValues[j][0], savedHitsValues[j][1],
-                savedHits, weapons)
-            console.log(savedHits, 'round', j, targetHP, savedHitsValues[j][0], savedHitsValues[j][1], savedHits, weapons)
-            if (savedHitsValues[j][1]=='w2HP' && savedHits.w4HP.length>1) {
-                for (var k=1; k<savedHits.w4HP.length; k++) {
-                    countHitProbabilities(savedHits.w4HP[k][1], savedHitsValues[j][0],
-                        'w2HP', savedHits, weapons)
-                }
-            } else if (savedHitsValues[j][1]=='w1HP') {
-                if (savedHits.w4HP.length>1) {
-                    console.log(savedHits.w4HP[1][1])
-
-                    for (var k=1; k<savedHits.w4HP.length; k++) {
-                        countHitProbabilities(savedHits.w4HP[k][1], savedHitsValues[j][0],
-                            'w4HP', savedHits, weapons)
-                    }
-                } 
-                if (savedHits.w2HP.length>1) {
-                    console.log(savedHits.w2HP)
-                    for (var k=1; k<savedHits.w2HP.length; k++) {
-                        countHitProbabilities(savedHits.w2HP[k][1], savedHitsValues[j][0],
-                            'w2HP', savedHits, weapons)
-                    }
-                }
-
-            }
-        }
-
-        if (weapons.w4HP>0) countHitProbabilities(targetHP, 4, 'w4HP', savedHits, weapons)
-        if (weapons.w2HP>0) {
-            countHitProbabilities(targetHP, 2, 'w2HP', savedHits, weapons)
-        }
-        if (weapons.w1HP>0) countHitProbabilities(targetHP, 1, 'w1HP', savedHits, weapons)*/
-        //console.log('weapon HP', savedHits)
-
+        //console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
     }
 }
 
@@ -184,16 +141,19 @@ function hitOutcomes(attacker, targetHitPoints, weapons) {
     return result
 }
 
-/*function countHitProbabilities(targetHP, weaponHP, name, savedHits, weapons) {
-        console.log('first', name, savedHits)
-        var loopHP = targetHP
+function countKillChance(preservedHP, weapons) {
+    return preservedHP.reduce(function(acc, n) {
+        if (n.targetHP<=0) acc += weapons.hitRate*100
+        return acc
+    }, 0)
+}
 
-        for (i=0; loopHP>=0; i++) {
-            if (weapons[name] >= i) savedHits[name].push([i, targetHP - i * weaponHP, name])
-            loopHP -= i * weaponHP
-        }
-        console.log('second', name, savedHits)
-}*/
+function countMissChance(preservedHP, weapons, targetHitPoints) {
+    return preservedHP.reduce(function(acc, n) {
+        if (n.targetHP==targetHitPoints) acc += (1-weapons.hitRate)*100
+        return acc
+    }, 0)
+}
 
 function binomial(weapons, hp, hitRate) {
     return nCr(weapons, hp)*Math.pow(hitRate, hp)*Math.pow(1-hitRate, weapons-hp)

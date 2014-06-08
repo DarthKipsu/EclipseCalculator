@@ -82,6 +82,7 @@ describe('hit probabilities', function() {
         var attacker = initiativeOrder[1]
         var target = selectTarget(initiativeOrder, attacker)
         var targetHitPoints = target[0].hull + 1
+        var weapons = addHitRates(attacker, target)
 
         it('will hit terran interceptor', function() {
             expect(target[0].type).toEqual('interceptor')
@@ -93,7 +94,6 @@ describe('hit probabilities', function() {
         })
 
         it('gets zero hits with 4HP weapons', function() {
-            var weapons = addHitRates(attacker, target)
             var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
             var w4HPhits = preservedHP.every(function(n) {
                 return n.name != 'w4HP'
@@ -102,7 +102,6 @@ describe('hit probabilities', function() {
         })
 
         it('gets zero hits with 2HP weapons', function() {
-            var weapons = addHitRates(attacker, target)
             var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
             var w2HPhits = preservedHP.every(function(n) {
                 return n.name != 'w2HP'
@@ -111,7 +110,6 @@ describe('hit probabilities', function() {
         })
 
         it('gets one or no hits with 1HP weapons', function() {
-            var weapons = addHitRates(attacker, target)
             var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
             var w1HPhits = preservedHP.filter(function(n) {
                 return n.name == 'w1HP'
@@ -120,12 +118,23 @@ describe('hit probabilities', function() {
         })
 
         it('will remove 1 hp with a hit and 0 with a miss', function() {
-            var weapons = addHitRates(attacker, target)
             var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
             expect(preservedHP[0].hits).toBe(0)
             expect(preservedHP[0].targetHP).toBe(targetHitPoints)
             expect(preservedHP[1].hits).toBe(1)
             expect(preservedHP[1].targetHP).toBe(0)
+        })
+
+        it('will have 1/6 chance of destroying enemy', function() {
+            var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
+            var killProbability = countKillChance(preservedHP, weapons)
+            expect(killProbability.toPrecision(3)).toEqual('16.7')
+        })
+
+        it('has 5/6 chance of inflicting no damage', function() {
+            var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
+            var noHitsProbability = countMissChance(preservedHP, weapons, targetHitPoints)
+            expect(noHitsProbability.toPrecision(3)).toEqual('83.3')
         })
 
     })
