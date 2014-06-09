@@ -65,7 +65,6 @@ describe('adding ships in initiative order', function() {
         it('selects target with smallest hitpoints', function() {
             var initiativeOrder = setInitiativeOrder('terran', 'enemyTerran')
             var target = selectTarget(initiativeOrder, initiativeOrder[0])
-            recordTable.enemyTerran.interceptor.hull = 3
             expect(target[0].hull).toEqual(0)
             expect(target[1]).toBe("attacker")
         })
@@ -125,16 +124,21 @@ describe('hit probabilities', function() {
             expect(preservedHP[1].targetHP).toBe(0)
         })
 
-        it('will have 1/6 chance of destroying enemy', function() {
-            var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
-            var killProbability = countKillChance(preservedHP, weapons)
-            expect(killProbability.toPrecision(3)).toEqual('16.7')
+        it('will have 1/6 chance of destroying enemy on first turn', function() {
+            var killProbability = possibleOutcomes.attackerHits(weapons)
+            expect((killProbability*100).toPrecision(3)).toEqual('16.7')
         })
 
         it('has 5/6 chance of inflicting no damage', function() {
-            var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
-            var noHitsProbability = countMissChance(preservedHP, weapons, targetHitPoints)
-            expect(noHitsProbability.toPrecision(3)).toEqual('83.3')
+            var noHitsProbability = possibleOutcomes.attackerMiss(weapons)
+            expect((noHitsProbability*100).toPrecision(3)).toEqual('83.3')
+        })
+
+        it('has 5/36 chance of getting killed by the enemy on first turn', function() {
+            var targetWeapons = addHitRates(target, attacker)
+            //var gettingKilledProbability = possibleOutcomes.enemyHits(targetWeapons, weapons)
+            //expect((gettingKilledProbability*100).toPrecision(3)).toEqual('13.9')
+            console.log(possibleOutcomes.enemyHits(targetWeapons, weapons))
         })
 
     })
