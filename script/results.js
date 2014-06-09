@@ -160,52 +160,56 @@ var results = {
             results.attackerMiss(weapons)
         return result
     },
-    enemyMiss: function(targetWeapons, weapons) {
+    /*enemyMiss: function(targetWeapons, weapons) {
         var result = binomial(targetWeapons, 0, targetWeapons.hitRate) *
             results.attackerMiss(weapons)
         return result
-    },
+    },*/
     kill: function(attacker, target, weapons, targetWeapons) {
         var targetHP = target[0].hull + 1
+        if (target[0].hits1HP!=undefined) {
+            addKillChanceWithPreviousHits(target, targetHP, weapons)
+        }
         if (weapons.w1HP<targetHP) {
-            if (target[0].hits1HP==undefined) target[0].hits1HP = 0
-            for (var i=1; i<weapons.w1HP+1; i++) {
-                target[0].hits1HP += results.attackerHits(weapons, i)
-            }
+            saveHitPoints(target, targetHP, weapons)
             return 0
         }
-        else if (attacker[1]=='defender') return results.attackerHits(weapons, targetHP)
-        else return results.enemyHits(targetWeapons, weapons, targetHP)
+        else if (attacker[1]=='defender') {
+            saveHitPoints(target, targetHP, weapons)
+            var killChance = results.attackerHits(weapons, targetHP)
+            saveKillChance(target, killChance)
+            return target[0].killed
+        }
+        else {
+            var killChance = results.enemyHits(targetWeapons, weapons, attacker[0].hull+1)
+            saveKillChance(target, killChance)
+            return killChance
+        }
     }
 }
 
-/*function countKillChanceFirstHit(preservedHP, weapons) {
-    return preservedHP.reduce(function(acc, n) {
-        if (n.targetHP<=0) acc += binomial(weapons.w1HP, n.hits, weapons.hitRate) * 100
-        return acc
-    }, 0)
+function addKillChanceWithPreviousHits(target, targetHP, weapons) {
+    for (var i=targetHP+1; i>0; i--) {
+        if (target[0]['hits'+i+'HP']!=undefined && targetHP-i<=weapons.w1HP) {
+            var killChance = results.attackerHits(weapons, targetHP-i) * target[0]['hits'+i+'HP']
+            saveKillChance(target, killChance)
+        }
+    }
 }
 
-function countKillChance(preservedHP, weapons, targetWeapons, targetHits) {
-    return preservedHP.reduce(function(acc, n) {
-        if (n.targetHP<=0) acc += binomial(weapons.w1HP, n.hits, weapons.hitRate) * binomial(targetWeapons.w1HP, targetHits.hits, targetWeapons.hitRate) * 100
-        return acc
-    }, 0)
+function saveHitPoints(target, targetHP, weapons) {
+    for (var i=1; i<weapons.w1HP+1; i++) {
+        if (i<targetHP) {
+            if (target[0]['hits'+i+'HP']==undefined) target[0]['hits'+i+'HP'] = 0
+            target[0]['hits'+i+'HP'] += results.attackerHits(weapons, i)
+        }
+    }
 }
 
-function countMissChance(preservedHP, weapons, targetHitPoints) {
-    return preservedHP.reduce(function(acc, n) {
-        if (n.targetHP==targetHitPoints) acc += (1-weapons.hitRate)*100
-        return acc
-    }, 0)
+function saveKillChance(target, killChance) {
+    if (target[0].killed==undefined) target[0].killed = 0
+    target[0].killed += killChance
 }
-
-function countGetKilledChance(attacker, target, weapons) {
-    var attackerHP = attacker[0].hull + 1
-    var targetWeapons = addHitRates(target, attacker)
-    var targetHits = hitOutcomes(target, attackerHP, targetWeapons)
-    return countKillChance(targetHits, targetWeapons, weapons, {hits: 0})
-}*/
 
 function binomial(weapons, hp, hitRate) {
     return nCr(weapons, hp)*Math.pow(hitRate, hp)*Math.pow(1-hitRate, weapons-hp)

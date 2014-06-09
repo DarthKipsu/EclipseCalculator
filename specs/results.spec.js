@@ -136,7 +136,7 @@ describe('hit probabilities', function() {
 
         it('has 5/36 chance of getting killed by the enemy on first turn', function() {
             var targetWeapons = addHitRates(target, attacker)
-            var gettingKilledProbability = results.enemyHits(targetWeapons, weapons, targetHitPoints)
+            var gettingKilledProbability = results.kill(target, attacker, weapons, targetWeapons)
             expect((gettingKilledProbability*100).toPrecision(3)).toEqual('13.9')
         })
 
@@ -174,13 +174,17 @@ describe('hit probabilities', function() {
             expect((killProbability*100).toPrecision(3)).toEqual('0.00')
         })
 
-        it('gives orion dreadnought 11,1% chance of killing target on it\'s own', function() {
-            var killProbability = results.kill(orionDre, orionTarget, orionDreWeapons)
-            expect((killProbability*100).toPrecision(3)).toEqual('11.1')
-        })
-
         it('saves orion cruisers 33,3% change of getting one hit to terran cruiser', function() {
             expect((orionTarget[0].hits1HP*100).toPrecision(3)).toEqual('33.3')
+        })
+
+        it('adds orion dreadnoughts 44.4% chance of hitting enemy just once on target', function() {
+            results.kill(orionDre, orionTarget, orionDreWeapons)
+            expect((orionTarget[0].hits1HP*100).toPrecision(3)).toEqual('77.8')
+        })
+
+        it('counts previous hits to give dreadnought 25,9% chance of killing target', function() {
+            expect((orionTarget[0].killed*100).toPrecision(3)).toEqual('25.9')
         })
 
     })
