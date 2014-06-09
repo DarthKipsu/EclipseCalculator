@@ -136,9 +136,8 @@ describe('hit probabilities', function() {
 
         it('has 5/36 chance of getting killed by the enemy on first turn', function() {
             var targetWeapons = addHitRates(target, attacker)
-            //var gettingKilledProbability = possibleOutcomes.enemyHits(targetWeapons, weapons)
-            //expect((gettingKilledProbability*100).toPrecision(3)).toEqual('13.9')
-            console.log(possibleOutcomes.enemyHits(targetWeapons, weapons))
+            var gettingKilledProbability = possibleOutcomes.enemyHits(targetWeapons, weapons)
+            expect((gettingKilledProbability*100).toPrecision(3)).toEqual('13.9')
         })
 
     })

@@ -96,10 +96,12 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         //chance to destroy enemy hull
         var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
         var targetWeapons = addHitRates(target, attacker)
-        if (ship==0) var killProbability = (countKillChanceFirstHit(preservedHP, weapons)).toPrecision(3)
-        else var killProbability = (countKillChance(preservedHP, weapons, targetWeapons, {hits: 0})).toPrecision(3)
-        var noHitsProbability = (countMissChance(preservedHP, weapons, targetHitPoints)).toPrecision(3)
-        var gettingKilledProbability = (countGetKilledChance(attacker, target, weapons)).toPrecision(3)
+        if (ship==0) var killProbability = (possibleOutcomes.attackerHits(weapons)*100).toPrecision(3)
+        else var killProbability = (possibleOutcomes.enemyHits(targetWeapons, weapons)*100).toPrecision(3)
+        var noHitsProbability = (possibleOutcomes.attackerMiss(weapons)*100).toPrecision(3)
+        if (ship==0) var gettingKilledProbability = (possibleOutcomes.enemyHits(targetWeapons, weapons)*100).toPrecision(3)
+        else var gettingKilledProbability = (possibleOutcomes.attackerHits(weapons)*100).toPrecision(3)
+
         console.log('chance to kill enemy on first turn:', killProbability, '%. Chance to get no hits:', noHitsProbability, '%. Chance to get killed:', gettingKilledProbability, '%.')
 
         //console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
@@ -156,8 +158,6 @@ var possibleOutcomes = {
     enemyHits: function(targetWeapons, weapons) {
         var result = binomial(targetWeapons.w1HP, 1, targetWeapons.hitRate) *
             possibleOutcomes.attackerMiss(weapons)
-            console.log(targetWeapons)
-            console.log(weapons)
         return result
     },
     enemyMiss: function(targetWeapons, weapons) {
@@ -167,7 +167,7 @@ var possibleOutcomes = {
     }
 }
 
-function countKillChanceFirstHit(preservedHP, weapons) {
+/*function countKillChanceFirstHit(preservedHP, weapons) {
     return preservedHP.reduce(function(acc, n) {
         if (n.targetHP<=0) acc += binomial(weapons.w1HP, n.hits, weapons.hitRate) * 100
         return acc
@@ -193,7 +193,7 @@ function countGetKilledChance(attacker, target, weapons) {
     var targetWeapons = addHitRates(target, attacker)
     var targetHits = hitOutcomes(target, attackerHP, targetWeapons)
     return countKillChance(targetHits, targetWeapons, weapons, {hits: 0})
-}
+}*/
 
 function binomial(weapons, hp, hitRate) {
     return nCr(weapons, hp)*Math.pow(hitRate, hp)*Math.pow(1-hitRate, weapons-hp)
