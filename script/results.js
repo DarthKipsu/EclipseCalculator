@@ -96,11 +96,11 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         //chance to destroy enemy hull
         var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
         var targetWeapons = addHitRates(target, attacker)
-        if (ship==0) var killProbability = (possibleOutcomes.attackerHits(weapons)*100).toPrecision(3)
-        else var killProbability = (possibleOutcomes.enemyHits(targetWeapons, weapons)*100).toPrecision(3)
-        var noHitsProbability = (possibleOutcomes.attackerMiss(weapons)*100).toPrecision(3)
-        if (ship==0) var gettingKilledProbability = (possibleOutcomes.enemyHits(targetWeapons, weapons)*100).toPrecision(3)
-        else var gettingKilledProbability = (possibleOutcomes.attackerHits(weapons)*100).toPrecision(3)
+        if (ship==0) var killProbability = (results.attackerHits(weapons)*100).toPrecision(3)
+        else var killProbability = (results.enemyHits(targetWeapons, weapons)*100).toPrecision(3)
+        var noHitsProbability = (results.attackerMiss(weapons)*100).toPrecision(3)
+        if (ship==0) var gettingKilledProbability = (results.enemyHits(targetWeapons, weapons)*100).toPrecision(3)
+        else var gettingKilledProbability = (results.attackerHits(weapons)*100).toPrecision(3)
 
         console.log('chance to kill enemy on first turn:', killProbability, '%. Chance to get no hits:', noHitsProbability, '%. Chance to get killed:', gettingKilledProbability, '%.')
 
@@ -146,24 +146,36 @@ function hitOutcomes(attacker, targetHitPoints, weapons) {
     return result
 }
 
-var possibleOutcomes = {
-    attackerHits: function(weapons) {
-        var result = binomial(weapons.w1HP, 1, weapons.hitRate)
+var results = {
+    attackerHits: function(weapons, hits) {
+        var result = binomial(weapons.w1HP, hits, weapons.hitRate)
         return result
     },
     attackerMiss: function(weapons) {
          var result = binomial(weapons.w1HP, 0, weapons.hitRate)
         return result
     },
-    enemyHits: function(targetWeapons, weapons) {
-        var result = binomial(targetWeapons.w1HP, 1, targetWeapons.hitRate) *
-            possibleOutcomes.attackerMiss(weapons)
+    enemyHits: function(targetWeapons, weapons, hits) {
+        var result = binomial(targetWeapons.w1HP, hits, targetWeapons.hitRate) *
+            results.attackerMiss(weapons)
         return result
     },
     enemyMiss: function(targetWeapons, weapons) {
         var result = binomial(targetWeapons, 0, targetWeapons.hitRate) *
-            possibleOutcomes.attackerMiss(weapons)
+            results.attackerMiss(weapons)
         return result
+    },
+    kill: function(attacker, target, weapons, targetWeapons) {
+        var targetHP = target[0].hull + 1
+        if (weapons.w1HP<targetHP) {
+            if (target[0].hits1HP==undefined) target[0].hits1HP = 0
+            for (var i=1; i<weapons.w1HP+1; i++) {
+                target[0].hits1HP += results.attackerHits(weapons, i)
+            }
+            return 0
+        }
+        else if (attacker[1]=='defender') return results.attackerHits(weapons, targetHP)
+        else return results.enemyHits(targetWeapons, weapons, targetHP)
     }
 }
 

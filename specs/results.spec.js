@@ -125,19 +125,62 @@ describe('hit probabilities', function() {
         })
 
         it('will have 1/6 chance of destroying enemy on first turn', function() {
-            var killProbability = possibleOutcomes.attackerHits(weapons)
+            var killProbability = results.kill(attacker, target, weapons)
             expect((killProbability*100).toPrecision(3)).toEqual('16.7')
         })
 
         it('has 5/6 chance of inflicting no damage', function() {
-            var noHitsProbability = possibleOutcomes.attackerMiss(weapons)
+            var noHitsProbability = results.attackerMiss(weapons)
             expect((noHitsProbability*100).toPrecision(3)).toEqual('83.3')
         })
 
         it('has 5/36 chance of getting killed by the enemy on first turn', function() {
             var targetWeapons = addHitRates(target, attacker)
-            var gettingKilledProbability = possibleOutcomes.enemyHits(targetWeapons, weapons)
+            var gettingKilledProbability = results.enemyHits(targetWeapons, weapons, targetHitPoints)
             expect((gettingKilledProbability*100).toPrecision(3)).toEqual('13.9')
+        })
+
+    })
+
+    describe('defending orion cru % dread vs attacking enemyTerran cru & dread', function() {
+        
+        var initiativeOrder = [[recordTable.orion.cruiser, 'defender'],
+            [recordTable.orion.dreadnought, 'defender'],
+            [recordTable.enemyTerran.cruiser, 'attacker'],
+            [recordTable.enemyTerran.dreadnought, 'attacker']]
+
+        var orionCru = initiativeOrder[0]
+        var orionDre = initiativeOrder[1]
+        var terranCru = initiativeOrder[2]
+        var terranDre = initiativeOrder[3]
+
+        var orionTarget = selectTarget(initiativeOrder, orionCru)
+        var orionTargetHP = orionTarget[0].hull + 1
+        var terranTarget = selectTarget(initiativeOrder, terranCru)
+        var terranTargetHP = terranTarget[0].hull + 1
+
+        var orionCruWeapons = addHitRates(orionCru, orionTarget)
+        var orionDreWeapons = addHitRates(orionDre, orionTarget)
+        var terranCruWeapons = addHitRates(terranCru, terranTarget)
+        var terranDreWeapons = addHitRates(terranDre, terranTarget)
+
+        it('orion ships have 1/3 hit rate, terran only 1/6', function() {
+            expect(orionCruWeapons.hitRate).toEqual(1/3)
+            expect(terranCruWeapons.hitRate).toEqual(1/6)
+        })
+
+        it('gives orion cruiser 0% chance of killing target on first turn', function() {
+            var killProbability = results.kill(orionCru, orionTarget, orionCruWeapons)
+            expect((killProbability*100).toPrecision(3)).toEqual('0.00')
+        })
+
+        it('gives orion dreadnought 11,1% chance of killing target on it\'s own', function() {
+            var killProbability = results.kill(orionDre, orionTarget, orionDreWeapons)
+            expect((killProbability*100).toPrecision(3)).toEqual('11.1')
+        })
+
+        it('saves orion cruisers 33,3% change of getting one hit to terran cruiser', function() {
+            expect((orionTarget[0].hits1HP*100).toPrecision(3)).toEqual('33.3')
         })
 
     })
