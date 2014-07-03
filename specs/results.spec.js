@@ -183,7 +183,7 @@ describe('hit probabilities', function() {
             expect((orionTarget[0].hits1HP*100).toPrecision(3)).toEqual('77.8')
         })
 
-        it('counts previous hits to give dreadnought 25,9% chance of killing target', function() {
+        it('counts previous hits to give dreadnought 29,6% chance of killing target', function() {
             expect((orionTarget[0].killed*100).toPrecision(3)).toEqual('25.9')
         })
 

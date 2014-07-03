@@ -5,7 +5,6 @@ function allShipsAreValid() {
 }
 
 function showResults() {
-    addContentFromHTML('#results', 'results.html')
     hideResultsWithX()
 
     var enemy = attackerOrDefender()
@@ -16,6 +15,7 @@ function showResults() {
 function hideResultsWithX() {
     $('#results').on('click', '.close', function() {
         $('#results').hide()
+        $('#results').empty()
     })
 }
 
@@ -34,7 +34,6 @@ var initiative = {
         while (shipsAttending.length>0) {
             initiative.moveBiggestInitiative(shipsAttending, initiativeOrder)
         }
-        console.log('init order:', initiativeOrder)
         return initiativeOrder
     },
 
@@ -80,31 +79,39 @@ var initiative = {
 }
 
 function firstRoundWinProbability(initiativeOrder, enemy) {
-    console.log(initiativeOrder, enemy)
-    for (var ship=0; ship<initiativeOrder.length; ship++) {
-        console.log('ATTACKER:', initiativeOrder[ship][0].type, initiativeOrder[ship][1])
-        var attacker = initiativeOrder[ship]
+    var resultContainer = document.getElementById('results')
+    var div = document.createElement('div')
+    div.classList.add('close')
+    $(div).html('X')
+    $(div).appendTo(resultContainer)
 
-        // target with smallest hull
+    for (var ship=0; ship<initiativeOrder.length; ship++) {
+        var attacker = initiativeOrder[ship]
         var target = selectTarget(initiativeOrder, attacker)
         var targetHitPoints = target[0].hull+1
-        console.log('TARGET hp:', targetHitPoints, '('+ target[0].type +')')
-        
-        //weapon and hitRate info
         var weapons = addHitRates(attacker, target)
 
-        //chance to destroy enemy hull
-        var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
         var targetWeapons = addHitRates(target, attacker)
-        if (ship==0) var killProbability = (results.attackerHits(weapons)*100).toPrecision(3)
-        else var killProbability = (results.enemyHits(targetWeapons, weapons)*100).toPrecision(3)
-        var noHitsProbability = (results.attackerMiss(weapons)*100).toPrecision(3)
-        if (ship==0) var gettingKilledProbability = (results.enemyHits(targetWeapons, weapons)*100).toPrecision(3)
-        else var gettingKilledProbability = (results.attackerHits(weapons)*100).toPrecision(3)
+        var killProbability = results.kill(attacker, target, weapons, targetWeapons)
+        var noHitsProbability = results.attackerMiss(weapons)
 
-        console.log('chance to kill enemy on first turn:', killProbability, '%. Chance to get no hits:', noHitsProbability, '%. Chance to get killed:', gettingKilledProbability, '%.')
+        var content = document.createElement('div')
+        content.classList.add('result-content')
+        $(content).html(initiativeOrder[ship][1] + " " + initiativeOrder[ship][0].type +
+            ' attacks ' + target[1] + " " + target[0].type + '<br>has' +
+            (killProbability*100).toPrecision(3) + ' chance to kill target on first turn<br>' +
+            'and ' + (noHitsProbability*100).toPrecision(3)+ ' chance to miss entirely')
+        $(content).appendTo(resultContainer)
+        console.log(target[0])
+    }
 
-        //console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
+    for (var ship=0; ship<initiativeOrder.length; ship++) {
+        var attacker = initiativeOrder[ship]
+        var target = selectTarget(initiativeOrder, attacker)
+        target[0]['killed'] = 0
+        target[0]['hits1HP'] = 0 
+        target[0]['hits2HP'] = 0 
+        console.log(target[0])
     }
 }
 
@@ -160,11 +167,6 @@ var results = {
             results.attackerMiss(weapons)
         return result
     },
-    /*enemyMiss: function(targetWeapons, weapons) {
-        var result = binomial(targetWeapons, 0, targetWeapons.hitRate) *
-            results.attackerMiss(weapons)
-        return result
-    },*/
     kill: function(attacker, target, weapons, targetWeapons) {
         var targetHP = target[0].hull + 1
         if (target[0].hits1HP!=undefined) {
