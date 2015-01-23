@@ -89,5 +89,5 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     $(info).html('<p>To be implemented...</p>')
     $(info).appendTo(resultContainer)
 
-    console.log(initiativeOrder)
+    console.log(JSON.stringify(initiativeOrder))
 }
