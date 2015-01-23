@@ -5,7 +5,6 @@ function allShipsAreValid() {
 }
 
 function showResults() {
-    addContentFromHTML('#results', 'results.html')
     hideResultsWithX()
 
     var enemy = attackerOrDefender()
@@ -16,6 +15,7 @@ function showResults() {
 function hideResultsWithX() {
     $('#results').on('click', '.close', function() {
         $('#results').hide()
+        $('#results').empty()
     })
 }
 
@@ -34,7 +34,6 @@ var initiative = {
         while (shipsAttending.length>0) {
             initiative.moveBiggestInitiative(shipsAttending, initiativeOrder)
         }
-        console.log('init order:', initiativeOrder)
         return initiativeOrder
     },
 
@@ -80,91 +79,15 @@ var initiative = {
 }
 
 function firstRoundWinProbability(initiativeOrder, enemy) {
-    console.log(initiativeOrder, enemy)
-    for (var ship=0; ship<initiativeOrder.length; ship++) {
-        console.log('ATTACKER:', initiativeOrder[ship][0].type, initiativeOrder[ship][1])
-        var attacker = initiativeOrder[ship]
+    var resultContainer = document.getElementById('results')
+    var div = document.createElement('div')
+    div.classList.add('close')
+    $(div).html('X')
+    $(div).appendTo(resultContainer)
+    
+    var info = document.createElement('div')
+    $(info).html('<p>To be implemented...</p>')
+    $(info).appendTo(resultContainer)
 
-        // target with smallest hull
-        var target = selectTarget(initiativeOrder, attacker)
-        var targetHitPoints = target[0].hull+1
-        console.log('TARGET hp:', targetHitPoints, '('+ target[0].type +')')
-        
-        //weapon and hitRate info
-        var weapons = addHitRates(attacker, target)
-
-        //chance to destroy enemy hull
-        var preservedHP = hitOutcomes(attacker, targetHitPoints, weapons)
-        var killProbability = (countKillChance(preservedHP, weapons)).toPrecision(3)
-        var noHitsProbability = (countMissChance(preservedHP, weapons, targetHitPoints)).toPrecision(3)
-        console.log('chance to kill enemy:', killProbability, '%. Chance to get no hits:', noHitsProbability, '%.')
-
-        //console.log('binomi:', ((binomial(1,1,1/6))*(1-binomial(2,0,1/6))*100).toPrecision(2)+'%')
-    }
-}
-
-function selectTarget(initiativeOrder, attacker) {
-    var attackerSide = attacker[1]
-    var targets = initiativeOrder.filter(function (ship) {
-        return ship[1] != attackerSide
-    })
-    return targets.reduce(function(accumulator, ship) {
-        if (ship[0].hull<accumulator[0].hull) {
-            accumulator = ship
-        }
-        return accumulator
-    })
-}
-
-function addHitRates(attacker, target) {
-    var weapons = {
-        hitRate: (1 + attacker[0].computer + target[0].shield) / 6,
-        w1HP: attacker[0].dice1HP,
-        w2HP: attacker[0].dice2HP,
-        w4HP: attacker[0].dice4HP,
-    }
-    weapons.all = weapons.w1HP + weapons.w2HP + weapons.w4HP
-    if (weapons.hitRate<1/6) weapons.hitRate = 1/6
-    return weapons
-}
-
-function hitOutcomes(attacker, targetHitPoints, weapons) {
-    var result = []
-    for (var i=0; i<weapons.w1HP+1; i++) {
-        var outcome = {
-            name: 'w1HP',
-            hits: i,
-            targetHP: targetHitPoints - i * 1
-        }
-        result.push(outcome)
-    }
-    return result
-}
-
-function countKillChance(preservedHP, weapons) {
-    return preservedHP.reduce(function(acc, n) {
-        if (n.targetHP<=0) acc += weapons.hitRate*100
-        return acc
-    }, 0)
-}
-
-function countMissChance(preservedHP, weapons, targetHitPoints) {
-    return preservedHP.reduce(function(acc, n) {
-        if (n.targetHP==targetHitPoints) acc += (1-weapons.hitRate)*100
-        return acc
-    }, 0)
-}
-
-function binomial(weapons, hp, hitRate) {
-    return nCr(weapons, hp)*Math.pow(hitRate, hp)*Math.pow(1-hitRate, weapons-hp)
-}
-
-function nCr(weapons, hp) {
-    return factional(weapons) / (factional(hp) * factional(weapons-hp))
-}
-
-function factional(number) {
-    if (number<0) return -1
-    else if (number==0) return 1
-    else return (number * factional(number-1))
+    console.log(initiativeOrder)
 }
