@@ -86,8 +86,11 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     $(div).appendTo(resultContainer)
     
     var info = document.createElement('div')
-    $(info).html('<p>To be implemented...</p>')
-    $(info).appendTo(resultContainer)
-
-    console.log(JSON.stringify(initiativeOrder))
+    $.get("https://eclipse-calculator.herokuapp.com/odds", {
+        data: JSON.stringify(initiativeOrder)
+    }).done(function(data) {
+        $(info).html('<p>Defender win odds:' + data.defender + '%</p>'+
+                '<p>Attacker  win odds:' + data.attacker + '%</p>')
+        $(info).appendTo(resultContainer)
+    })
 }
