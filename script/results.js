@@ -86,11 +86,30 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     $(div).appendTo(resultContainer)
     
     var info = document.createElement('div')
+    var ships = document.createElement('div')
     $.get("https://eclipse-calculator.herokuapp.com/odds", {
         data: JSON.stringify(initiativeOrder)
     }).done(function(data) {
-        $(info).html('<p>Defender win odds:' + data.defender + '%</p>'+
-                '<p>Attacker  win odds:' + data.attacker + '%</p>')
+        $(info).html('<p>Attacker win odds:' + data.attacker + ' %</p>'+
+                '<p>Defender  win odds:' + data.defender + ' %</p></br>')
         $(info).appendTo(resultContainer)
+        $(ships).append('<p>Alive odds for each winner ship after three rounds:</p>')
+        $(ships).append('<ul>')
+        for (var i = 0; i < data['alive-odds'].length; i++) {
+            if (initiativeOrder[i][1] == 'attacker') {
+                $(ships).append('<li>Attacker ' + initiativeOrder[i][0].type +
+                        ': ' + data['alive-odds'][i] + ' %')
+            }
+        };
+        $(ships).append('</ul>')
+        $(ships).append('<ul>')
+        for (var i = 0; i < data['alive-odds'].length; i++) {
+            if (initiativeOrder[i][1] == 'defender') {
+                $(ships).append('<li>Defender ' + initiativeOrder[i][0].type +
+                        ': ' + data['alive-odds'][i] + ' %')
+            }
+        };
+        $(ships).append('</ul>')
+        $(ships).appendTo(resultContainer)
     })
 }
