@@ -94,26 +94,25 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     $.get("https://eclipse-calculator.herokuapp.com/odds", {
         data: JSON.stringify(initiativeOrder)
     }).done(function(data) {
-        $(info).html('<p>Attacker win odds:' + data.attacker + ' %</p>'+
-                '<p>Defender  win odds:' + data.defender + ' %</p></br>')
+        $(info).html('<p>Wind odds after three rounds:</br>&nbsp;</p>' + 
+                '<p>Attacker:' + data.attacker + ' %</p>'+
+                '<p>Defender:' + data.defender + ' %</p></br>')
         $(info).appendTo(resultContainer)
         $(ships).append('<p>Alive odds for each ship after three rounds:</p>')
-        $(ships).append('<ul>')
+        $(ships).append('<ul class="attUl"></ul>')
+        $(ships).append('<ul class="defUl"></ul>')
+        $(ships).appendTo(resultContainer)
         for (var i = 0; i < data['alive-odds'].length; i++) {
             if (initiativeOrder[i][1] == 'attacker') {
-                $(ships).append('<li>Attacker ' + initiativeOrder[i][0].type +
+                $('.attUl').append('<li>Attacker ' + initiativeOrder[i][0].type +
                         ': ' + data['alive-odds'][i] + ' %')
             }
         };
-        $(ships).append('</ul>')
-        $(ships).append('<ul>')
         for (var i = 0; i < data['alive-odds'].length; i++) {
             if (initiativeOrder[i][1] == 'defender') {
-                $(ships).append('<li>Defender ' + initiativeOrder[i][0].type +
+                $('.defUl').append('<li>Defender ' + initiativeOrder[i][0].type +
                         ': ' + data['alive-odds'][i] + ' %')
             }
         };
-        $(ships).append('</ul>')
-        $(ships).appendTo(resultContainer)
     })
 }
