@@ -30,11 +30,14 @@ $(document).ready(function() {
     })
 
     $('#go').click(function() {
-        if (allShipsAreValid()) { //results.js
+        var allValid = allShipsAreValid() //results.js
+        if (allValid && bothSideHaveShipsSelected()) { //results.js
             $('#results').show()
             showResults() //results.js
-        } else {
+        } else if (!allValid) {
             showFlashMessage('Fix the red ships first!') //upgrades.js
+        } else {
+            showFlashMessage('You have no ships selected!') //upgrades.js
         }
     })
 })

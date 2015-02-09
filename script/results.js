@@ -4,6 +4,10 @@ function allShipsAreValid() {
     else return true
 }
 
+function bothSideHaveShipsSelected() {
+    return initiative.countTheShips('defender').length > 0
+}
+
 function showResults() {
     hideResultsWithX()
 
@@ -93,7 +97,7 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
         $(info).html('<p>Attacker win odds:' + data.attacker + ' %</p>'+
                 '<p>Defender  win odds:' + data.defender + ' %</p></br>')
         $(info).appendTo(resultContainer)
-        $(ships).append('<p>Alive odds for each winner ship after three rounds:</p>')
+        $(ships).append('<p>Alive odds for each ship after three rounds:</p>')
         $(ships).append('<ul>')
         for (var i = 0; i < data['alive-odds'].length; i++) {
             if (initiativeOrder[i][1] == 'attacker') {
