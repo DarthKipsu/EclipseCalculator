@@ -1,22 +1,29 @@
 $(document).ready(function() {
+    $(document).ajaxStart(function () {
+        $("#loading").show();
+    }).ajaxStop(function () {
+        $("#loading").hide();
+    });
+
     $('ul.race-selector, .enemy-selector, #enemy-race').hide()
 
-    $('.race-selector span').mouseenter(function() {
-        openRaceSelectorMenu('race') //race-selector.js
-    })
-    
+        $('.race-selector span').mouseenter(function() {
+            openRaceSelectorMenu('race') //race-selector.js
+        })
+
     $('.enemy-selector span').mouseenter(function() {
         openRaceSelectorMenu('enemy') //race-selector.js
     })
-    
+
     $('.race-selector span, li.race-selector').click(function() {
-        moveRaceSelector() //race-selector.js
-        addEnemySelector() //race-selector.js
-        hideSelectorPopUps() //race-selector.js
-        
-        selectChosenRace(this) //race-selector.js
-        addContentFromHTML('#upgrades', 'upgrades.html') //script.js
-        $('.title').show()
+        $.get("https://eclipse-calculator.herokuapp.com/odds", {})
+            moveRaceSelector() //race-selector.js
+            addEnemySelector() //race-selector.js
+            hideSelectorPopUps() //race-selector.js
+
+            selectChosenRace(this) //race-selector.js
+            addContentFromHTML('#upgrades', 'upgrades.html') //script.js
+            $('.title').show()
     })
 
     $('#go').mouseenter(function() {
@@ -31,13 +38,13 @@ $(document).ready(function() {
 
     $('#go').click(function() {
         var allValid = allShipsAreValid() //results.js
-        if (allValid && bothSideHaveShipsSelected()) { //results.js
-            $('#results').show()
-            showResults() //results.js
-        } else if (!allValid) {
-            showFlashMessage('Fix the red ships first!') //upgrades.js
-        } else {
-            showFlashMessage('You have no ships selected!') //upgrades.js
-        }
+            if (allValid && bothSideHaveShipsSelected()) { //results.js
+                $('#results').show()
+                    showResults() //results.js
+            } else if (!allValid) {
+                showFlashMessage('Fix the red ships first!') //upgrades.js
+            } else {
+                showFlashMessage('You have no ships selected!') //upgrades.js
+            }
     })
 })

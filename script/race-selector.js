@@ -60,6 +60,7 @@ function reorderSelectorRaces(selection, race, topRaceOnSelector, player) {
 }
 
 function handleClick(selection) {
+    $.get("https://eclipse-calculator.herokuapp.com/odds", {})
     var selectedRace = $(selection).data('race')
     if (selectedRace!=chosenRace) {
         selectEnemyRace(selection, selectedRace)

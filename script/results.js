@@ -88,6 +88,10 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     div.classList.add('close')
     $(div).html('X')
     $(div).appendTo(resultContainer)
+    var loading = document.createElement('div')
+    $(loading).attr('id','loading')
+    $(loading).html('calculating results...')
+    $(loading).appendTo(resultContainer)
     
     var info = document.createElement('div')
     var ships = document.createElement('div')
