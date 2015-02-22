@@ -1,7 +1,11 @@
 function allShipsAreValid() {
     var invalid = document.querySelectorAll('.invalid')
     if (invalid.length>0) return false
-    else return true
+    var inputs = document.getElementsByTagName('input')
+    for (var input of inputs) {
+        if (!input.validity.valid) return false
+    }
+    return true
 }
 
 function bothSideHaveShipsSelected() {
@@ -25,7 +29,7 @@ function hideResultsWithX() {
 
 function attackerOrDefender() {
     var inputs = document.getElementsByTagName('input')
-    var enemy = inputs[4].checked?'defender':'attacker'
+    var enemy = inputs[4].checked ? 'defender' : 'attacker'
     return enemy
 }
 

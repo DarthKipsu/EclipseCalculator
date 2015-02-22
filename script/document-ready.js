@@ -1,8 +1,10 @@
 $(document).ready(function() {
     $(document).ajaxStart(function () {
         $("#loading").show();
+        $('#go').prop('disabled',true);
     }).ajaxStop(function () {
         $("#loading").hide();
+        $('#go').prop('disabled',false);
     });
 
     $('ul.race-selector, .enemy-selector, #enemy-race').hide()
@@ -37,7 +39,8 @@ $(document).ready(function() {
     })
 
     $('#go').click(function() {
-        var allValid = allShipsAreValid() //results.js
+        $('#results').empty()
+            var allValid = allShipsAreValid() //results.js
             if (allValid && bothSideHaveShipsSelected()) { //results.js
                 $('#results').show()
                     showResults() //results.js

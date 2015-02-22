@@ -44,24 +44,26 @@
             </div>
         </div>
         <div id="upgrades"></div>
+        <form action='javascript:void(0);'>
         <p class='title'>Your ships:</p>
         <div id='player-ship'></div>
         <div id='player-input'>
-            <div>Interceptor: <input type='text' class="player" name='interceptor' value='0'></div>
-            <div>Cruiser: <input type='text' class="player" name='cruiser' value='0'></div>
-            <div>Dreadnought: <input type='text' class="player" name='dreadnought' value='0'></div>
-            <div>Starbase: <input type='text' class="player" name='starbase' value='0'></div>
+            <div>Interceptor: <input type='number' min='0' max='8' class="player" name='interceptor' value='0'></div>
+            <div>Cruiser: <input type='number' min='0' max='4' class="player" name='cruiser' value='0'></div>
+            <div>Dreadnought: <input type='number' min='0' max='2' class="player" name='dreadnought' value='0'></div>
+            <div>Starbase: <input type='number' min='0' max='4' class="player" name='starbase' value='0'></div>
             <div>Attacker? <input type="checkbox" value="player"></div>
         </div>
         <p class='title'>Enemy ships:</p>
         <div id='enemy-ship'></div>
         <div id='enemy-input'>
-            <div>Interceptor: <input type='text' class="enemy" name='interceptor' value='0'></div>
-            <div>Cruiser: <input type='text' class="enemy" name='cruiser' value='0'></div>
-            <div>Dreadnought: <input type='text' class="enemy" name='dreadnought' value='0'></div>
-            <div>Starbase: <input type='text' class="enemy" name='starbase' value='0'></div>
+            <div>Interceptor: <input type='number' min='0' max='8' class="enemy" name='interceptor' value='0'></div>
+            <div>Cruiser: <input type='number' min='0' max='4' class="enemy" name='cruiser' value='0'></div>
+            <div>Dreadnought: <input type='number' min='0' max='2' class="enemy" name='dreadnought' value='0'></div>
+            <div>Starbase: <input type='number' min='0' max='4' class="enemy" name='starbase' value='0'></div>
         </div>
-        <div id='go'>Calculate scenario propabilities!</div>
+        <div><input type='submit' id='go'value='Calculate scenario propabilities!'></div>
+        </div>
         <div id='results'></div>
     </body>
 </html>
