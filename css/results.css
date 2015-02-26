@@ -2,6 +2,8 @@
     display: none;
     width: 740px;
     height: 600px;
+    overflow: auto;
+    overflow-x: hidden;
     background: white;
     border: 1px solid #DBDBDB;
     box-shadow: 0 0 15px #FCFAE1;
@@ -13,6 +15,6 @@
 
 .close {
     width: 20px;
-    margin: 5px 0 0 718px;
+    margin: 5px 0 0 708px;
     cursor: pointer;
 }

@@ -24,6 +24,7 @@ function hideResultsWithX() {
     $('#results').on('click', '.close', function() {
         $('#results').hide()
         $('#results').empty()
+        $('#go').show()
     })
 }
 
@@ -99,7 +100,7 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     
     var info = document.createElement('div')
     var ships = document.createElement('div')
-    $.post("http://eclipse-calculator.herokuapp.com/odds", {
+    $.post("https://eclipse-calculator.herokuapp.com/odds", {
         data: JSON.stringify(initiativeOrder)
     }).done(function(data) {
         $(info).html('<p>Wind odds after three rounds:</br>&nbsp;</p>' + 
