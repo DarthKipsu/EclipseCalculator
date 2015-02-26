@@ -99,7 +99,7 @@ function firstRoundWinProbability(initiativeOrder, enemy) {
     
     var info = document.createElement('div')
     var ships = document.createElement('div')
-    $.get("https://eclipse-calculator.herokuapp.com/odds", {
+    $.post("http://eclipse-calculator.herokuapp.com/odds", {
         data: JSON.stringify(initiativeOrder)
     }).done(function(data) {
         $(info).html('<p>Wind odds after three rounds:</br>&nbsp;</p>' + 
